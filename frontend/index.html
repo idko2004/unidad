@@ -13,7 +13,7 @@
 		<script defer src="js/main.js"></script>
 	</head>
 	<body>
-		<div id="findGameMenu" hidden>
+		<div id="findGameMenu">
 			<div class="bigTitleContainer">
 				<div class="bigTitleText">
 					La unidad
@@ -45,20 +45,20 @@
 					<p>
 						Tu nombre:
 					</p>
-					<input type="text">
+					<input type="text" id="createGameUsername">
 					<p>
 						Cantidad de jugadores:
 					</p>
-					<input type="number">
+					<input type="number" id="createGamePlayers">
 					<p>
-						<button>Crear partida</button>
+						<button id="createGameButton">Crear partida</button>
 					</p>
 				</div>
 			</section>
 		</div>
 
 
-		<div id="waitForPlayersMenu">
+		<div id="waitForPlayersMenu" hidden>
 			<div class="bigTitleContainer">
 				<div class="bigTitleText">
 					La unidad

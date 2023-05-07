@@ -1,127 +1,127 @@
 html
 {
-    --red: #c01c28;
-    --black: #241f31;
-    --white: #f6f5f4;
+	--red: #c01c28;
+	--black: #241f31;
+	--white: #f6f5f4;
 }
 
 body
 {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background-color: var(--black);
-    color: var(--white);
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background-color: var(--black);
+	color: var(--white);
 }
 
 .bigTitleContainer
 {
-    background-color: var(--red);
-    height: 10rem;
-    margin: 0 0.5rem 1.5rem 0.5rem;
-    border-radius: 0 0 1rem 1rem;
+	background-color: var(--red);
+	height: 10rem;
+	margin: 0 0.5rem 1.5rem 0.5rem;
+	border-radius: 0 0 1rem 1rem;
 }
 
 .bigTitleText
 {
-    font-family: 'Tilt Warp', cursive;
-    font-size: 3.5rem;
-    line-height: 10rem;
-    text-align: center;
-    color: var(--white);
+	font-family: 'Tilt Warp', cursive;
+	font-size: 3.5rem;
+	line-height: 10rem;
+	text-align: center;
+	color: var(--white);
 }
 
 .redTitleText
 {
-    font-family: 'Tilt Warp', cursive;
-    font-size: 1.5rem;
-    color: var(--red);
-    text-align: center;
+	font-family: 'Tilt Warp', cursive;
+	font-size: 1.5rem;
+	color: var(--red);
+	text-align: center;
 }
 
 section
 {
-    padding: 0.5rem;
+	padding: 0.5rem;
 }
 
 .menuContent
 {
-    text-align: center;
+	text-align: center;
 }
 
 .menuContent p
 {
-    font-family: 'Tilt Warp', cursive;
-    font-size: 1rem;
-    color: var(--white);
+	font-family: 'Tilt Warp', cursive;
+	font-size: 1rem;
+	color: var(--white);
 }
 
 .menuContent input
 {
-    text-align: center;
-    font-size: 1rem;
-    padding: 0.3rem;
-    border-radius: 0.4rem;
-    border: 0.2rem solid var(--red);
-    background-color: var(--black);
-    color: var(--white);
-    font-family: 'Tilt Warp', cursive;
+	text-align: center;
+	font-size: 1rem;
+	padding: 0.3rem;
+	border-radius: 0.4rem;
+	border: 0.2rem solid var(--red);
+	background-color: var(--black);
+	color: var(--white);
+	font-family: 'Tilt Warp', cursive;
 }
 
 .menuContent input:hover,
 .menuContent input:focus
 {
-    background-color: var(--red);
-    outline: none;
+	background-color: var(--red);
+	outline: none;
 }
 
 .menuContent button
 {
-    font-size: 1rem;
-    font-family: 'Tilt Warp', cursive;
-    color: white;
-    background-color: var(--red);
-    padding: 0.4rem;
-    border: 0.2rem solid var(--red);
-    border-radius: 0.4rem;
+	font-size: 1rem;
+	font-family: 'Tilt Warp', cursive;
+	color: white;
+	background-color: var(--red);
+	padding: 0.4rem;
+	border: 0.2rem solid var(--red);
+	border-radius: 0.4rem;
 }
 
 .menuContent button:hover,
 .menuContent button:focus
 {
-    border-color: var(--white);
-    cursor: pointer;
+	border-color: var(--white);
+	cursor: pointer;
 }
 
 .playersList
 {
-    padding: 0.5rem;
-    width: 45ch;
-    margin: 0 auto;
+	padding: 0.5rem;
+	width: 45ch;
+	margin: 0 auto;
 }
 
 .playerInTheList
 {
-    background-color: var(--red);
-    font-family: 'Tilt Warp', cursive;
-    padding: 0.4rem;
-    border-radius: 0.4rem;
+	background-color: var(--red);
+	font-family: 'Tilt Warp', cursive;
+	padding: 0.4rem;
+	border-radius: 0.4rem;
 }
 
 .btnFloatRight
 {
-    float: right;
-    font-family: 'Tilt Warp', cursive;
-    font-size: 0.8rem;
-    border: 0;
-    background-color: transparent;
-    color: var(--white);
+	float: right;
+	font-family: 'Tilt Warp', cursive;
+	font-size: 0.8rem;
+	border: 0;
+	background-color: transparent;
+	color: var(--white);
 }
 
 .btnFloatRight:hover
 {
-    background-color: var(--black);
-    color: var(--red);
-    border-radius: 0.4rem;
-    cursor: pointer;
+	background-color: var(--black);
+	color: var(--red);
+	border-radius: 0.4rem;
+	cursor: pointer;
 }

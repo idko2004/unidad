@@ -1,5 +1,47 @@
 
-module.exports = async function(data)
+module.exports = async function(data, ws)
 {
-    console.log(data.toString());
+	const dataString = data.toString();
+	if(dataString === undefined || dataString === '') return;
+	console.log(dataString);
+
+	try
+	{
+		const dataObject = JSON.parse(dataString);
+		console.log(dataObject);
+
+		if(dataObject.operation === undefined) return;
+
+		parseOperation(dataObject, ws);
+	}
+	catch(err)
+	{
+		console.log('HA OCURRIDO UN ERROR', err);
+		ws.send(JSON.stringify(
+		{
+			operation: 'parsingData',
+			error: 'cantParseData',
+			errorMsg: err.message,
+			errorCode: err.code
+		}));
+	}
+}
+
+const createGame = require('./operations/createGame');
+
+function parseOperation(dataObject, ws)
+{
+	switch(dataObject.operation)
+	{
+		default:
+			ws.send(JSON.stringify(
+			{
+				error: 'invalidOperation'
+			}));
+			break;
+
+		case 'createGame':
+			createGame(dataObject, ws);
+			break;
+	}
 }
