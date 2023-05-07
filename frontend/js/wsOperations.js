@@ -3,7 +3,15 @@ function parseOperations(response)
     switch(response.operation)
     {
         case 'obtainRoomID':
-            obtainedRoomID(response);
+            joinedToGame(response);
+            break;
+
+        case 'joinedToGame':
+            joinedToGame(response);
+            break;
+
+        case 'playerJoined':
+            playerJoined(response);
             break;
     }
 }

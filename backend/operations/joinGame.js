@@ -13,10 +13,16 @@ module.exports = function(dataObject, ws)
 	Respuesta:
 	{
 		operation: 'joinedToGame',
+		roomID,
 		players:
 		[
 			
 		]
+	}
+	Respuesta para los demás:
+	{
+		operation: 'playerJoined',
+		username
 	}
 	*/
 	console.log('---------------\njoinGame\n');
@@ -83,6 +89,25 @@ module.exports = function(dataObject, ws)
 	ws.send(JSON.stringify(
 	{
 		operation: 'joinedToGame',
+		roomID,
 		players
 	}));
+
+	console.log(game.activeGames);
+
+
+	// Avisar a los demás jugadores que se ha unido alguien
+	for(let i = 0; i < players.length; i++)
+	{
+		const key = players[i];
+		if(key === username) continue;
+
+		const connection = game.activeGames[roomID].players[key].ws;
+
+		connection.send(JSON.stringify(
+		{
+			operation: 'playerJoined',
+			username
+		}));
+	}
 }

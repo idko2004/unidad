@@ -89,7 +89,7 @@ document.getElementById('createGameButton').addEventListener('click', function()
 //  WAIT FOR PLAYERS MENU
 //
 
-function obtainedRoomID(response)
+function joinedToGame(response)
 {
 	document.getElementById('waitRoomID').innerText = response.roomID;
 
@@ -102,6 +102,11 @@ function obtainedRoomID(response)
 	{
 		addPlayerToWaitingList(response.players[i]);
 	}
+}
+
+function playerJoined(response)
+{
+	addPlayerToWaitingList(response.username);
 }
 
 function addPlayerToWaitingList(playerName)
