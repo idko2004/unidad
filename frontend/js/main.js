@@ -2,6 +2,8 @@ const url = 'ws://localhost:8888';
 
 let connected = false;
 
+let gameMaster = false;
+
 const ws = new WebSocket(url);
 
 ws.addEventListener('open', function(e)
@@ -13,40 +15,15 @@ ws.addEventListener('open', function(e)
 ws.addEventListener('message', function(e)
 {
 	console.log(e);
-})
-
-document.getElementById('createGameButton').addEventListener('click', function()
-{
-	if(!connected) return;
-
-	let username = document.getElementById('createGameUsername').value;
-	if(username === undefined) return;
-	
-	username = username.trim();
-	if(username === '') return;
-
-
-	let numberOfPlayers = parseInt(document.getElementById('createGamePlayers').value);
-	if(isNaN(numberOfPlayers)
-	|| numberOfPlayers < 1
-	|| numberOfPlayers > 10)
+	try
 	{
-		return;
+		const response = JSON.parse(e.data);
+		console.log(response);
+
+		parseOperations(response);
 	}
-
-	let obj =
+	catch(err)
 	{
-		operation: 'createGame',
-		username,
-		maxPlayers: numberOfPlayers
-	};
-
-	ws.send(JSON.stringify(obj));
+		console.log(err);
+	}
 });
-
-/*document.getElementById('sendMessage').addEventListener('click', function()
-{
-	if(!connected) return;
-
-	ws.send('hola');
-});*/

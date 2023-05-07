@@ -11,6 +11,9 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 
 		<script defer src="js/main.js"></script>
+		<script defer src="js/menu.js"></script>
+		<script defer src="js/wsOperations.js"></script>
+
 	</head>
 	<body>
 		<div id="findGameMenu">
@@ -65,22 +68,22 @@
 				</div>
 			</div>
 			<div class="redTitleText">
-				ID de la sala: a1b2c3
+				ID de la sala: <span id="waitRoomID"></span>
 			</div>
-			<div class="playersList">
-				<div class="playerInTheList">
+			<div class="playersList" id="playersList">
+				<!--div class="playerInTheList">
 					<span>Fulanito de tal</span>
 					<button class="btnFloatRight">(X)</button>
-				</div>
+				</div-->
 			</div>
 			<div class="menuContent">
-				<div>
+				<div id="waitingForPlayersText">
 					<p>
 						Esperando a los demás jugadores...
 					</p>
 				</div>
 				<div>
-					<button>Empezar</button>
+					<button id="waitStartButton">Empezar</button>
 					<button>Salir</button>
 				</div>
 			</div>

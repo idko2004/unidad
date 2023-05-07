@@ -90,7 +90,7 @@ module.exports = function(dataObject, ws)
 
 	ws.send(JSON.stringify(
 	{
-		operation: 'obtainGameID',
+		operation: 'obtainRoomID',
 		roomID,
 		players:
 		[
