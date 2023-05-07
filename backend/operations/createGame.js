@@ -45,6 +45,7 @@ module.exports = function(dataObject, ws)
 			error: 'badRequest',
 			operation: 'obtainRoomID'
 		}));
+		return;
 	}
 
 

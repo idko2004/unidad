@@ -28,6 +28,7 @@ module.exports = async function(data, ws)
 }
 
 const createGame = require('./operations/createGame');
+const joinGame = require('./operations/joinGame');
 
 function parseOperation(dataObject, ws)
 {
@@ -42,6 +43,10 @@ function parseOperation(dataObject, ws)
 
 		case 'createGame':
 			createGame(dataObject, ws);
+			break;
+
+		case 'joinGame':
+			joinGame(dataObject, ws);
 			break;
 	}
 }

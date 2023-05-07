@@ -15,6 +15,44 @@ function changeMenus(menu)
 	}
 }
 
+//
+//  SEARCH FOR GAME
+//
+
+document.getElementById('searchGameButton').addEventListener('click', function()
+{
+	if(!connected) return;
+
+	let username = document.getElementById('searchGameUsername').value;
+	if(username === undefined) return;
+	
+	username = username.trim();
+	if(username === '') return;
+
+
+	let roomID = document.getElementById('searchGameRoom').value;
+	if(roomID === undefined) return;
+
+	roomID = roomID.trim();
+	if(roomID === '') return;
+
+	let obj =
+	{
+		operation: 'joinGame',
+		username,
+		roomID
+	};
+
+	ws.send(JSON.stringify(obj));
+
+	gameMaster = false;
+	changeMenus('waitPlayers');
+});
+
+//
+//  CREATE GAME
+//
+
 document.getElementById('createGameButton').addEventListener('click', function()
 {
 	if(!connected) return;
@@ -55,9 +93,9 @@ function obtainedRoomID(response)
 {
 	document.getElementById('waitRoomID').innerText = response.roomID;
 
-	if(!gameMaster)
+	if(gameMaster)
 	{
-		document.getElementById('waitStartButton').hidden = true;
+		document.getElementById('waitStartButton').hidden = false;
 	}
 
 	for(let i = 0; i < response.players.length; i++)
