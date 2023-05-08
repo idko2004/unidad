@@ -46,6 +46,7 @@ const gamesExample =
 		master: 'alguien', //Persona que creó la sala y controla el juego
 		maxPlayers: 4, //Cantidad de jugadores necesarios para iniciar una partida,
 		currentCard: '6b',
+		letMorePlayersIn: false,
 		players:
 		{
 			'alguien': //Nombre del jugador

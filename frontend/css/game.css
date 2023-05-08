@@ -1,0 +1,63 @@
+#game nav
+{
+    background-color: var(--red);
+	border-radius: 0 0 1rem 1rem;
+    padding: 0.4rem;
+	margin: 0 0.5rem 1.5rem 0.5rem;
+    font-size: 1rem;
+    font-family: 'Tilt Warp', cursive;
+}
+
+.floatRight
+{
+    float: right;
+}
+
+.mainCardContainer
+{
+    text-align: center;
+}
+
+#currentCard
+{
+    height: 40vh;
+}
+
+.logContainer
+{
+    min-height: 1.3rem;
+    line-height: 1.3rem;
+    font-size: 1rem;
+    font-family: 'Tilt Warp', cursive;
+    margin: 0.5rem;
+    padding: 0.4rem;
+    border-radius: 0.5rem;
+    background-color: var(--red);
+}
+
+/*
+.redTitleTextLeft
+{
+	font-family: 'Tilt Warp', cursive;
+	font-size: 1.5rem;
+	color: var(--red);
+	text-align: left;
+    margin: 0.5rem;
+}
+*/
+.deckContainer
+{
+    padding: 0.5rem;
+}
+
+#deck
+{
+    padding: 0.5rem 0;
+    text-align: center;
+}
+
+.cardInDeck
+{
+    height: 8rem;
+    margin: 0.3rem;
+}

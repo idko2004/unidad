@@ -60,6 +60,19 @@ module.exports = function(dataObject, ws)
 
 
 
+	// Ver si se puede entrar a la sala
+	if(!game.activeGames[roomID].letMorePlayersIn)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'joinedToGame',
+			error: 'gameAlredyStarted'
+		}));
+		return;
+	}
+
+
+
 	// Añadir usuario a la sala
 	game.activeGames[roomID].players[username] =
 	{

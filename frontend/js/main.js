@@ -3,6 +3,8 @@ const url = 'ws://localhost:8888';
 let connected = false;
 
 let gameMaster = false;
+let username;
+let roomID;
 
 const ws = new WebSocket(url);
 

@@ -65,6 +65,7 @@ module.exports = function(dataObject, ws)
 		master: username,
 		maxPlayers,
 		currentCard: '6b',
+		letMorePlayersIn: true,
 		players:
 		{
 			[username]:

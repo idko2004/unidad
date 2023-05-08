@@ -2,6 +2,7 @@ function changeMenus(menu)
 {
 	document.getElementById('findGameMenu').hidden = true;
 	document.getElementById('waitForPlayersMenu').hidden = true;
+	document.getElementById('game').hidden = true;
 
 	switch(menu)
 	{
@@ -12,6 +13,9 @@ function changeMenus(menu)
 		case 'waitPlayers':
 			document.getElementById('waitForPlayersMenu').hidden = false;
 			break;
+
+		case 'game':
+			document.getElementById('game').hidden = false;
 	}
 }
 
@@ -23,14 +27,14 @@ document.getElementById('searchGameButton').addEventListener('click', function()
 {
 	if(!connected) return;
 
-	let username = document.getElementById('searchGameUsername').value;
+	username = document.getElementById('searchGameUsername').value;
 	if(username === undefined) return;
 	
 	username = username.trim();
 	if(username === '') return;
 
 
-	let roomID = document.getElementById('searchGameRoom').value;
+	roomID = document.getElementById('searchGameRoom').value;
 	if(roomID === undefined) return;
 
 	roomID = roomID.trim();
@@ -57,7 +61,7 @@ document.getElementById('createGameButton').addEventListener('click', function()
 {
 	if(!connected) return;
 
-	let username = document.getElementById('createGameUsername').value;
+	username = document.getElementById('createGameUsername').value;
 	if(username === undefined) return;
 	
 	username = username.trim();
@@ -91,6 +95,7 @@ document.getElementById('createGameButton').addEventListener('click', function()
 
 function joinedToGame(response)
 {
+	roomID = response.roomID;
 	document.getElementById('waitRoomID').innerText = response.roomID;
 
 	if(gameMaster)

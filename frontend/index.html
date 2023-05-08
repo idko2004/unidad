@@ -9,14 +9,16 @@
 		<link href="https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap" rel="stylesheet">
 
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/game.css">
 
 		<script defer src="js/main.js"></script>
 		<script defer src="js/menu.js"></script>
+		<script defer src="js/game.js"></script>
 		<script defer src="js/wsOperations.js"></script>
 
 	</head>
 	<body>
-		<div id="findGameMenu">
+		<div id="findGameMenu" hidden>
 			<div class="bigTitleContainer">
 				<div class="bigTitleText">
 					La unidad
@@ -85,6 +87,36 @@
 				<div>
 					<button id="waitStartButton" hidden>Empezar</button>
 					<button>Salir</button>
+				</div>
+			</div>
+		</div>
+
+		<div id="game">
+			<nav>
+				Unidad
+				<span class="floatRight">
+					<span id="navUsername">Username</span>
+					|
+					ID de la sala:
+					<span id="navRoomID">roomID</span>
+				</span>
+			</nav>
+			<div class="mainCardContainer">
+				<img id="currentCard" src="img/examplecard.png">
+			</div>
+			<div class="logContainer">
+				Es el turno de alguien.
+			</div>
+			<div class="deckContainer">
+				<div class="redTitleText leftAlign">Tu mazo:</div>
+				<div id="deck">
+					<img class="cardInDeck" src="img/examplecard.png">
+					<img class="cardInDeck" src="img/examplecard.png">
+					<img class="cardInDeck" src="img/examplecard.png">
+					<img class="cardInDeck" src="img/examplecard.png">
+					<img class="cardInDeck" src="img/examplecard.png">
+					<img class="cardInDeck" src="img/examplecard.png">
+					<img class="cardInDeck" src="img/examplecard.png">
 				</div>
 			</div>
 		</div>
