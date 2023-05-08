@@ -135,3 +135,15 @@ function addPlayerToWaitingList(playerName)
 
 	playersList.appendChild(playerInTheList);
 }
+
+document.getElementById('waitStartButton').addEventListener('click', function(e)
+{
+	ws.send(JSON.stringify(
+	{
+		operation: 'startGame',
+		roomID,
+		username
+	}));
+
+	e.target.innerText = 'Iniciando juego...';
+});

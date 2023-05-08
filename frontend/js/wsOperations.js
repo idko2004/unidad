@@ -13,5 +13,8 @@ function parseOperations(response)
         case 'playerJoined':
             playerJoined(response);
             break;
+
+        case 'startGame':
+            break;
     }
 }
