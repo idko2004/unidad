@@ -47,6 +47,8 @@ const gamesExample =
 		maxPlayers: 4, //Cantidad de jugadores necesarios para iniciar una partida,
 		currentCard: '6b',
 		letMorePlayersIn: false,
+		whoIsPlaying: 0, //A quien le toca
+		order: [ 'alguien', 'fulanito' ], //El orden en el que van a ir los turnos
 		players:
 		{
 			'alguien': //Nombre del jugador

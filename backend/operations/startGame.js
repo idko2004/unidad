@@ -66,10 +66,16 @@ module.exports = function(dataObject, ws)
 
 
 
+	// Poner el orden de los jugadores y quien juega
+	const players = Object.keys(room.players);
+	
+	room.order = players;
+	room.whoIsPlaying = 0;
+
+
+
 
 	//Avisar a todos los jugadores de que empezó el juego
-	const players = Object.keys(room.players);
-
 	const currentCard = room.currentCard;
 
 	for(let i = 0; i < players.length; i++)
@@ -79,12 +85,25 @@ module.exports = function(dataObject, ws)
 
 		const deck = playerProfile.deck;
 
+		let message;
+		let yourTurn = false;
+		if(i === room.whoIsPlaying)
+		{
+			message = 'Es tu turno.';
+			yourTurn = true;
+		}
+		else
+		{
+			message = `Es el turno de ${players[room.whoIsPlaying]}.`;
+		}
+
 		playerProfile.ws.send(JSON.stringify(
 		{
 			operation: 'startGame',
 			deck,
 			currentCard,
-			message: 'Aquí debería decir que carta salió'
+			message,
+			yourTurn
 		}));
 	}
 }
