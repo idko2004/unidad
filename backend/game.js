@@ -69,7 +69,8 @@ const gamesExample =
 			'fulanito':
 			{
 				deck: ['7g'],
-				won: false
+				won: false,
+				ws: null
 			}
 		}
 	}

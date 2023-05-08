@@ -15,6 +15,7 @@ function parseOperations(response)
             break;
 
         case 'startGame':
+            startGame(response);
             break;
     }
 }

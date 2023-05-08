@@ -5,6 +5,9 @@ let connected = false;
 let gameMaster = false;
 let username;
 let roomID;
+let currentCard;
+let deck = [];
+let canPlay = false;
 
 const ws = new WebSocket(url);
 

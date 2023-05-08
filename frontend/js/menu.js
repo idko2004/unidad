@@ -16,6 +16,7 @@ function changeMenus(menu)
 
 		case 'game':
 			document.getElementById('game').hidden = false;
+			break;
 	}
 }
 
