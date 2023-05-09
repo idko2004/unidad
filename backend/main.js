@@ -2,7 +2,7 @@ console.log('Iniciando servidor');
 
 const WebSocket = require('ws');
 
-const parseMessage = require('./parseMessage');
+const parseMessage = require('./utils/parseMessage');
 
 const wss = new WebSocket.Server(
 {

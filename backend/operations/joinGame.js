@@ -1,5 +1,5 @@
 
-const game = require('../game');
+const game = require('../utils/game');
 
 module.exports = function(dataObject, ws)
 {

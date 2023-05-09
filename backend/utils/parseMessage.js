@@ -27,9 +27,9 @@ module.exports = async function(data, ws)
 	}
 }
 
-const createGame = require('./operations/createGame');
-const joinGame = require('./operations/joinGame');
-const startGame = require('./operations/startGame');
+const createGame = require('../operations/createGame');
+const joinGame = require('../operations/joinGame');
+const startGame = require('../operations/startGame');
 
 function parseOperation(dataObject, ws)
 {
