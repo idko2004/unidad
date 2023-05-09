@@ -98,6 +98,81 @@ document.getElementById('createGameButton').addEventListener('click', function()
 
 function joinedToGame(response)
 {
+	if(response.error !== undefined)
+	{
+		switch(response.error)
+		{
+			case 'cantFindRoom':
+				floatingWindow(
+				{
+					title: 'La sala no existe',
+					text: '¿Has copiado bien el ID de la sala?',
+					button:
+					{
+						text: 'No',
+						callback: async function()
+						{
+							await closeWindow();
+							changeMenus('findGame');
+						}
+					}
+				});
+				break;
+
+			case 'gameAlredyStarted':
+				floatingWindow(
+				{
+					title: 'Parece que llegas tarde',
+					text: 'La partida ya ha comenzado',
+					button:
+					{
+						text: ':(',
+						callback: async function()
+						{
+							await closeWindow();
+							changeMenus('findGame');
+						}
+					}
+				});
+				break;
+
+			case 'roomIsFull':
+				floatingWindow(
+				{
+					title: 'Ya no queda sitio',
+					text: 'La sala está llena',
+					button:
+					{
+						text: ':(',
+						callback: async function()
+						{
+							await closeWindow();
+							changeMenus('findGame');
+						}
+					}
+				});
+				break;
+
+			default:
+				floatingWindow(
+				{
+					title: 'Algo salió mal',
+					text: `El error que el servidor envió:\n\n${response.error}`,
+					button:
+					{
+						text: '¡Oh no!',
+						callback: async function()
+						{
+							await closeWindow();
+							changeMenus('findGame');
+						}
+					}
+				});
+				break;
+		}
+		return;
+	}
+
 	roomID = response.roomID;
 	players = response.players;
 	document.getElementById('waitRoomID').innerText = response.roomID;

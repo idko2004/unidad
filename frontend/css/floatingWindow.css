@@ -1,0 +1,327 @@
+/*
+    Importado de notas
+*/
+
+#floatWindow,
+#floatingMenu
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--red-win-bg);
+    width: 100vw;
+    height: 100vh;
+}
+
+#window
+{
+    width: 40%;
+    min-width: 20rem;
+    max-width: 40rem;
+
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -35%);
+}
+
+#menu
+{
+    width: 15ch;
+    min-width: 20rem;
+    max-width: 30rem;
+    
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -35%);
+}
+
+#window,
+#menu
+{
+    margin: 0 auto;
+    padding: 1rem;
+    background-color: var(--red);
+    display: block;
+    height: auto;
+    border: solid 3px var(--dark-red);
+    border-radius: 10px;
+}
+
+.openWin
+{
+    animation: openWindow 300ms ease-in-out 1;
+}
+
+@keyframes openWindow
+{
+    0%
+    {
+        transform: translate(-50%, -35%) rotateZ(20deg);
+        opacity: 0;
+    }
+    60%
+    {
+        transform: translate(-50%, -35%) rotateZ(-6deg);
+        opacity: 0.6;
+    }
+    100%
+    {
+        transform: translate(-50%, -35%) rotateZ(0deg);
+        opacity: 1;
+    }
+}
+
+.closeWin
+{
+    animation: closeWindow 100ms linear 1;
+}
+
+@keyframes closeWindow
+{
+    0%
+    {
+        transform: translate(-50%, -35%) rotateZ(0deg);
+        opacity: 1;
+    }
+    100%
+    {
+        transform: translate(-50%, -35%) rotateZ(15deg);
+        opacity: 0;
+    }
+}
+
+.openWinSlide
+{
+    animation: openWindowSlide 250ms ease-in-out 1;
+}
+
+@keyframes openWindowSlide
+{
+    0%
+    {
+        transform: translate(-50%, -10%);
+        top: 10%;
+        opacity: 0;
+    }
+    60%
+    {
+        transform: translate(-50%, -37%);
+        top: 40%;
+        opacity: 0.7;
+    }
+    100%
+    {
+        transform: translate(-50%, -35%);
+        top: 35%;
+        opacity: 1;
+    }
+}
+
+.closeWinSlide
+{
+    animation: closeWindowSlide 100ms linear 1;
+}
+
+@keyframes closeWindowSlide
+{
+    0%
+    {
+        transform: translate(-50%, -35%);
+        top: 35%;
+        opacity: 1;
+    }
+    100%
+    {
+        transform: translate(-50%, -10%);
+        top: 10%;
+        opacity: 0;
+    }
+}
+
+.openBg
+{
+    animation: openBackground 100ms ease-in-out 1;
+}
+
+@keyframes openBackground
+{
+    0%
+    {
+        opacity: 0;
+    }
+    100%
+    {
+        opacity: 1;
+    }
+}
+
+.closeBg
+{
+    animation: closeBackground 100ms ease-in-out 1;
+}
+
+@keyframes closeBackground
+{
+    0%
+    {
+        opacity: 1;
+    }
+    100%
+    {
+        opacity: 0;
+    }
+}
+
+#windowTitle,
+#menu h1
+{
+    margin: 0;
+    padding: 0 0 0.7rem 0;
+    color: white;
+    word-wrap: break-word;
+	font-family: 'Tilt Warp', cursive;
+    font-weight: 700;
+}
+
+#windowText
+{
+    margin: 0;
+    padding: 0 0 0.7rem 0;
+    word-wrap: break-word;
+    line-height: 1.5rem;
+    color: white;
+	font-family: 'Tilt Warp', cursive;
+    font-weight: 400;
+}
+
+#windowInput
+{
+    margin: 0 0 0.7rem 0;
+}
+
+#windowInput input
+{
+    width: 100%;
+    text-align: center;
+    border: 2px solid var(--dark-red);
+    border-radius: 10px;
+    padding: 0.3rem;
+    background-color: var(--dark-red);
+    color: white;
+    font-size: 1rem;
+	font-family: 'Tilt Warp', cursive;
+    font-weight: 400;
+}
+
+#windowInput input:focus,
+#windowInput input:hover
+{
+    border-color: white;
+    outline: none;
+}
+
+#windowButtons
+{
+    text-align: right;
+}
+
+#windowButtons button
+{
+    margin: 0.3rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+	font-family: 'Tilt Warp', cursive;
+    font-weight: 400;
+}
+
+.windowButtonPrincipal
+{
+    transition: all ease 100ms;
+    border-radius: 10px;
+    border: 3px solid var(--dark-red);
+    background-color: var(--dark-red);
+    color: var(--white);
+}
+
+.windowButtonSecondary
+{
+    transition: all ease 100ms;
+    border-radius: 10px;
+    border: 3px solid var(--dark-red);
+    background-color: var(--red);
+    color: var(--white);
+}
+
+.windowButtonPrincipal:hover,
+.windowButtonSecondary:hover,
+.windowButtonPrincipal:focus,
+.windowButtonSecondary:focus
+{
+    transition: all ease 100ms;
+    background-color: var(--dark-red);
+    border-color: white;
+    color: white;
+    outline: none;
+}
+
+
+/*
+#closeMenuButton
+{
+    float: right;
+    padding: 0.3rem;
+    margin: 0.3rem;
+    color: white;
+    background-color: var(--dark-red);
+    border: 2px solid var(--green-hover);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: var(--rubik);
+    transition: all ease 100ms;
+    font-family: var(--rubik);
+    font-weight: 400;
+}
+
+#menuButtons
+{
+    text-align: center;
+    max-height: 80vh;
+}
+
+#menuButtons button
+{
+    width: 90%;
+    margin: 0.3rem 0;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-family: var(--rubik);
+    color: white;
+    background-color: var(--green-hover);
+    border: 2px solid var(--green-hover);
+    border-radius: 10px;
+    transition: all ease 100ms;
+    font-family: var(--rubik);
+    font-weight: 400;
+}
+
+#menuButtons button:hover,
+#menuButtons button:focus,
+#closeMenuButton:hover,
+#closeMenuButton:focus
+{
+    border-color: white;
+    transition: all ease 100ms;
+    outline: none;
+}
+
+#menuTitleText
+{
+    max-width: 13ch;
+    max-height: 1.1em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+*/

@@ -46,9 +46,11 @@ module.exports = function(dataObject, ws)
 	}
 
 
+
 	//Encontrar la sala
 	roomID = roomID.trim();
-	if(game.activeGames[roomID] === undefined)
+	const room = game.activeGames[roomID]
+	if(room === undefined)
 	{
 		ws.send(JSON.stringify(
 		{
@@ -61,7 +63,7 @@ module.exports = function(dataObject, ws)
 
 
 	// Ver si se puede entrar a la sala
-	if(!game.activeGames[roomID].letMorePlayersIn)
+	if(!room.letMorePlayersIn)
 	{
 		ws.send(JSON.stringify(
 		{
@@ -73,8 +75,26 @@ module.exports = function(dataObject, ws)
 
 
 
+	// Obtener los nombres de los usuarios para usarlos más tarde
+	const players = Object.keys(room.players);
+
+
+
+	// Ver si la sala está llena
+	if(players.length >= room.maxPlayers)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'joinedToGame',
+			error: 'roomIsFull'
+		}));
+		return;
+	}
+
+
+
 	// Añadir usuario a la sala
-	game.activeGames[roomID].players[username] =
+	room.players[username] =
 	{
 		deck:
 		[
@@ -92,12 +112,6 @@ module.exports = function(dataObject, ws)
 
 
 
-
-	// Obtener los nombres de los usuarios
-	const players = Object.keys(game.activeGames[roomID].players);
-
-
-
 	// Responder
 	ws.send(JSON.stringify(
 	{
@@ -109,13 +123,14 @@ module.exports = function(dataObject, ws)
 	console.log(game.activeGames);
 
 
+
 	// Avisar a los demás jugadores que se ha unido alguien
 	for(let i = 0; i < players.length; i++)
 	{
 		const key = players[i];
 		if(key === username) continue;
 
-		const connection = game.activeGames[roomID].players[key].ws;
+		const connection = room.players[key].ws;
 
 		connection.send(JSON.stringify(
 		{

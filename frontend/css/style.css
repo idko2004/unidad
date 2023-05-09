@@ -3,6 +3,14 @@ html
 	--red: #c01c28;
 	--black: #241f31;
 	--white: #f6f5f4;
+
+	--red-win-bg: rgba(165,29,45, 0.20);
+	--dark-red: #a51d2d;
+}
+
+button:hover
+{
+	cursor: pointer;
 }
 
 body
