@@ -3,6 +3,9 @@ const url = 'ws://localhost:8888';
 let connected = false;
 
 let gameMaster = false;
+let players = [];
+let maxPlayers;
+
 let username;
 let roomID;
 let currentCard;

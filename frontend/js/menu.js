@@ -77,11 +77,13 @@ document.getElementById('createGameButton').addEventListener('click', function()
 		return;
 	}
 
+	maxPlayers = numberOfPlayers;
+
 	let obj =
 	{
 		operation: 'createGame',
 		username,
-		maxPlayers: numberOfPlayers
+		maxPlayers
 	};
 
 	ws.send(JSON.stringify(obj));
@@ -97,12 +99,8 @@ document.getElementById('createGameButton').addEventListener('click', function()
 function joinedToGame(response)
 {
 	roomID = response.roomID;
+	players = response.players;
 	document.getElementById('waitRoomID').innerText = response.roomID;
-
-	if(gameMaster)
-	{
-		document.getElementById('waitStartButton').hidden = false;
-	}
 
 	for(let i = 0; i < response.players.length; i++)
 	{
@@ -112,7 +110,14 @@ function joinedToGame(response)
 
 function playerJoined(response)
 {
+	players.push(response.username);
 	addPlayerToWaitingList(response.username);
+
+	//Hacer aparecer el botón de empezar
+	if(gameMaster && (players.length === maxPlayers))
+	{
+		document.getElementById('waitStartButton').hidden = false;
+	}
 }
 
 function addPlayerToWaitingList(playerName)
@@ -139,6 +144,10 @@ function addPlayerToWaitingList(playerName)
 
 document.getElementById('waitStartButton').addEventListener('click', function(e)
 {
+	if(!gameMaster) return;
+
+	if(players.length < maxPlayers) return;
+
 	ws.send(JSON.stringify(
 	{
 		operation: 'startGame',
