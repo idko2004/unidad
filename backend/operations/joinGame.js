@@ -110,6 +110,8 @@ module.exports = function(dataObject, ws)
 		ws
 	}
 
+	players.push(username);
+
 
 
 	// Responder
