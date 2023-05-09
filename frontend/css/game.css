@@ -29,22 +29,13 @@
     line-height: 1.3rem;
     font-size: 1rem;
     font-family: 'Tilt Warp', cursive;
+    text-align: center;
     margin: 0.5rem;
     padding: 0.4rem;
     border-radius: 0.5rem;
     background-color: var(--red);
 }
 
-/*
-.redTitleTextLeft
-{
-	font-family: 'Tilt Warp', cursive;
-	font-size: 1.5rem;
-	color: var(--red);
-	text-align: left;
-    margin: 0.5rem;
-}
-*/
 .deckContainer
 {
     padding: 0.5rem;
