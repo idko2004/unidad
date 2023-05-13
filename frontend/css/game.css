@@ -1,65 +1,65 @@
 #game nav
 {
-    background-color: var(--red);
+	background-color: var(--red);
 	border-radius: 0 0 1rem 1rem;
-    padding: 0.4rem;
+	padding: 0.4rem;
 	margin: 0 0.5rem 1.5rem 0.5rem;
-    font-size: 1rem;
-    font-family: 'Tilt Warp', cursive;
+	font-size: 1rem;
+	font-family: 'Tilt Warp', cursive;
 }
 
 .floatRight
 {
-    float: right;
+	float: right;
 }
 
 .mainCardContainer
 {
-    text-align: center;
+	text-align: center;
 }
 
 #currentCard
 {
-    height: 40vh;
+	height: 40vh;
 }
 
 .logContainer
 {
-    min-height: 1.3rem;
-    line-height: 1.3rem;
-    font-size: 1rem;
-    font-family: 'Tilt Warp', cursive;
-    text-align: center;
-    margin: 0.5rem;
-    padding: 0.4rem;
-    border-radius: 0.5rem;
-    background-color: var(--red);
+	min-height: 1.3rem;
+	line-height: 1.3rem;
+	font-size: 1rem;
+	font-family: 'Tilt Warp', cursive;
+	text-align: center;
+	margin: 0.5rem;
+	padding: 0.4rem;
+	border-radius: 0.5rem;
+	background-color: var(--red);
 }
 
 .deckContainer
 {
-    padding: 0.5rem;
+	padding: 0.5rem;
 }
 
 #deck
 {
-    padding: 0.5rem 0;
-    text-align: center;
+	padding: 0.5rem 0;
+	text-align: center;
 }
 
 .cardInDeck
 {
-    height: 8rem;
-    margin: 0.3rem;
+	height: 8rem;
+	margin: 0.3rem;
 }
 
 .cardHoverAnim
 {
-    transition: transform 150ms;
-    cursor: pointer;
+	transition: transform 150ms;
+	cursor: pointer;
 }
 
 .cardHoverAnim:hover
 {
-    transform: scale(1.1);
+	transform: scale(1.1);
 }

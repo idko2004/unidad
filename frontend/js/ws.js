@@ -8,21 +8,22 @@ ws.addEventListener('open', function(e)
 
 ws.addEventListener('error', function(e)
 {
-    console.log('Error conectando al servidor', e);
-    connected = false;
-    floatingWindow(
-    {
-        title: 'Algo salió mal',
-        text: 'No se pudo conectar al servidor',
-        button:
-        {
-            text: ':(',
-            callback: function()
-            {
-                location.reload();
-            }
-        }
-    })
+	console.log('Error conectando al servidor', e);
+	connected = false;
+	floatingWindow(
+	{
+		title: 'Algo salió mal',
+		text: 'No se pudo conectar al servidor',
+		button:
+		{
+			text: ':(',
+			callback: async function()
+			{
+				await closeWindow();
+				location.reload();
+			}
+		}
+	})
 });
 
 ws.addEventListener('close', function(e)
@@ -36,8 +37,9 @@ ws.addEventListener('close', function(e)
 		button:
 		{
 			text: ':(',
-			callback: function()
+			callback: async function()
 			{
+				await closeWindow();
 				location.reload();
 			}
 		}
@@ -62,22 +64,22 @@ ws.addEventListener('message', function(e)
 
 function parseOperations(response)
 {
-    switch(response.operation)
-    {
-        case 'obtainRoomID':
-            joinedToGame(response);
-            break;
+	switch(response.operation)
+	{
+		case 'obtainRoomID':
+			joinedToGame(response);
+			break;
 
-        case 'joinedToGame':
-            joinedToGame(response);
-            break;
+		case 'joinedToGame':
+			joinedToGame(response);
+			break;
 
-        case 'playerJoined':
-            playerJoined(response);
-            break;
+		case 'playerJoined':
+			playerJoined(response);
+			break;
 
-        case 'startGame':
-            startGame(response);
-            break;
-    }
+		case 'startGame':
+			startGame(response);
+			break;
+	}
 }

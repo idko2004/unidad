@@ -87,12 +87,12 @@ function generateDeck()
 
 module.exports =
 {
-    getCard,
-    generateDeck,
-    cardsArrays:
-    {
-        allCards,
-        normalCards,
-        specialCards
-    }
+	getCard,
+	generateDeck,
+	cardsArrays:
+	{
+		allCards,
+		normalCards,
+		specialCards
+	}
 }

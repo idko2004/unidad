@@ -1,17 +1,17 @@
 {
-  "name": "unidad-backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node main.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "colors": "^1.4.0",
-    "generate-key": "^0.0.6",
-    "ws": "^8.13.0"
-  }
+	"name": "unidad-backend",
+	"version": "1.0.0",
+	"description": "",
+	"main": "main.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node main.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"colors": "^1.4.0",
+		"generate-key": "^0.0.6",
+		"ws": "^8.13.0"
+	}
 }
