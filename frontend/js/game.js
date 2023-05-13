@@ -27,6 +27,8 @@ function createCardsInDeck(deck)
     {
         const img = document.createElement('img');
         img.classList.add('cardInDeck');
+        img.classList.add('cardHoverAnim');
+
         img.src = `img/${deck[i]}.png`;
         img.setAttribute('card', deck[i]);
 
