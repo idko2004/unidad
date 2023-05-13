@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>La unidad</title>
+		<title>Unidad</title>
 
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,10 +20,60 @@
 
 	</head>
 	<body>
-		<div id="findGameMenu">
+		<div id="mainMenu">
 			<div class="bigTitleContainer">
 				<div class="bigTitleText">
-					La unidad
+					Unidad
+				</div>
+			</div>
+			<section>
+				<div class="redTitleText">
+					Para nada una copia barata del UNO
+				</div>
+				<div class="menuContent">
+					<p>
+						<button id="mainMenuToCreateGame">Crear partida</button>
+					</p>
+					<p>
+						<button id="mainMenuToFindGame">Unirse a una partida</button>
+					</p>
+				</div>
+			</section>
+		</div>
+
+
+		<div id="createGameMenu" hidden>
+			<div class="bigTitleContainer">
+				<div class="bigTitleText">
+					Unidad
+				</div>
+			</div>
+			<section>
+				<div class="redTitleText">
+					Crear una partida
+				</div>
+				<div class="menuContent">
+					<p>
+						Tu nombre:
+					</p>
+					<input type="text" id="createGameUsername">
+					<p>
+						Cantidad de jugadores:
+					</p>
+					<input type="number" id="createGamePlayers" value="2">
+					<p>
+						<button id="createGameButton">Crear partida</button>
+						<button id="createGameBack">Volver</button>
+					</p>
+				</div>
+			</section>
+		</div>
+
+
+		<div id="findGameMenu" hidden>
+			<div class="bigTitleContainer">
+				<div class="bigTitleText">
+					Unidad
 				</div>
 			</div>
 			<section>
@@ -41,24 +91,7 @@
 					<input type="text" id="searchGameRoom">
 					<p>
 						<button id="searchGameButton">Buscar partida</button>
-					</p>
-				</div>
-			</section>
-			<section>
-				<div class="redTitleText">
-					Crear una partida
-				</div>
-				<div class="menuContent">
-					<p>
-						Tu nombre:
-					</p>
-					<input type="text" id="createGameUsername">
-					<p>
-						Cantidad de jugadores:
-					</p>
-					<input type="number" id="createGamePlayers">
-					<p>
-						<button id="createGameButton">Crear partida</button>
+						<button id="searchGameBack">Volver</button>
 					</p>
 				</div>
 			</section>
@@ -68,7 +101,7 @@
 		<div id="waitForPlayersMenu" hidden>
 			<div class="bigTitleContainer">
 				<div class="bigTitleText">
-					La unidad
+					Unidad
 				</div>
 			</div>
 			<div class="redTitleText">

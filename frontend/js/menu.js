@@ -1,13 +1,23 @@
 function changeMenus(menu)
 {
+	document.getElementById('mainMenu').hidden = true;
+	document.getElementById('createGameMenu').hidden = true;
 	document.getElementById('findGameMenu').hidden = true;
 	document.getElementById('waitForPlayersMenu').hidden = true;
 	document.getElementById('game').hidden = true;
 
 	switch(menu)
 	{
+		case 'main':
+			document.getElementById('mainMenu').hidden = false;
+			break;
+
 		case 'findGame':
 			document.getElementById('findGameMenu').hidden = false;
+			break;
+
+		case 'createGame':
+			document.getElementById('createGameMenu').hidden = false;
 			break;
 
 		case 'waitPlayers':
@@ -21,7 +31,31 @@ function changeMenus(menu)
 }
 
 //
-//  SEARCH FOR GAME
+//	MAIN MENU
+//
+
+document.getElementById('mainMenuToCreateGame').addEventListener('click', function()
+{
+	changeMenus('createGame');
+});
+
+document.getElementById('mainMenuToFindGame').addEventListener('click', function()
+{
+	changeMenus('findGame');
+});
+
+document.getElementById('createGameBack').addEventListener('click', function()
+{
+	changeMenus('main');
+});
+
+document.getElementById('searchGameBack').addEventListener('click', function()
+{
+	changeMenus('main');
+})
+
+//
+//	SEARCH FOR GAME
 //
 
 document.getElementById('searchGameButton').addEventListener('click', function()
@@ -55,7 +89,7 @@ document.getElementById('searchGameButton').addEventListener('click', function()
 });
 
 //
-//  CREATE GAME
+//	CREATE GAME
 //
 
 document.getElementById('createGameButton').addEventListener('click', function()
@@ -71,9 +105,19 @@ document.getElementById('createGameButton').addEventListener('click', function()
 
 	let numberOfPlayers = parseInt(document.getElementById('createGamePlayers').value);
 	if(isNaN(numberOfPlayers)
-	|| numberOfPlayers < 1
+	|| numberOfPlayers < 2
 	|| numberOfPlayers > 10)
 	{
+		floatingWindow(
+		{
+			title: 'El número de jugadores está mal',
+			text: 'La cantidad de jugadores debe estar entre 2 y 10',
+			button:
+			{
+				text: 'Aceptar',
+				callback: closeWindow
+			}
+		});
 		return;
 	}
 
@@ -93,7 +137,7 @@ document.getElementById('createGameButton').addEventListener('click', function()
 });
 
 //
-//  WAIT FOR PLAYERS MENU
+//	WAIT FOR PLAYERS MENU
 //
 
 function joinedToGame(response)

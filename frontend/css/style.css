@@ -50,6 +50,7 @@ body
 	border-radius: 1rem;
 	padding: 0.4rem;
 	width: 40ch;
+	max-width: 90vw;
 	margin: 0 auto;
 }
 
