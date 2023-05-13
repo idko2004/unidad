@@ -26,14 +26,63 @@ const specialCards =
 	'+4', 'COLOR'
 ];
 
+
+
+const random = require('./random');
+
+const colors = require('colors');
+
 function getCard(type)
 {
-
+	if(type === 'all')
+	{
+		let cardIndex = random.range(0, allCards.length);
+		let card = allCards[cardIndex];
+		if(card !== undefined) return card;
+		else
+		{
+			console.log(colors.red(`cards.getCard: allCards[${cardIndex}] is undefined`));
+			return allCards[0];
+		}
+	}
+	else if(type === 'normal')
+	{
+		let cardIndex = random.range(0, normalCards.length);
+		let card = normalCards[cardIndex];
+		if(card !== undefined) return card;
+		else
+		{
+			console.log(colors.red(`cards.getCard: normalCards[${cardIndex}] is undefined`));
+			return normalCards[0];
+		}
+	}
+	else if(type === 'special')
+	{
+		let cardIndex = random.range(0, specialCards.length);
+		let card = specialCards[cardIndex];
+		if(card !== undefined) return card;
+		else
+		{
+			console.log(colors.red(`cards:getCard: specialCards[${cardIndex}] is undefined`));
+			return specialCards[0];
+		}
+	}
+	else
+	{
+		console.log(colors.red(`cards.getCard: ${type} no es un tipo de carta`));
+		return undefined;
+	}
 }
 
 function generateDeck()
 {
-
+	let deck = [];
+	for(let i = 0; i <= 7; i++)
+	{
+		deck.push(getCard('all'));
+	}
+	console.log('cards.generateDeck: deck generado', deck);
+	return deck;
 }
 
 module.exports =
