@@ -12,7 +12,7 @@ let currentCard;
 let deck = [];
 let canPlay = false;
 
-floatingWindow(
+/*floatingWindow(
 {
 	title: 'ola',
 	text: 'patata',
@@ -29,4 +29,4 @@ floatingWindow(
 			callback: closeWindow
 		}
 	]
-});
+});*/

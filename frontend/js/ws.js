@@ -6,6 +6,25 @@ ws.addEventListener('open', function(e)
 	connected = true;
 });
 
+ws.addEventListener('error', function(e)
+{
+    console.log('Error conectando al servidor', e);
+    connected = false;
+    floatingWindow(
+    {
+        title: 'Algo salió mal',
+        text: 'No se pudo conectar al servidor',
+        button:
+        {
+            text: ':(',
+            callback: function()
+            {
+                location.reload();
+            }
+        }
+    })
+});
+
 ws.addEventListener('message', function(e)
 {
 	console.log(e);
