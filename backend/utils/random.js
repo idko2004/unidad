@@ -13,7 +13,7 @@ function range(min, max)
 
 	let r = Math.floor(Math.random() * (n - min) + min);
 
-	while(r > n - 1)
+	while(r > max)
 	{
 		r -= max;
 	}
