@@ -25,6 +25,25 @@ ws.addEventListener('error', function(e)
     })
 });
 
+ws.addEventListener('close', function(e)
+{
+	console.log('El servidor se ha desconectado', e);
+	connected = false;
+	floatingWindow(
+	{
+		title: 'Servidor desconectado',
+		text: 'La conexión con el servidor se ha cerrado.',
+		button:
+		{
+			text: ':(',
+			callback: function()
+			{
+				location.reload();
+			}
+		}
+	});
+});
+
 ws.addEventListener('message', function(e)
 {
 	console.log(e);
