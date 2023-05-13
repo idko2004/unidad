@@ -1,5 +1,6 @@
 
 const game = require('../utils/game');
+const cards = require('../utils/cards');
 
 module.exports = function(dataObject, ws)
 {
@@ -96,16 +97,7 @@ module.exports = function(dataObject, ws)
 	// Añadir usuario a la sala
 	room.players[username] =
 	{
-		deck:
-		[
-			'6b',
-			'6b',
-			'6b',
-			'6b',
-			'6b',
-			'6b',
-			'6b',
-		],
+		deck: cards.generateDeck(),
 		won: false,
 		ws
 	}

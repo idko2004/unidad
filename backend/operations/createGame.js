@@ -1,5 +1,6 @@
 
 const game = require('../utils/game');
+const cards = require('../utils/cards');
 
 const rand = require('generate-key');
 
@@ -64,22 +65,13 @@ module.exports = function(dataObject, ws)
 	{
 		master: username,
 		maxPlayers,
-		currentCard: '6b',
+		currentCard: cards.getCard('normal'),
 		letMorePlayersIn: true,
 		players:
 		{
 			[username]:
 			{
-				deck:
-				[
-					'7y',
-					'7y',
-					'7y',
-					'7y',
-					'7y',
-					'7y',
-					'7y'
-				],
+				deck: cards.generateDeck(),
 				won: false,
 				ws
 			}
