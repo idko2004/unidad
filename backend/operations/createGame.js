@@ -78,7 +78,7 @@ module.exports = function(dataObject, ws)
 		}
 	}
 	console.log('Estado de los juegos', game.activeGames);
-	console.log('Estado del usuario', game.activeGames[roomID].players[username]);
+	//console.log('Estado del usuario', game.activeGames[roomID].players[username]);
 
 
 
