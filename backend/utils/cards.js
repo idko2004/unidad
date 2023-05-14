@@ -26,6 +26,41 @@ const specialCards =
 	'+4', 'COLOR'
 ];
 
+const cardTypes =
+{
+	'+2r': { special: true },
+	'+2g': { special: true },
+	'+2b': { special: true },
+	'+2y': { special: true },
+	'SKIPr': { special: true },
+	'SKIPg': { special: true },
+	'SKIPb': { special: true },
+	'SKIPy': { special: true },
+	'REVERSEr': { special: true },
+	'REVERSEg': { special: true },
+	'REVERSEb': { special: true },
+	'REVERSEy': { special: true },
+	'+4': { special: true },
+	'COLOR': { special: true },
+	'1r': ,
+	'2r': ,
+	'3r': ,
+	'4r': ,
+	'5r': ,
+	'6r': ,
+	'7r': ,
+	'8r': ,
+	'9r': ,
+	'0r': ,
+	'1g': ,
+	'2g': ,
+	'3g': ,
+	'4g': ,
+	'5g', '6g', '7g', '8g', '9g', '0g',
+	'1b', '2b', '3b', '4b', '5b', '6b', '7b', '8b', '9b', '0b',
+	'1y', '2y', '3y', '4y', '5y', '6y', '7y', '8y', '9y', '0y'
+}
+
 
 
 const random = require('./random');
