@@ -139,6 +139,7 @@ module.exports = function(dataObject, ws)
 	// Si la carta jugada no es especial, hacer la cosa
 	else
 	{
+		// ME FALTÓ HACER UNA COSA MUY IMPORTANTE, VER SI LA CARTA SE PUEDE JUGAR, SI ES DEL MISMO NÚMERO O DEL MISMO COLOR, AHORA SE PUEDE JUGAR CUALQUIER CARTA
 		room.currentCard = play.card;
 		room.players[username].deck = cards.deleteFromDeck(play.card, room.players[username].deck);
 		room.whoIsPlaying++;
