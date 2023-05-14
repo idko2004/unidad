@@ -1,4 +1,7 @@
 const game = require('../utils/game');
+const cards = require('../utils/cards');
+
+const colors = require('colors');
 
 module.exports = function(dataObject, ws)
 {
@@ -28,7 +31,8 @@ module.exports = function(dataObject, ws)
 	//Comprobar si tenemos todos los datos
 	const roomID = dataObject.roomID;
 	const username = dataObject.username;
-	if([roomID, username].includes(undefined))
+	const play = dataObject.play;
+	if([roomID, username, play].includes(undefined))
 	{
 		ws.send(JSON.stringify(
 		{
@@ -80,13 +84,91 @@ module.exports = function(dataObject, ws)
 
 
 
-	// Si la carta jugada no es especial, hacer la cosa
+	// Obtener las propiedades de la carta
+	const cardProperties = cards.cardTypes[play.card];
+	if(cardProperties === undefined)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'errorPlaying',
+			error: 'invalidCard'
+		}));
+		return;
+	}
 
+
+
+	// Comprobar si la carta está en el deck del jugador
+	if(!room.players[username].deck.includes(play.card))
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'errorPlaying',
+			error: 'invalidCard'
+		}));
+		return;
+	}
 
 
 	// Si la carta jugada es especial, hacer la cosa
+	if(cardProperties.special)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'errorPlaying',
+			error: 'not implemented yet'
+		}));
+		return;
+	}
+
+
+
+	// Si la carta no es especial pero hace algo, hacer la cosa
+	else if(cardProperties.doesSomething)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'errorPlaying',
+			error: 'not implemented yet'
+		}));
+		return;
+	}
+
+
+
+	// Si la carta jugada no es especial, hacer la cosa
+	else
+	{
+		room.currentCard = play.card;
+		room.players[username].deck = cards.deleteFromDeck(play.card, room.players[username].deck);
+		room.whoIsPlaying++;
+	}
 
 
 
 	// Enviar el estado de la partida a todos los jugadores
+	for(let i = 0; i < room.order; i++)
+	{
+		const player = room.players[room.order[i]];
+		if(player === undefined)
+		{
+			console.log(colors.red(`operation play: ${room.order[i]} no es un jugador de la partida`));
+			continue;
+		}
+
+		if(player.ws === undefined)
+		{
+			console.log(colors.red(`operation play: ${room.order[i]} no tiene un websocket asignado`));
+			continue;
+		}
+
+		player.ws.send(JSON.stringify(
+		{
+			operation: 'gameUpdate',
+			currentCard: room.currentCard,
+			deck: player.deck,
+			yourTurn: room.order[room.whoIsPlaying] === room.order[i],
+			messages: [ 'alguien hizo algo' ]
+		}));
+	}
 }
