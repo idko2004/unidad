@@ -7,6 +7,7 @@ function startGame(response)
 
 	deck = response.deck;
 	currentCard = response.currentCard;
+	canPlay = response.yourTurn;
 
 	updateCurrentCard(response.currentCard);
 	createCardsInDeck(response.deck);
@@ -32,6 +33,11 @@ function createCardsInDeck(deck)
 		img.src = `img/${deck[i]}.png`;
 		img.setAttribute('card', deck[i]);
 
+		img.addEventListener('click', function(e)
+		{
+			clickACardInDeck(e);
+		});
+
 		deckDiv.appendChild(img);
 	}
 }
@@ -40,4 +46,23 @@ const logsDiv = document.getElementById('logsDiv');
 function updateLog(text)
 {
 	logsDiv.innerText = text;
+}
+
+function clickACardInDeck(e)
+{
+	const card = e.target.attributes.card;
+
+	if(canPlay) //Es tu turno
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'play',
+			roomID,
+			username,
+			play:
+			{
+				card
+			}
+		}));
+	}
 }
