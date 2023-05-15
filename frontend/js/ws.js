@@ -81,5 +81,9 @@ function parseOperations(response)
 		case 'startGame':
 			startGame(response);
 			break;
+
+		case 'errorPlaying':
+			errorPlaying(response);
+			break;
 	}
 }

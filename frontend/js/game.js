@@ -89,3 +89,20 @@ function clickACardInDeck(e)
 		}));
 	}
 }
+
+function errorPlaying(response)
+{
+	floatingWindow(
+	{
+		title: 'Algo salió mal',
+		text: `error: ${response.error}`,
+		button:
+		{
+			text: 'Aceptar',
+			callback: function()
+			{
+				closeWindow();
+			}
+		}
+	});
+}
