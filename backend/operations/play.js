@@ -177,7 +177,7 @@ module.exports = function(dataObject, ws)
 
 
 	// Enviar el estado de la partida a todos los jugadores
-	for(let i = 0; i < room.order; i++)
+	for(let i = 0; i < room.order.length; i++)
 	{
 		const player = room.players[room.order[i]];
 		if(player === undefined)

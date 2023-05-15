@@ -9,7 +9,7 @@ let maxPlayers;
 let username;
 let roomID;
 let currentCard;
-let deck = [];
+let playerDeck = [];
 let canPlay = false;
 
 /*floatingWindow(

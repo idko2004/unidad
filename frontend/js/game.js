@@ -5,7 +5,7 @@ function startGame(response)
 
 	changeMenus('game');
 
-	deck = response.deck;
+	playerDeck = response.deck;
 	currentCard = response.currentCard;
 	canPlay = response.yourTurn;
 
@@ -39,6 +39,13 @@ function createCardsInDeck(deck)
 		});
 
 		deckDiv.appendChild(img);
+
+		/*playerDeck.push(
+		{
+			card: deck[i],
+			element: img
+		});
+		*/
 	}
 }
 
@@ -73,7 +80,8 @@ function updateLog(text)
 
 function clickACardInDeck(e)
 {
-	const card = e.target.attributes.card;
+	const card = e.target.attributes.card.value;
+	//e.target.hidden = true;
 
 	if(canPlay) //Es tu turno
 	{
@@ -105,4 +113,77 @@ function errorPlaying(response)
 			}
 		}
 	});
+}
+
+function gameUpdate(response)
+{
+	updateCurrentCard(response.currentCard);
+	canPlay = response.yourTurn;
+	newMessages(response.messages);
+	updateDeck(response.deck);
+}
+
+function updateDeck(deck)
+{
+	console.log('old deck', JSON.stringify(playerDeck));
+	console.log('how new is supposed to be', JSON.stringify(deck));
+	playerDeck = JSON.parse(JSON.stringify(deck));
+
+	const elementsInDeck = document.getElementsByClassName('cardInDeck');
+
+	const pairedCards = [];
+
+	for(let i = 0; i < deck.length; i++)
+	{
+		// Por cada elemento de la array del deck, buscar una carta en el html que se corresponda
+		const deckElement = findCard(deck[i]);
+		pairedCards.push(deckElement);
+		deck[i] = null;
+
+		// Todos los elementos de deck que no sean null son cartas nuevas
+		// Todas las cartas html que no están paireadas deben ser eliminadas
+	}
+
+	removeCards();
+	addCards();
+
+	function findCard(card)
+	{
+		for(let j = 0; j < elementsInDeck.length; j++)
+		{
+			if(card === elementsInDeck[j].attributes.card.value
+			&& !pairedCards.includes(elementsInDeck[j]))
+			{
+				return elementsInDeck[j];
+			}
+		}
+	}
+
+	function removeCards()
+	{
+		let toRemove = [];
+		for(let j = 0; j < elementsInDeck.length; j++)
+		{
+			if(!pairedCards.includes(elementsInDeck[j]))
+			{
+				toRemove.push(elementsInDeck[j]);
+			}
+		}
+
+		toRemove.forEach(function(e)
+		{
+			e.remove();
+		});
+	}
+
+	function addCards()
+	{
+		let toAdd = [];
+		for(let j = 0; j < deck.length; j++)
+		{
+			if(deck[j] !== null) toAdd.push(deck[j]);
+		}
+
+		createCardsInDeck(toAdd);
+	}
 }
