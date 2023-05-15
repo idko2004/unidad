@@ -85,7 +85,7 @@ module.exports = function(dataObject, ws)
 
 
 	// Obtener las propiedades de la carta
-	const cardProperties = cards.cardTypes[play.card];
+	const cardProperties = cards.properties[play.card];
 	if(cardProperties === undefined)
 	{
 		ws.send(JSON.stringify(
@@ -139,7 +139,25 @@ module.exports = function(dataObject, ws)
 	// Si la carta jugada no es especial, hacer la cosa
 	else
 	{
-		// ME FALTÓ HACER UNA COSA MUY IMPORTANTE, VER SI LA CARTA SE PUEDE JUGAR, SI ES DEL MISMO NÚMERO O DEL MISMO COLOR, AHORA SE PUEDE JUGAR CUALQUIER CARTA
+		const currentCardProperties = cards.properties[room.currentCard];
+
+		const sameColor = currentCardProperties.color === cardProperties.color;
+		const sameValue = currentCardProperties.value === cardProperties.value;
+
+		let validPlay = false;
+		if(sameColor) validPlay = true;
+		else if(sameValue) validPlay = true;
+
+		if(!validPlay)
+		{
+			ws.send(JSON.stringify(
+			{
+				operation: 'errorPlaying',
+				error: 'invalidCard'
+			}));
+			return;
+		}
+
 		room.currentCard = play.card;
 		room.players[username].deck = cards.deleteFromDeck(play.card, room.players[username].deck);
 		room.whoIsPlaying++;
