@@ -25,6 +25,8 @@ module.exports = function(dataObject, ws)
 		messages:[]
 	}
 	*/
+	console.log('---------------\nplay\n');
+	console.log(dataObject);
 
 
 
@@ -39,6 +41,7 @@ module.exports = function(dataObject, ws)
 			operation: 'errorPlaying',
 			error: 'badRequest'
 		}));
+		console.log('errorPlaying: badRequest:', roomID, username, play);
 		return;
 	}
 
@@ -53,32 +56,35 @@ module.exports = function(dataObject, ws)
 			operation: 'errorPlaying',
 			error: 'invalidRoom'
 		}));
+		console.log('errorPlaying: invalidRoom: la sala es undefined');
 		return;
 	}
 
 
 
 	// Comprobar si el usuario es parte de la sala
-	if(room.order.includes(username))
+	if(!room.order.includes(username))
 	{
 		ws.send(JSON.stringify(
 		{
 			operation: 'errorPlaying',
 			error: 'invalidRoom'
 		}));
+		console.log('errorPlaying: invalidRoom: el usuario no pertenece a la sala');
 		return;
 	}
 
 
 
 	// Comprobar si es su turno
-	if(room.order[room.whoIsPlaying] === username)
+	if(room.order[room.whoIsPlaying] !== username)
 	{
 		ws.send(JSON.stringify(
 		{
 			operation: 'errorPlaying',
 			error: 'notYourTurn'
 		}));
+		console.log('errorPlaying: notYourTurn');
 		return;
 	}
 
@@ -93,6 +99,7 @@ module.exports = function(dataObject, ws)
 			operation: 'errorPlaying',
 			error: 'invalidCard'
 		}));
+		console.log('errorPlaying: invalidCard: la carta no existe');
 		return;
 	}
 
@@ -106,6 +113,7 @@ module.exports = function(dataObject, ws)
 			operation: 'errorPlaying',
 			error: 'invalidCard'
 		}));
+		console.log('errorPlaying: invalidCard: la carta no está en el mazo');
 		return;
 	}
 
@@ -118,6 +126,7 @@ module.exports = function(dataObject, ws)
 			operation: 'errorPlaying',
 			error: 'not implemented yet'
 		}));
+		console.log('errorPlaying: not implemented yet: cartas especiales');
 		return;
 	}
 
@@ -131,6 +140,7 @@ module.exports = function(dataObject, ws)
 			operation: 'errorPlaying',
 			error: 'not implemented yet'
 		}));
+		console.log('errorPlaying: not implemented yet: cartas no especiales que hacen cosas');
 		return;
 	}
 
@@ -155,6 +165,7 @@ module.exports = function(dataObject, ws)
 				operation: 'errorPlaying',
 				error: 'invalidCard'
 			}));
+			console.log('errorPlaying: invalidCard: la carta no es ni del mismo color ni valor');
 			return;
 		}
 
