@@ -89,12 +89,12 @@ module.exports = function(dataObject, ws)
 		let yourTurn = false;
 		if(i === room.whoIsPlaying)
 		{
-			message = 'Es tu turno.';
+			message = [ 'Es tu turno.' ];
 			yourTurn = true;
 		}
 		else
 		{
-			message = `Es el turno de ${players[room.whoIsPlaying]}.`;
+			message = [ `Es el turno de ${players[room.whoIsPlaying]}.` ];
 		}
 
 		playerProfile.ws.send(JSON.stringify(
