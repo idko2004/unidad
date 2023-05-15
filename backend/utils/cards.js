@@ -26,7 +26,7 @@ const specialCards =
 	'+4', 'COLOR'
 ];
 
-const cardTypes =
+const properties =
 {
 	'+2r': { special: true, color: 'r', value: '+2' },
 	'+2g': { special: true, color: 'g', value: '+2' },
@@ -190,5 +190,5 @@ module.exports =
 		normalCards,
 		specialCards
 	},
-	cardTypes
+	properties
 }
