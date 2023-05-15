@@ -11,7 +11,7 @@ function startGame(response)
 
 	updateCurrentCard(response.currentCard);
 	createCardsInDeck(response.deck);
-	updateLog(response.message);
+	newMessages(response.message);
 }
 
 const currentCardImg = document.getElementById('currentCard');
@@ -43,6 +43,29 @@ function createCardsInDeck(deck)
 }
 
 const logsDiv = document.getElementById('logsDiv');
+let messagesPending = [];
+let updateMessageJob;
+
+function newMessages(messages)
+{
+	if(!Array.isArray(messages)) return;
+
+	messagesPending.push(messages);
+
+	updateMessageJob = setInterval(function()
+	{
+		if(messagesPending.length > 0)
+		{
+			updateLog(messagesPending[0]);
+			messagesPending.shift();
+		}
+		else
+		{
+			clearInterval(updateMessageJob);
+		}
+	}, 500);
+}
+
 function updateLog(text)
 {
 	logsDiv.innerText = text;
