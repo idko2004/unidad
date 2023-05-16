@@ -171,7 +171,7 @@ module.exports = function(dataObject, ws)
 
 		room.currentCard = play.card;
 		room.players[username].deck = cards.deleteFromDeck(play.card, room.players[username].deck);
-		room.whoIsPlaying++;
+		game.nextTurn(roomID);
 	}
 
 
