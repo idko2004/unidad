@@ -11,6 +11,8 @@ let roomID;
 let currentCard;
 let playerDeck = [];
 let canPlay = false;
+let canSkip = false;
+let canGrabACard = true;
 
 /*floatingWindow(
 {

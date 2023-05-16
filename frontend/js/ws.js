@@ -89,5 +89,9 @@ function parseOperations(response)
 		case 'gameUpdate':
 			gameUpdate(response);
 			break;
+
+		case 'grabCard':
+			grabCard(response);
+			break;
 	}
 }

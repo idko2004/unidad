@@ -170,6 +170,7 @@ module.exports = function(dataObject, ws)
 		}
 
 		room.currentCard = play.card;
+		room.cardGrabbed = false;
 		room.players[username].deck = cards.deleteFromDeck(play.card, room.players[username].deck);
 		game.utils.nextTurn(roomID);
 	}

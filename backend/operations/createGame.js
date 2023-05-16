@@ -69,6 +69,7 @@ module.exports = function(dataObject, ws)
 		letMorePlayersIn: true,
 		whoIsPlaying: 0,
 		direction: 1,
+		cardGrabbed: false,
 		order: [],
 		players:
 		{

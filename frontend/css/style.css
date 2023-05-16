@@ -3,9 +3,11 @@ html
 	--red: #c01c28;
 	--black: #241f31;
 	--white: #f6f5f4;
+	--gray: #c0bfbc;
 
 	--red-win-bg: rgba(165,29,45, 0.20);
 	--dark-red: #a51d2d;
+	--dark-gray: #9a9996;
 }
 
 button:hover
@@ -16,7 +18,7 @@ button:hover
 body
 {
 	margin: 0;
-	padding: 0;
+	padding: 0 0 2rem 0;
 	border: 0;
 	background-color: var(--black);
 	color: var(--white);
@@ -90,7 +92,7 @@ section
 	outline: none;
 }
 
-.menuContent button
+button
 {
 	font-size: 1rem;
 	font-family: 'Tilt Warp', cursive;
@@ -101,11 +103,18 @@ section
 	border-radius: 0.4rem;
 }
 
-.menuContent button:hover,
-.menuContent button:focus
+button:hover,
+button:focus
 {
 	border-color: var(--white);
 	cursor: pointer;
+}
+
+button:disabled
+{
+	background-color: var(--gray);
+	border-color: var(--dark-gray);
+	cursor: not-allowed;
 }
 
 .playersList
@@ -145,4 +154,9 @@ section
 .leftAlign
 {
 	text-align: left;
+}
+
+.centerAlign
+{
+	text-align: center;
 }

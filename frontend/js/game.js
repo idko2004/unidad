@@ -39,14 +39,8 @@ function createCardsInDeck(deck)
 		});
 
 		deckDiv.appendChild(img);
-
-		/*playerDeck.push(
-		{
-			card: deck[i],
-			element: img
-		});
-		*/
 	}
+	moveAddCardToLast();
 }
 
 const logsDiv = document.getElementById('logsDiv');
@@ -133,16 +127,20 @@ function errorPlaying(response)
 function gameUpdate(response)
 {
 	updateCurrentCard(response.currentCard);
-	canPlay = response.yourTurn;
 	newMessages(response.messages);
 	updateDeck(response.deck);
+	
+	canPlay = response.yourTurn;
+
+	changeSkipCondition(false);
+	canGrabACard = true;
 }
 
 function updateDeck(deck)
 {
 	console.log('old deck', JSON.stringify(playerDeck));
 	console.log('how new is supposed to be', JSON.stringify(deck));
-	playerDeck = JSON.parse(JSON.stringify(deck));
+	playerDeck = [].push(deck);
 
 	const elementsInDeck = document.getElementsByClassName('cardInDeck');
 
@@ -161,6 +159,7 @@ function updateDeck(deck)
 
 	removeCards();
 	addCards();
+	moveAddCardToLast();
 
 	function findCard(card)
 	{
@@ -201,4 +200,76 @@ function updateDeck(deck)
 
 		createCardsInDeck(toAdd);
 	}
+}
+
+function moveAddCardToLast()
+{
+	const parent = document.getElementById('deck');
+	const card = document.getElementById('addCard');
+
+	parent.appendChild(card);
+}
+
+const skipButton = document.getElementById('skipButton');
+function changeSkipCondition(nowCanSkip)
+{
+	if(typeof nowCanSkip !== 'boolean') return;
+
+	canSkip = nowCanSkip;
+
+	skipButton.disabled = !nowCanSkip;
+}
+
+//La carta de pedir más cartas
+document.getElementById('addCard').addEventListener('click', function()
+{
+	if(!canPlay || canSkip || !canGrabACard) return;
+
+	ws.send(JSON.stringify(
+	{
+		operation: 'grabCard',
+		roomID,
+		username
+	}));
+});
+
+function grabCard(response)
+{
+	if(response.error !== undefined)
+	{
+		if(response.error === 'alredyGrabbed')
+		{
+			floatingWindow(
+			{
+				title: 'Nop',
+				text: 'Ya has tomado una carta.',
+				button:
+				{
+					text: 'Aceptar',
+					callback: closeWindow
+				}
+			});
+			return;
+		}
+		else
+		{
+			floatingWindow(
+			{
+				title: 'Algo salió mal',
+				text: `error: ${response.error}`,
+				button:
+				{
+					text: 'Aceptar',
+					callback: closeWindow
+				}
+			});
+			return;
+		}
+	}
+
+	const card = response.card;
+	createCardsInDeck([card]);
+	playerDeck.push(card);
+	changeSkipCondition(true);
+	canGrabACard = false;
 }

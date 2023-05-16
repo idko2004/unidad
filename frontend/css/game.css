@@ -47,19 +47,22 @@
 	text-align: center;
 }
 
-.cardInDeck
+.cardInDeck,
+#addCard
 {
 	height: 8rem;
 	margin: 0.3rem;
 }
 
-.cardHoverAnim
+.cardHoverAnim,
+#addCard
 {
 	transition: transform 150ms;
 	cursor: pointer;
 }
 
-.cardHoverAnim:hover
+.cardHoverAnim:hover,
+#addCard:hover
 {
 	transform: scale(1.1);
 }
