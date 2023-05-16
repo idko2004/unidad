@@ -100,19 +100,34 @@ function clickACardInDeck(e)
 
 function errorPlaying(response)
 {
-	floatingWindow(
+	switch(response.error)
 	{
-		title: 'Algo salió mal',
-		text: `error: ${response.error}`,
-		button:
-		{
-			text: 'Aceptar',
-			callback: function()
+		default:
+			floatingWindow(
 			{
-				closeWindow();
-			}
-		}
-	});
+				title: 'Algo salió mal',
+				text: `error: ${response.error}`,
+				button:
+				{
+					text: 'Aceptar',
+					callback: closeWindow
+				}
+			});
+			break;
+
+		case 'invalidCard':
+			floatingWindow(
+			{
+				title: 'Esa carta no',
+				text: 'Elige una carta que tenga el mismo color o contenido',
+				button:
+				{
+					text: 'Aceptar',
+					callback: closeWindow
+				}
+			});
+			break;
+	}
 }
 
 function gameUpdate(response)
