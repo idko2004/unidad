@@ -67,6 +67,9 @@ module.exports = function(dataObject, ws)
 		maxPlayers,
 		currentCard: cards.getCard('normal'),
 		letMorePlayersIn: true,
+		whoIsPlaying: 0,
+		direction: 1,
+		order: [],
 		players:
 		{
 			[username]:
