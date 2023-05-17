@@ -11,7 +11,7 @@ const wss = new WebSocket.Server(
 
 wss.on('connection', async function(ws)
 {
-	console.log('¡Cliente conectado!');
+	console.log('### ¡Cliente conectado! ###');
 	
 	ws.on('message', function(data)
 	{

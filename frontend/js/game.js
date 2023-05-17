@@ -121,6 +121,19 @@ function errorPlaying(response)
 				}
 			});
 			break;
+
+		case 'grabCardFirst':
+			floatingWindow(
+			{
+				title: 'Toma una carta del mazo',
+				text: 'No puedes saltar tu turno si no tomas una carta del mazo antes',
+				button:
+				{
+					text: 'Aceptar',
+					callback: closeWindow
+				}
+			});
+			break;
 	}
 }
 
@@ -140,7 +153,7 @@ function updateDeck(deck)
 {
 	console.log('old deck', JSON.stringify(playerDeck));
 	console.log('how new is supposed to be', JSON.stringify(deck));
-	playerDeck = [].push(deck);
+	playerDeck = JSON.parse(JSON.stringify(deck));
 
 	const elementsInDeck = document.getElementsByClassName('cardInDeck');
 
@@ -270,6 +283,41 @@ function grabCard(response)
 	const card = response.card;
 	createCardsInDeck([card]);
 	playerDeck.push(card);
+	console.log('deck después de agarrar una carta', playerDeck);
 	changeSkipCondition(true);
 	canGrabACard = false;
 }
+
+//Saltar turno
+document.getElementById('skipButton').addEventListener('click', function()
+{
+	if(!canSkip) return;
+
+	floatingWindow(
+	{
+		title: '¿Saltar turno?',
+		buttons:
+		[
+			{
+				text: 'No',
+				primary: false,
+				callback: closeWindow
+			},
+			{
+				text: 'Sí, saltar turno',
+				primary: true,
+				callback: function()
+				{
+					changeSkipCondition(false);
+					ws.send(JSON.stringify(
+					{
+						operation: 'skip',
+						roomID,
+						username
+					}));
+					closeWindow();
+				}
+			}
+		]
+	});
+});

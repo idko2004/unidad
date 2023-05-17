@@ -8,17 +8,20 @@ module.exports = function(dataObject, ws)
 	/*
 	Requisitos:
 	{
-		operation: 'grabCard',
+		operation: 'skip',
 		username,
 		roomID
 	}
 	Enviar a todos:
 	{
-		operation: 'grabCard',
-		card
+		operation: 'gameUpdate',
+		currentCard,
+		deck: [],
+		yourTurn: true | false
+		messages:[]
 	}
 	*/
-	console.log('---------------\ngrabCard\n');
+	console.log('---------------\nskip\n');
 	console.log(dataObject);
 
 
@@ -54,15 +57,15 @@ module.exports = function(dataObject, ws)
 
 
 
-	// Comprobar si ya no se tomó una carta en este turno
-	if(room.cardGrabbed)
+	// Comprobar que ya se agarró carta del mazo
+	if(!room.cardGrabbed)
 	{
 		ws.send(JSON.stringify(
 		{
-			operation: 'grabCard',
-			error: 'alredyGrabbed'
+			operation: 'errorPlaying',
+			error: 'grabCardFirst'
 		}));
-		console.log('grabCard: alredyGrabbed: ya se tomó una carta del mazo en este turno');
+		console.log('errorPlaying: grabCardFirst: no se tomó una carta del mazo');
 		return;
 	}
 
@@ -96,19 +99,12 @@ module.exports = function(dataObject, ws)
 
 
 
-	// Elegir la carta que enviar
-	const card = cards.getCard('all');
-	room.players[username].deck.push(card);
+	// Saltar un turno
+	game.utils.nextTurn(roomID);
+	room.cardGrabbed = false;
 
 
 
-	// Guardar que ya se tomó la carta
-	room.cardGrabbed = true;
-
-	ws.send(JSON.stringify(
-	{
-		operation: 'grabCard',
-		card
-	}));
-	console.log('Carta enviada');
+	// Enviar el estado de la partida a todos los jugadores
+	game.utils.updatePlayers(roomID);
 }

@@ -50,12 +50,12 @@ function nextTurn(roomID)
 	const room = activeGames[roomID];
 	if(room === undefined)
 	{
-		console.log(colors.red(`game.nextTurn: ${roomID} is not a valid room`));
+		console.log(colors.red(`game.utils.nextTurn: ${roomID} is not a valid room`));
 		return;
 	}
 	if(![-1, 1].includes(room.direction))
 	{
-		console.log(colors.red(`game.nextTurn: ${room.direction} is not a valid direction`));
+		console.log(colors.red(`game.utils.nextTurn: ${room.direction} is not a valid direction`));
 		return;
 	}
 
@@ -67,11 +67,57 @@ function nextTurn(roomID)
 	return room.whoIsPlaying;
 }
 
+
+
+function updatePlayers(roomID) //Para enviar el estado de la partida a todos los jugadores
+{
+	if(roomID === undefined)
+	{
+		console.log(colors.red(`game.utils.updatePlayers: roomID es undefined`));
+		return;
+	}
+
+	const room = activeGames[roomID];
+	if(room === undefined)
+	{
+		console.log(colors.red(`game.utils.updatePlayers: ${roomID} no es una sala válida`));
+		return;
+	}
+
+	for(let i = 0; i < room.order.length; i++)
+	{
+		const player = room.players[room.order[i]];
+		if(player === undefined)
+		{
+			console.log(colors.red(`game.utils.updatePlayers: ${room.order[i]} no es un jugador de la partida`));
+			continue;
+		}
+
+		if(player.ws === undefined)
+		{
+			console.log(colors.red(`game.utils.updatePlayers: ${room.order[i]} no tiene un websocket asignado`));
+			continue;
+		}
+
+		player.ws.send(JSON.stringify(
+		{
+			operation: 'gameUpdate',
+			currentCard: room.currentCard,
+			deck: player.deck,
+			yourTurn: room.order[room.whoIsPlaying] === room.order[i],
+			messages: [ 'alguien hizo algo' ]
+		}));
+	}
+}
+
+
+
 module.exports =
 {
 	activeGames,
 	utils:
 	{
+		updatePlayers,
 		nextTurn
 	}
 };

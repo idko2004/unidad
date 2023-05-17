@@ -178,28 +178,5 @@ module.exports = function(dataObject, ws)
 
 
 	// Enviar el estado de la partida a todos los jugadores
-	for(let i = 0; i < room.order.length; i++)
-	{
-		const player = room.players[room.order[i]];
-		if(player === undefined)
-		{
-			console.log(colors.red(`operation play: ${room.order[i]} no es un jugador de la partida`));
-			continue;
-		}
-
-		if(player.ws === undefined)
-		{
-			console.log(colors.red(`operation play: ${room.order[i]} no tiene un websocket asignado`));
-			continue;
-		}
-
-		player.ws.send(JSON.stringify(
-		{
-			operation: 'gameUpdate',
-			currentCard: room.currentCard,
-			deck: player.deck,
-			yourTurn: room.order[room.whoIsPlaying] === room.order[i],
-			messages: [ 'alguien hizo algo' ]
-		}));
-	}
+	game.utils.updatePlayers(roomID);
 }

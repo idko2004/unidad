@@ -1,6 +1,8 @@
+const colors = require('colors');
 
 module.exports = async function(data, ws)
 {
+	console.log('########');
 	const dataString = data.toString();
 	if(dataString === undefined || dataString === '') return;
 	console.log(dataString);
@@ -32,6 +34,7 @@ const joinGame = require('../operations/joinGame');
 const startGame = require('../operations/startGame');
 const play = require('../operations/play');
 const grabCard = require('../operations/grabCard');
+const skip = require('../operations/skip');
 
 function parseOperation(dataObject, ws)
 {
@@ -42,6 +45,7 @@ function parseOperation(dataObject, ws)
 			{
 				error: 'invalidOperation'
 			}));
+			console.log(colors.red(`${dataObject.operation} no es una operación válida`));
 			break;
 
 		case 'createGame':
@@ -62,6 +66,10 @@ function parseOperation(dataObject, ws)
 
 		case 'grabCard':
 			grabCard(dataObject, ws);
+			break;
+
+		case 'skip':
+			skip(dataObject, ws);
 			break;
 	}
 }
