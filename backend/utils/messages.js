@@ -4,14 +4,16 @@ const msgValues =
 {
 	yourTurn: 'yourTurn',
 	turn: 'turn',
-	cardPlayed: 'cardPlayed'
+	cardPlayed: 'cardPlayed',
+	skipTurn: 'skipTurn'
 }
 
 const messages =
 {
 	yourTurn: 'Tu turno',
 	turn: 'Es el turno de %username%',
-	cardPlayed: '%username% tiró un %cardname%'
+	cardPlayed: '%username% tiró un %cardname%',
+	skipTurn: '%username% no tira nada'
 }
 
 const cardNames =

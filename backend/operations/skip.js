@@ -1,5 +1,6 @@
 const game = require('../utils/game');
 const cards = require('../utils/cards');
+const msg = require('../utils/messages');
 
 const colors = require('colors');
 
@@ -105,6 +106,14 @@ module.exports = function(dataObject, ws)
 
 
 
+	// Mensajes
+	let messages =
+	[
+		msg.getMessage(msg.msgValues.skipTurn, { username })
+	];
+
+
+
 	// Enviar el estado de la partida a todos los jugadores
-	game.utils.updatePlayers(roomID);
+	game.utils.updatePlayers(roomID, messages);
 }
