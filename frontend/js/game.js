@@ -47,6 +47,8 @@ function createCardsInDeck(deck)
 const logsDiv = document.getElementById('logsDiv');
 let messagesPending = [];
 let updateMessageJob;
+let waitMessageTime = 1_400;
+let lastMessageChanged;
 
 function newMessages(messages)
 {
@@ -62,16 +64,25 @@ function updateMessage()
 {
 	if(messagesPending.length > 0)
 	{
-		console.log('Changing message', messagesPending[0]);
-		logsDiv.innerText = messagesPending[0];
-		messagesPending.shift();
+		let now = new Date().getTime();
+
+		//Solo cambiar el mensaje si ha pasado suficiente tiempo desde que se cambió el mensaje anterior, o no se cambió el mensaje aún, esto es para evitar cambiar el mensaje cuando el servidor envia mensajes nuevos y el mensaje anterior no ha pasado suficiente tiempo en pantalla
+		if(lastMessageChanged === undefined
+		|| (now - lastMessageChanged) > waitMessageTime - 100/*margen*/)
+		{
+			console.log('Changing message', messagesPending[0]);
+			logsDiv.innerText = messagesPending[0];
+			messagesPending.shift();
+
+			lastMessageChanged = now;
+		}
 
 		if(updateMessageJob === undefined)
 		{
 			updateMessageJob = setInterval(function()
 			{
 				updateMessage();
-			}, 1_000);
+			}, waitMessageTime);
 		}
 	}
 	else
