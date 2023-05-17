@@ -20,6 +20,7 @@ const deckDiv = document.getElementById('deck');
 function updateCurrentCard(card)
 {
 	currentCardImg.src = `img/${card}.png`;
+	currentCard = card;
 }
 
 function createCardsInDeck(deck)
@@ -83,7 +84,21 @@ function updateMessage()
 function clickACardInDeck(e)
 {
 	const card = e.target.attributes.card.value;
-	//e.target.hidden = true;
+
+	if(!validCard(card, currentCard))
+	{
+		floatingWindow(
+		{
+			title: 'Esa carta no',
+			text: 'Elige una carta que tenga el mismo color o contenido',
+			button:
+			{
+				text: 'Aceptar',
+				callback: closeWindow
+			}
+		});
+		return;
+	}
 
 	if(canPlay) //Es tu turno
 	{
