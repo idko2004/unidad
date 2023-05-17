@@ -30,6 +30,7 @@ function createCardsInDeck(deck)
 		const img = document.createElement('img');
 		img.classList.add('cardInDeck');
 		img.classList.add('cardHoverAnim');
+		img.classList.add('card-spawn');
 
 		img.src = `img/${deck[i]}.png`;
 		img.setAttribute('card', deck[i]);
@@ -37,6 +38,11 @@ function createCardsInDeck(deck)
 		img.addEventListener('click', function(e)
 		{
 			clickACardInDeck(e);
+		});
+
+		img.addEventListener('animationend', function(e)
+		{
+			cardAnimationEnd(e);
 		});
 
 		deckDiv.appendChild(img);
@@ -233,7 +239,7 @@ function updateDeck(deck)
 
 		toRemove.forEach(function(e)
 		{
-			e.remove();
+			e.classList.add('card-delete');
 		});
 	}
 
@@ -355,3 +361,18 @@ document.getElementById('skipButton').addEventListener('click', function()
 		]
 	});
 });
+
+// Cards animations
+function cardAnimationEnd(e)
+{
+	switch(e.animationName)
+	{
+		case 'cardSpawnAnim':
+			e.target.classList.remove('card-spawn');
+			break;
+
+		case 'cardDeleteAnim':
+			e.target.remove();
+			break;
+	}
+}
