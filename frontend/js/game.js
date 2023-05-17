@@ -333,33 +333,13 @@ document.getElementById('skipButton').addEventListener('click', function()
 {
 	if(!canSkip) return;
 
-	floatingWindow(
+	changeSkipCondition(false);
+	ws.send(JSON.stringify(
 	{
-		title: '¿Saltar turno?',
-		buttons:
-		[
-			{
-				text: 'No',
-				primary: false,
-				callback: closeWindow
-			},
-			{
-				text: 'Sí, saltar turno',
-				primary: true,
-				callback: function()
-				{
-					changeSkipCondition(false);
-					ws.send(JSON.stringify(
-					{
-						operation: 'skip',
-						roomID,
-						username
-					}));
-					closeWindow();
-				}
-			}
-		]
-	});
+		operation: 'skip',
+		roomID,
+		username
+	}));
 });
 
 // Cards animations
