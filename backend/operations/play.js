@@ -1,5 +1,6 @@
 const game = require('../utils/game');
 const cards = require('../utils/cards');
+const msg = require('../utils/messages');
 
 const colors = require('colors');
 
@@ -118,6 +119,10 @@ module.exports = function(dataObject, ws)
 	}
 
 
+
+	let messages = [];
+
+
 	// Si la carta jugada es especial, hacer la cosa
 	if(cardProperties.special)
 	{
@@ -173,10 +178,15 @@ module.exports = function(dataObject, ws)
 		room.cardGrabbed = false;
 		room.players[username].deck = cards.deleteFromDeck(play.card, room.players[username].deck);
 		game.utils.nextTurn(roomID);
+		messages.push(msg.getMessage(msg.msgValues.cardPlayed,
+		{
+			username,
+			cardname: msg.cardNames[play.card]
+		}));
 	}
 
 
 
 	// Enviar el estado de la partida a todos los jugadores
-	game.utils.updatePlayers(roomID);
+	game.utils.updatePlayers(roomID, messages);
 }

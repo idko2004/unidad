@@ -49,27 +49,35 @@ let updateMessageJob;
 
 function newMessages(messages)
 {
+	console.log('newMessages', messages);
 	if(!Array.isArray(messages)) return;
 
-	messagesPending.push(messages);
+	messagesPending.push(...messages);
 
-	updateMessageJob = setInterval(function()
-	{
-		if(messagesPending.length > 0)
-		{
-			updateLog(messagesPending[0]);
-			messagesPending.shift();
-		}
-		else
-		{
-			clearInterval(updateMessageJob);
-		}
-	}, 500);
+	updateMessage();
 }
 
-function updateLog(text)
+function updateMessage()
 {
-	logsDiv.innerText = text;
+	if(messagesPending.length > 0)
+	{
+		console.log('Changing message', messagesPending[0]);
+		logsDiv.innerText = messagesPending[0];
+		messagesPending.shift();
+
+		if(updateMessageJob === undefined)
+		{
+			updateMessageJob = setInterval(function()
+			{
+				updateMessage();
+			}, 1_000);
+		}
+	}
+	else
+	{
+		clearInterval(updateMessageJob);
+		updateMessageJob = undefined;
+	}
 }
 
 function clickACardInDeck(e)

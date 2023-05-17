@@ -45,6 +45,8 @@ const gamesExample =
 
 const colors = require('colors');
 
+const msg = require('./messages');
+
 function nextTurn(roomID)
 {
 	const room = activeGames[roomID];
@@ -69,7 +71,7 @@ function nextTurn(roomID)
 
 
 
-function updatePlayers(roomID) //Para enviar el estado de la partida a todos los jugadores
+function updatePlayers(roomID, messages) //Para enviar el estado de la partida a todos los jugadores
 {
 	if(roomID === undefined)
 	{
@@ -83,6 +85,10 @@ function updatePlayers(roomID) //Para enviar el estado de la partida a todos los
 		console.log(colors.red(`game.utils.updatePlayers: ${roomID} no es una sala válida`));
 		return;
 	}
+
+	if(messages === undefined || !Array.isArray(messages)) messages = [];
+
+	let turnMessageIndex = messages.length;
 
 	for(let i = 0; i < room.order.length; i++)
 	{
@@ -99,13 +105,24 @@ function updatePlayers(roomID) //Para enviar el estado de la partida a todos los
 			continue;
 		}
 
+		const yourTurn = room.order[room.whoIsPlaying] === room.order[i];
+
+		// Cambiar el mensaje del turno de quién es
+		if(yourTurn) messages[turnMessageIndex] = msg.getMessage(msg.msgValues.yourTurn);
+		else messages[turnMessageIndex] = msg.getMessage(msg.msgValues.turn,
+		{
+			username: room.order[room.whoIsPlaying]
+		});
+
+		console.log('Mensajes:', messages);
+
 		player.ws.send(JSON.stringify(
 		{
 			operation: 'gameUpdate',
 			currentCard: room.currentCard,
 			deck: player.deck,
-			yourTurn: room.order[room.whoIsPlaying] === room.order[i],
-			messages: [ 'alguien hizo algo' ]
+			yourTurn,
+			messages
 		}));
 	}
 }
