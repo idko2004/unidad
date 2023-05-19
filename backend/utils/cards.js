@@ -190,7 +190,7 @@ function cardIsValid(card, currentCard)
 	sameColor = currentCardProps.color === cardProps.color;
 	sameValue = currentCardProps.value === cardProps.value;
 
-	if(currentCardProps.color === null) sameColor = true;
+	if(currentCardProps.color === null || cardProps.color === null) sameColor = true;
 
 	return sameColor || sameValue;
 }
