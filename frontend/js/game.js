@@ -185,8 +185,9 @@ function gameUpdate(response)
 	
 	canPlay = response.yourTurn;
 
-	changeSkipCondition(false);
-	canGrabACard = true;
+	canSkipDirectly = response.canSkipDirectly;
+	changeSkipCondition(response.canSkipDirectly || false);
+	canGrabACard = !response.canSkipDirectly || true;
 }
 
 function updateDeck(deck)
@@ -284,7 +285,35 @@ function changeSkipCondition(nowCanSkip)
 //La carta de pedir más cartas
 document.getElementById('addCard').addEventListener('click', function()
 {
-	if(!canPlay || canSkip || !canGrabACard) return;
+	if(!canPlay) return;
+	if(canSkipDirectly)
+	{
+		floatingWindow(
+		{
+			title: 'Ahora no',
+			text: 'No puedes tomar cartas del mazo si te están bombardeando con +4s.',
+			button:
+			{
+				text: 'Aceptar',
+				button: closeWindow
+			}
+		});
+		return;
+	}
+	if(!canGrabACard)
+	{
+		floatingWindow(
+		{
+			title: 'Ya tomaste una',
+			text: 'Solo puedes tomar una carta por turno, si no tienes ninguna carta jugable, debes saltar tu turno',
+			button:
+			{
+				text: 'Aceptar',
+				callback: closeWindow
+			}
+		});
+		return;
+	}
 
 	ws.send(JSON.stringify(
 	{

@@ -86,6 +86,7 @@ const properties =
 
 
 
+const { activeGames } = require('./game');
 const random = require('./random');
 
 const colors = require('colors');
@@ -213,6 +214,22 @@ function deckContainsSpecificsCards(cards, deck)
 	return false;
 }
 
+
+function giveCardsToVictim(roomID, victim)
+{
+	const newCards = [];
+	const cardsToVictim = activeGames[roomID].cardsToVictim;
+	for(let i = 0; i < cardsToVictim; i++)
+	{
+		newCards.push(getCard('all'));
+	}
+	console.log('Cartas para la víctima', newCards);
+
+	activeGames[roomID].players[victim].deck.push(...newCards); //Añadir las cartas al mazo de la víctima
+	console.log('Mazo de la víctima', activeGames[roomID].players[victim].deck);
+	activeGames[roomID].cardsToVictim = 0; //Reiniciar el número de cartas para la siguiente víctima
+}
+
 module.exports =
 {
 	getCard,
@@ -220,6 +237,7 @@ module.exports =
 	deleteFromDeck,
 	cardIsValid,
 	deckContainsSpecificsCards,
+	giveCardsToVictim,
 	cardsArrays:
 	{
 		allCards,

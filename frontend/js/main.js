@@ -12,6 +12,7 @@ let currentCard;
 let playerDeck = [];
 let canPlay = false;
 let canSkip = false;
+let canSkipDirectly = false;
 let canGrabACard = true;
 
 /*floatingWindow(

@@ -203,23 +203,13 @@ module.exports = function(dataObject, ws)
 	{
 		if(room.cardsToVictim > 0) //Si te están tirando tremendo +4
 		{
-			const newCards = [];
-			const cardsToVictim = room.cardsToVictim;
-			for(let i = 0; i <= cardsToVictim; i++)
-			{
-				newCards.push(cards.getCard('all'));
-			}
-			console.log('Cartas para la víctima', newCards);
-
-			room.players[username].deck.push(...newCards); //Añadir las cartas al mazo de la víctima
-			console.log('Mazo de la víctima', room.players[username].deck);
-			room.cardsToVictim = 0; //Reiniciar el número de cartas para la siguiente víctima
-			game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
 			messages.push(msg.getMessage(msg.msgValues.cardsEaten, //Mensaje de que la víctima se comió cartas
 			{
 				victim: username,
-				cardsnumber: cardsToVictim
+				cardsnumber: room.cardsToVictim
 			}));
+			cards.giveCardsToVictim(roomID, username); //Dar las cartas al jugador
+			game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
 			game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
 			return;
 		} //Si no te están tirando tremendo +4
@@ -272,28 +262,18 @@ function playPlusCard(howManyCards, dataObject, ws, room, messages)
 	],room.players[victim].deck)) //Si la víctima no tiene cartas para defenderse
 	{
 		console.log('La victima no puede defenderse');
-		const newCards = [];
-
-		const cardsToVictim = room.cardsToVictim;
-		for(let i = 0; i <= cardsToVictim; i++)
-		{
-			newCards.push(cards.getCard('all'));
-		}
-
-		console.log('Cartas para la víctima', newCards);
-
-		room.players[victim].deck.push(...newCards); //Añadir las cartas al mazo de la víctima
-		console.log('mazo de la víctima', room.players[victim].deck);
-		room.cardsToVictim = 0; //Reiniciar el número de cartas para la siguiente víctima
-
-		//Cambiar de turno dos veces para saltar el turno de la víctima
-		game.utils.nextTurn(roomID);
 
 		messages.push(msg.getMessage(msg.msgValues.cardsEaten, //Mensaje de que la víctima se comió cartas
 		{
 			victim,
-			cardsnumber: cardsToVictim
+			cardsnumber: room.cardsToVictim
 		}));
+
+		cards.giveCardsToVictim(roomID, victim);
+
+		//Cambiar de turno dos veces para saltar el turno de la víctima
+		game.utils.nextTurn(roomID);
+
 	}
 	else console.log('Existen cartas defensivas en su mazo');
 	//Si la víctima no tiene cartas para defenderse, debe recibir las cartas inmediatamente y su turno debe saltarse.

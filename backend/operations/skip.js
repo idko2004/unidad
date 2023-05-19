@@ -58,8 +58,8 @@ module.exports = function(dataObject, ws)
 
 
 
-	// Comprobar que ya se agarró carta del mazo
-	if(!room.cardGrabbed)
+	// Comprobar que ya se agarró carta del mazo (Sólo si no hay cartas +)
+	if(!room.cardGrabbed && room.cardsToVictim === 0)
 	{
 		ws.send(JSON.stringify(
 		{
@@ -98,19 +98,32 @@ module.exports = function(dataObject, ws)
 		return;
 	}
 
+	let messages = [];
+
+
+
+	//Si te están tirando cartas +
+	if(room.cardsToVictim > 0)
+	{
+		messages.push(msg.getMessage(msg.msgValues.cardsEaten, //Mensaje de que la víctima se comió cartas
+		{
+			victim: username,
+			cardsnumber: room.cardsToVictim
+		}));
+
+		cards.giveCardsToVictim(roomID, username);
+	}
+	else
+	{
+		// Mensajes
+		messages.push(msg.getMessage(msg.msgValues.skipTurn, { username }));
+	}
+
 
 
 	// Saltar un turno
 	game.utils.nextTurn(roomID);
 	room.cardGrabbed = false;
-
-
-
-	// Mensajes
-	let messages =
-	[
-		msg.getMessage(msg.msgValues.skipTurn, { username })
-	];
 
 
 
