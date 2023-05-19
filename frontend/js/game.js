@@ -203,12 +203,18 @@ function updateDeck(deck)
 	{
 		// Por cada elemento de la array del deck, buscar una carta en el html que se corresponda
 		const deckElement = findCard(deck[i]);
-		pairedCards.push(deckElement);
-		deck[i] = null;
+		if(deckElement !== undefined)
+		{
+			pairedCards.push(deckElement);
+			deck[i] = null;
+		}
 
 		// Todos los elementos de deck que no sean null son cartas nuevas
 		// Todas las cartas html que no están paireadas deben ser eliminadas
 	}
+
+	console.log(pairedCards);
+	console.log(deck);
 
 	removeCards();
 	addCards();
@@ -224,6 +230,8 @@ function updateDeck(deck)
 				return elementsInDeck[j];
 			}
 		}
+		console.log('updateDeck.findCard: no se pudo encontrar la carta');
+		return undefined;
 	}
 
 	function removeCards()

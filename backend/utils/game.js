@@ -10,7 +10,8 @@ const gamesExample =
 		letMorePlayersIn: false,
 		whoIsPlaying: 0, //A quien le toca,
 		direction: -1, //Determina en que dirección va el orden de juego, debe ser 1 o -1, este número se suma a whoIsPlaying al final de cada turno.
-		cardGrabbed: true, //Determina si el jugador ya ha "tomado una carta del mazo", si es verdadero, ya no debería ser capaz de tomar más cartas, debido a que ya tomó una, debe restablecerse a falso cada que termine el turno de un jugador
+		cardGrabbed: true, //Determina si el jugador ya ha "tomado una carta del mazo", si es verdadero, ya no debería ser capaz de tomar más cartas, debido a que ya tomó una, debe restablecerse a falso cada que termine el turno de un jugador,
+		cardsToVictim: 0, //Número de cartas que un jugador recibirá cuando no pueda defenderse de un +2 o +4
 		order: [ 'alguien', 'fulanito' ], //El orden en el que van a ir los turnos
 		players:
 		{
@@ -67,6 +68,32 @@ function nextTurn(roomID)
 	else if(room.whoIsPlaying < 0) room.whoIsPlaying = room.order.length - 1;
 
 	return room.whoIsPlaying;
+}
+
+
+function whosNext(roomID)
+{
+	const room = activeGames[roomID];
+	if(room === undefined)
+	{
+		console.log(colors.red(`game.utils.nextTurn: ${roomID} is not a valid room`));
+		return;
+	}
+	if(![-1, 1].includes(room.direction))
+	{
+		console.log(colors.red(`game.utils.nextTurn: ${room.direction} is not a valid direction`));
+		return;
+	}
+
+	const player = room.whoIsPlaying;
+	const direction = room.direction;
+
+	let who = player + direction;
+
+	if(who > room.order.length - 1) who = 0;
+	else if(who < 0) who = room.order.length - 1;
+
+	return who;
 }
 
 
@@ -135,6 +162,7 @@ module.exports =
 	utils:
 	{
 		updatePlayers,
-		nextTurn
+		nextTurn,
+		whosNext
 	}
 };

@@ -179,11 +179,47 @@ function deleteFromDeck(card, deck)
 	return newDeck;
 }
 
+function cardIsValid(card, currentCard)
+{
+	const cardProps = properties[card];
+	const currentCardProps = properties[currentCard];
+
+	let sameColor = false;
+	let sameValue = false;
+
+	sameColor = currentCardProps.color === cardProps.color;
+	sameValue = currentCardProps.value === cardProps.value;
+
+	if(currentCardProps.color === null) sameColor = true;
+
+	return sameColor || sameValue;
+}
+
+function deckContainsSpecificsCards(cards, deck)
+{
+	if([cards, deck].includes(undefined) || !Array.isArray(cards), !Array.isArray(deck))
+	{
+		console.log(colors.yellow('cards.deckContainsSpecificsCards: properties are undefined or not an array'));
+		return false;
+	}
+
+	for(let i = 0; i < deck.length; i++)
+	{
+		for(let j = 0; j < cards.length; j++)
+		{
+			if(cards[j] === deck[i]) return true;
+		}
+	}
+	return false;
+}
+
 module.exports =
 {
 	getCard,
 	generateDeck,
 	deleteFromDeck,
+	cardIsValid,
+	deckContainsSpecificsCards,
 	cardsArrays:
 	{
 		allCards,

@@ -5,7 +5,9 @@ const msgValues =
 	yourTurn: 'yourTurn',
 	turn: 'turn',
 	cardPlayed: 'cardPlayed',
-	skipTurn: 'skipTurn'
+	skipTurn: 'skipTurn',
+	accumuledCards: 'accumuledCards',
+	cardsEaten: 'cardsEaten'
 }
 
 const messages =
@@ -13,7 +15,9 @@ const messages =
 	yourTurn: 'Tu turno',
 	turn: 'Es el turno de %username%',
 	cardPlayed: '%username% tiró un %cardname%',
-	skipTurn: '%username% no tira nada'
+	skipTurn: '%username% no tira nada',
+	accumuledCards: '%username% tiró un %cardname%. ¡Hay %cardsnumber% acumuladas!',
+	cardsEaten: '¡%victim% se comió %cardsnumber% cartas!'
 }
 
 const cardNames =

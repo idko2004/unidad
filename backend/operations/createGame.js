@@ -70,6 +70,7 @@ module.exports = function(dataObject, ws)
 		whoIsPlaying: 0,
 		direction: 1,
 		cardGrabbed: false,
+		cardsToVictim: 0,
 		order: [],
 		players:
 		{
