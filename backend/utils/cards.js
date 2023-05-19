@@ -5,7 +5,7 @@ const allCards =
 	'1b', '2b', '3b', '4b', '5b', '6b', '7b', '8b', '9b', '0b',
 	'1y', '2y', '3y', '4y', '5y', '6y', '7y', '8y', '9y', '0y',
 	'+2r', '+2g', '+2b', '+2y',
-	'SKIPr', 'SKIPg', 'SKIPb', 'SKIPy',
+	'BLOCKr', 'BLOCKg', 'BLOCKb', 'BLOCKy',
 	'REVERSEr', 'REVERSEg', 'REVERSEb', 'REVERSEy',
 	'+4', 'COLOR'
 ];
@@ -21,7 +21,7 @@ const normalCards =
 const specialCards =
 [
 	'+2r', '+2g', '+2b', '+2y',
-	'SKIPr', 'SKIPg', 'SKIPb', 'SKIPy',
+	'BLOCKr', 'BLOCKg', 'BLOCKb', 'BLOCKy',
 	'REVERSEr', 'REVERSEg', 'REVERSEb', 'REVERSEy',
 	'+4', 'COLOR'
 ];
@@ -32,10 +32,10 @@ const properties =
 	'+2g': { special: true, color: 'g', value: '+2' },
 	'+2b': { special: true, color: 'b', value: '+2' },
 	'+2y': { special: true, color: 'y', value: '+2' },
-	'SKIPr': { special: true, color: 'r', value: 'SKIP' },
-	'SKIPg': { special: true, color: 'g', value: 'SKIP' },
-	'SKIPb': { special: true, color: 'b', value: 'SKIP' },
-	'SKIPy': { special: true, color: 'y', value: 'SKIP' },
+	'BLOCKr': { special: true, color: 'r', value: 'BLOCK' },
+	'BLOCKg': { special: true, color: 'g', value: 'BLOCK' },
+	'BLOCKb': { special: true, color: 'b', value: 'BLOCK' },
+	'BLOCKy': { special: true, color: 'y', value: 'BLOCK' },
 	'REVERSEr': { special: true, color: 'r', value: 'REVERSE' },
 	'REVERSEg': { special: true, color: 'g', value: 'REVERSE' },
 	'REVERSEb': { special: true , color: 'b', value: 'REVERSE'},
