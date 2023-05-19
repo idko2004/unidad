@@ -1,4 +1,5 @@
 console.log('Iniciando servidor');
+console.log(new Date().toString());
 
 const WebSocket = require('ws');
 
