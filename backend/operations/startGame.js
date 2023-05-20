@@ -1,4 +1,5 @@
 const game = require('../utils/game');
+const msg = require('../utils/messages');
 
 module.exports = function(dataObject, ws)
 {
@@ -89,12 +90,12 @@ module.exports = function(dataObject, ws)
 		let yourTurn = false;
 		if(i === room.whoIsPlaying)
 		{
-			message = [ 'Es tu turno.' ];
+			message = [msg.getMessage(msg.msgValues.yourTurn)];
 			yourTurn = true;
 		}
 		else
 		{
-			message = [ `Es el turno de ${players[room.whoIsPlaying]}.` ];
+			message = [ms.getMessage(msg.msgValues.turn, {username: players[room.whoIsPlaying]})];
 		}
 
 		playerProfile.ws.send(JSON.stringify(
