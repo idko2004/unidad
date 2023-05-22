@@ -107,6 +107,35 @@
 	}
 }
 
+.currentCard-out
+{
+	animation: cardDeleteAnim 250ms ease-out 1;
+}
+
+.currentCard-in
+{
+	animation: currentCardInAnim 250ms ease-out 1;
+}
+
+@keyframes currentCardInAnim
+{
+	0%
+	{
+		opacity: 0;
+		transform: scale(0);
+	}
+	60%
+	{
+		opacity: 1;
+		transform: scale(1.2);
+	}
+	100%
+	{
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
 img
 {
 	image-rendering: pixelated;

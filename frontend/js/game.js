@@ -6,21 +6,11 @@ function startGame(response)
 	changeMenus('game');
 
 	playerDeck = response.deck;
-	currentCard = response.currentCard;
 	canPlay = response.yourTurn;
 
 	updateCurrentCard(response.currentCard);
 	createCardsInDeck(response.deck);
 	newMessages(response.message);
-}
-
-const currentCardImg = document.getElementById('currentCard');
-const deckDiv = document.getElementById('deck');
-
-function updateCurrentCard(card)
-{
-	currentCardImg.src = `img/${card}.png`;
-	currentCard = card;
 }
 
 function createCardsInDeck(deck)
@@ -129,6 +119,7 @@ function clickACardInDeck(e)
 				card
 			}
 		}));
+		currentCardImg.scrollIntoView({behavior: 'smooth'});
 	}
 }
 
@@ -295,7 +286,7 @@ document.getElementById('addCard').addEventListener('click', function()
 			button:
 			{
 				text: 'Aceptar',
-				button: closeWindow
+				callback: closeWindow
 			}
 		});
 		return;
@@ -392,4 +383,32 @@ function cardAnimationEnd(e)
 			e.target.remove();
 			break;
 	}
+}
+
+// Current card animation
+const currentCardImg = document.getElementById('currentCard');
+const deckDiv = document.getElementById('deck');
+
+currentCardImg.addEventListener('animationend', function(e)
+{
+	switch(e.animationName)
+	{
+		case 'cardDeleteAnim':
+			currentCardImg.classList.remove('currentCard-out');
+			currentCardImg.src = `img/${currentCard}.png`;
+			currentCardImg.classList.add('currentCard-in');
+			break;
+
+		case 'currentCardInAnim':
+			currentCardImg.classList.remove('currentCard-in');
+			break;
+	}
+});
+
+function updateCurrentCard(card)
+{
+	if(card === currentCard) return; //Si la carta es igual, no hacer animación
+	if(currentCardImg.src !== '') currentCardImg.classList.add('currentCard-out'); //Si no hay carta anterior, no hacer animación
+	else currentCardImg.src = `img/${card}.png`;
+	currentCard = card;
 }
