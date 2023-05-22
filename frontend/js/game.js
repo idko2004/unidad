@@ -282,21 +282,21 @@ document.getElementById('addCard').addEventListener('click', function()
 {
 	if(!canPlay) return;
 
-	if(canGrabACard)
-	{
-		ws.send(JSON.stringify(
-		{
-			operation: 'grabCard',
-			roomID,
-			username
-		}));
-	}
-	else if(canSkip || canSkipDirectly)
+	if(canSkip || canSkipDirectly)
 	{
 		changeSkipCondition(false);
 		ws.send(JSON.stringify(
 		{
 			operation: 'skip',
+			roomID,
+			username
+		}));
+	}
+	else if(canGrabACard)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'grabCard',
 			roomID,
 			username
 		}));
