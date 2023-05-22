@@ -255,10 +255,13 @@ function updateDeck(deck)
 	}
 }
 
+const deckElement = document.getElementById('deck');
+const addCardElement = document.getElementById('addCard');
+
 function moveAddCardToLast()
 {
-	const parent = document.getElementById('deck');
-	const card = document.getElementById('addCard');
+	const parent = deckElement;
+	const card = addCardElement;
 
 	parent.appendChild(card);
 }
@@ -270,13 +273,35 @@ function changeSkipCondition(nowCanSkip)
 
 	canSkip = nowCanSkip;
 
-	skipButton.disabled = !nowCanSkip;
+	if(nowCanSkip) addCardElement.src = 'img/skipturn.png';
+	else addCardElement.src = 'img/add.png';
 }
 
-//La carta de pedir más cartas
+//La carta de pedir más cartas y saltar turno
 document.getElementById('addCard').addEventListener('click', function()
 {
 	if(!canPlay) return;
+
+	if(canGrabACard)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'grabCard',
+			roomID,
+			username
+		}));
+	}
+	else if(canSkip || canSkipDirectly)
+	{
+		changeSkipCondition(false);
+		ws.send(JSON.stringify(
+		{
+			operation: 'skip',
+			roomID,
+			username
+		}));
+	}
+	/*
 	if(canSkipDirectly)
 	{
 		floatingWindow(
@@ -305,13 +330,7 @@ document.getElementById('addCard').addEventListener('click', function()
 		});
 		return;
 	}
-
-	ws.send(JSON.stringify(
-	{
-		operation: 'grabCard',
-		roomID,
-		username
-	}));
+	*/
 });
 
 function grabCard(response)
@@ -355,20 +374,6 @@ function grabCard(response)
 	changeSkipCondition(true);
 	canGrabACard = false;
 }
-
-//Saltar turno
-document.getElementById('skipButton').addEventListener('click', function()
-{
-	if(!canSkip) return;
-
-	changeSkipCondition(false);
-	ws.send(JSON.stringify(
-	{
-		operation: 'skip',
-		roomID,
-		username
-	}));
-});
 
 // Cards animations
 function cardAnimationEnd(e)
