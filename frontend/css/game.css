@@ -106,3 +106,8 @@
 		transform: scale(0);
 	}
 }
+
+img
+{
+	image-rendering: pixelated;
+}
