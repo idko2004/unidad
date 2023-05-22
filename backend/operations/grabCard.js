@@ -68,6 +68,19 @@ module.exports = function(dataObject, ws)
 
 
 
+	if(room.cardsToVictim > 0)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'grabCard',
+			error: 'alredyGrabbed'
+		}));
+		console.log('grabCard: alredyGrabbed: en realidad no se tomó una carta, pero está recibiendo cartas + por lo que no puede tomar cartas');
+		return;
+	}
+
+
+
 	// Comprobar si el usuario es parte de la sala
 	if(!room.order.includes(username))
 	{
