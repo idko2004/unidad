@@ -138,7 +138,7 @@ module.exports = function(dataObject, ws)
 
 
 	// Si la carta jugada es especial, hacer la cosa
-	if(cardProperties.special)
+	if(cardProperties.type === cards.cardTypes.special)
 	{
 		switch(cardProperties.value)
 		{
@@ -164,7 +164,7 @@ module.exports = function(dataObject, ws)
 
 
 	// Si la carta no es especial pero hace algo, hacer la cosa
-	else if(cardProperties.doesSomething)
+	else if(cardProperties.type === cards.cardTypes.doesSomething)
 	{
 		if(room.cardsToVictim > 0) //Si te están tirando tremendo +4
 		{
