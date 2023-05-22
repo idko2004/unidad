@@ -95,7 +95,7 @@ module.exports = function(dataObject, ws)
 		}
 		else
 		{
-			message = [ms.getMessage(msg.msgValues.turn, {username: players[room.whoIsPlaying]})];
+			message = [msg.getMessage(msg.msgValues.turn, {username: players[room.whoIsPlaying]})];
 		}
 
 		playerProfile.ws.send(JSON.stringify(
