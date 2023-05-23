@@ -136,9 +136,30 @@ module.exports = function(dataObject, ws)
 
 	let messages = [];
 
+	// Si la carta jugada es más especial, hacer la cosa
+	if(cardProperties.type === cards.cardTypes.moreSpecial)
+	{
+		switch(cardProperties.value)
+		{
+			default:
+			ws.send(JSON.stringify(
+				{
+					operation: 'errorPlaying',
+					error: 'not implemented yet'
+				}));
+				console.log('errorPlaying: not implemented yet: cartas especiales');
+				return;
+
+				case '+6':
+					playPlusCard(6, dataObject, ws, room, messages);
+					break;
+		}
+	}
+
+
 
 	// Si la carta jugada es especial, hacer la cosa
-	if(cardProperties.type === cards.cardTypes.special)
+	else if(cardProperties.type === cards.cardTypes.special)
 	{
 		switch(cardProperties.value)
 		{
