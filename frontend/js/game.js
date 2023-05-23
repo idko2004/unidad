@@ -119,7 +119,7 @@ function clickACardInDeck(e)
 				card
 			}
 		}));
-		currentCardImg.scrollIntoView({behavior: 'smooth'});
+		window.scroll({top: 0, behavior: 'smooth'});
 	}
 }
 
@@ -291,6 +291,7 @@ document.getElementById('addCard').addEventListener('click', function()
 			roomID,
 			username
 		}));
+		window.scroll({top: 0, behavior: 'smooth'});
 	}
 	else if(canGrabACard)
 	{
@@ -301,36 +302,6 @@ document.getElementById('addCard').addEventListener('click', function()
 			username
 		}));
 	}
-	/*
-	if(canSkipDirectly)
-	{
-		floatingWindow(
-		{
-			title: 'Ahora no',
-			text: 'No puedes tomar cartas del mazo si te están bombardeando con +4s.',
-			button:
-			{
-				text: 'Aceptar',
-				callback: closeWindow
-			}
-		});
-		return;
-	}
-	if(!canGrabACard)
-	{
-		floatingWindow(
-		{
-			title: 'Ya tomaste una',
-			text: 'Solo puedes tomar una carta por turno, si no tienes ninguna carta jugable, debes saltar tu turno',
-			button:
-			{
-				text: 'Aceptar',
-				callback: closeWindow
-			}
-		});
-		return;
-	}
-	*/
 });
 
 function grabCard(response)
