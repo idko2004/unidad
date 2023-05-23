@@ -148,8 +148,15 @@ function newTable()
 		'+6r', '+6g', '+6b', '+6y',
 		'BLANKr', 'BLANKg', 'BLANKb', 'BLANKy',
 		'INTERCHANGEr', 'INTERCHANGEg', 'INTERCHANGEb', 'INTERCHANGEy',
-		'COLORr', 'COLORg', 'COLORb', 'COLORy'
+		'COLORr', 'COLORg', 'COLORb', 'COLORy',
 	];
+
+	//Añadir cartas normales aleatorias para compensar por las cartas más especiales
+	for(let i = 0; i < 20; i++)
+	{
+		table.push(getNormalCard());
+	}
+
 	return table;
 }
 
