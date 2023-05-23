@@ -12,7 +12,8 @@ const gamesExample =
 		direction: -1, //Determina en que dirección va el orden de juego, debe ser 1 o -1, este número se suma a whoIsPlaying al final de cada turno.
 		cardGrabbed: true, //Determina si el jugador ya ha "tomado una carta del mazo", si es verdadero, ya no debería ser capaz de tomar más cartas, debido a que ya tomó una, debe restablecerse a falso cada que termine el turno de un jugador,
 		cardsToVictim: 0, //Número de cartas que un jugador recibirá cuando no pueda defenderse de un +2 o +4
-		order: [ 'alguien', 'fulanito' ], //El orden en el que van a ir los turnos
+		order: [ 'alguien', 'fulanito' ], //El orden en el que van a ir los turnos,
+		table: [ '7y' ], //Todas las cartas que hay en la mesa
 		players:
 		{
 			'alguien': //Nombre del jugador

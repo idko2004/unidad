@@ -168,21 +168,13 @@ module.exports = function(dataObject, ws)
 	{
 		if(room.cardsToVictim > 0) //Si te están tirando tremendo +4
 		{
-			let newCards = [];
-			const cardsToVictim = room.cardsToVictim;
-			for(let i = 0; i <= cardsToVictim; i++)
-			{
-				newCards.push(cards.getCard('all'));
-			}
-
-			room.players[username].deck.push(...newCards); //Añadir las cartas al mazo de la víctima
-			room.cardsToVictim = 0; //Reiniciar el número de cartas para la siguiente víctima
-			game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
 			messages.push(msg.getMessage(msg.msgValues.cardsEaten, //Mensaje de que la víctima se comió cartas
 			{
 				victim: username,
-				cardsnumber: cardsToVictim
+				cardsnumber: room.cardsToVictim
 			}));
+			cards.giveCardsToVictim(roomID, username); //Dar las cartas al jugador
+			game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
 			game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
 			return;
 		}

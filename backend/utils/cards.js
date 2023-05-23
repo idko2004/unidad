@@ -75,9 +75,13 @@ const properties =
 	'REVERSEy': { type: cardTypes.special, color: 'y', value: 'REVERSE' },
 	'+4': { type: cardTypes.special, color: null, value: '+4' },
 	'COLOR': { type: cardTypes.special, color: null, value: 'COLOR' },
+	'COLORr': { type: cardTypes.special, color: 'r', value: 'COLOR' },
+	'COLORg': { type: cardTypes.special, color: 'g', value: 'COLOR' },
+	'COLORb': { type: cardTypes.special, color: 'b', value: 'COLOR' },
+	'COLORy': { type: cardTypes.special, color: 'y', value: 'COLOR' },
 	'1r': { type: cardTypes.normal, color: 'r', value: '1' },
-	'3r': { type: cardTypes.normal, color: 'r', value: '3' },
 	'2r': { type: cardTypes.normal, color: 'r', value: '2' },
+	'3r': { type: cardTypes.normal, color: 'r', value: '3' },
 	'4r': { type: cardTypes.normal, color: 'r', value: '4' },
 	'5r': { type: cardTypes.normal, color: 'r', value: '5' },
 	'6r': { type: cardTypes.normal, color: 'r', value: '6' },
@@ -119,11 +123,92 @@ const properties =
 
 
 
-const { activeGames } = require('./game');
+const game = require('./game');
 const random = require('./random');
 
 const colors = require('colors');
 
+function newTable()
+{
+	const table =
+	[
+		'1r', '2r', '3r', '4r', '5r', '6r', '7r', '8r', '9r', '+2r', 'REVERSEr', 'BLOCKr', '0r', '+4',
+		'1r', '2r', '3r', '4r', '5r', '6r', '7r', '8r', '9r', '+2r', 'REVERSEr', 'BLOCKr', 'COLOR',
+		
+		'1g', '2g', '3g', '4g', '5g', '6g', '7g', '8g', '9g', '+2g', 'REVERSEg', 'BLOCKg', '0g', '+4',
+		'1g', '2g', '3g', '4g', '5g', '6g', '7g', '8g', '9g', '+2g', 'REVERSEg', 'BLOCKg', 'COLOR',
+
+		'1b', '2b', '3b', '4b', '5b', '6b', '7b', '8b', '9b', '+2b', 'REVERSEb', 'BLOCKb', '0b', '+4',
+		'1b', '2b', '3b', '4b', '5b', '6b', '7b', '8b', '9b', '+2b', 'REVERSEb', 'BLOCKb', 'COLOR',
+		
+		'1y', '2y', '3y', '4y', '5y', '6y', '7y', '8y', '9y', '+2y', 'REVERSEy', 'BLOCKy', '0y', '+4',
+		'1y', '2y', '3y', '4y', '5y', '6y', '7y', '8y', '9y', '+2y', 'REVERSEy', 'BLOCKy', 'COLOR',
+
+		'+1r', '+1g', '+1b', '+1y',
+		'+6r', '+6g', '+6b', '+6y',
+		'BLANKr', 'BLANKg', 'BLANKb', 'BLANKy',
+		'INTERCHANGEr', 'INTERCHANGEg', 'INTERCHANGEb', 'INTERCHANGEy',
+		'COLORr', 'COLORg', 'COLORb', 'COLORy'
+	];
+	return table;
+}
+
+function getCard(roomID)
+{
+	if(roomID === undefined)
+	{
+		console.log(colors.red('cards.getCard: roomID es undefined'));
+		return allCards[0];
+	}
+
+	const room = game.activeGames[roomID];
+	if(room === undefined)
+	{
+		console.log(colors.red(`cards.getCard: ${roomID} is not a valid room`));
+		return allCards[0];
+	}
+
+	const table = room.table;
+	if(table === undefined || !Array.isArray(table))
+	{
+		console.log(colors.red(`cards.getCard: ${roomID} doesn't have a valid table`));
+		return allCards[0];
+	}
+
+	//Hacer que se elijan cartas random de la mesa
+	const n = random.range(0, table.length - 1);
+	const card = table[n];
+	if(card === undefined)
+	{
+		console.log(colors.red(`cards.getCard: table[${n}] no contiene una carta válida`));
+		return table[0];
+	}
+
+	let tableUpdate = deleteFromDeck(card, table);
+	if(tableUpdate.length < 3)
+	{
+		tableUpdate = newTable();
+		console.log('Mesa recargada');
+	}
+	
+	room.table = tableUpdate;
+
+	return card;
+}
+
+function getNormalCard()
+{
+	let cardIndex = random.range(0, normalCards.length - 1);
+	let card = normalCards[cardIndex];
+	if(card !== undefined) return card;
+	else
+	{
+		console.log(colors.red(`cards.getCard: normalCards[${cardIndex}] is undefined`));
+		return normalCards[0];
+	}
+}
+
+/*
 function getCard(type)
 {
 	if(type === 'all')
@@ -165,13 +250,14 @@ function getCard(type)
 		return undefined;
 	}
 }
+*/
 
-function generateDeck()
+function generateDeck(roomID)
 {
 	let deck = [];
 	for(let i = 0; i < 7; i++)
 	{
-		deck.push(getCard('all'));
+		deck.push(getCard(roomID));
 	}
 	console.log('cards.generateDeck: deck generado', deck);
 	return deck;
@@ -251,21 +337,23 @@ function deckContainsSpecificsCards(cards, deck)
 function giveCardsToVictim(roomID, victim)
 {
 	const newCards = [];
-	const cardsToVictim = activeGames[roomID].cardsToVictim;
+	const cardsToVictim = game.activeGames[roomID].cardsToVictim;
 	for(let i = 0; i < cardsToVictim; i++)
 	{
-		newCards.push(getCard('all'));
+		newCards.push(getCard(roomID));
 	}
 	console.log('Cartas para la víctima', newCards);
 
-	activeGames[roomID].players[victim].deck.push(...newCards); //Añadir las cartas al mazo de la víctima
-	console.log('Mazo de la víctima', activeGames[roomID].players[victim].deck);
-	activeGames[roomID].cardsToVictim = 0; //Reiniciar el número de cartas para la siguiente víctima
+	game.activeGames[roomID].players[victim].deck.push(...newCards); //Añadir las cartas al mazo de la víctima
+	console.log('Mazo de la víctima', game.activeGames[roomID].players[victim].deck);
+	game.activeGames[roomID].cardsToVictim = 0; //Reiniciar el número de cartas para la siguiente víctima
 }
 
 module.exports =
 {
 	getCard,
+	getNormalCard,
+	newTable,
 	generateDeck,
 	deleteFromDeck,
 	cardIsValid,

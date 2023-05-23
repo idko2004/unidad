@@ -61,27 +61,34 @@ module.exports = function(dataObject, ws)
 
 
 	// Crear una partida
+	const table = cards.newTable();
+
 	game.activeGames[roomID] =
 	{
 		master: username,
 		maxPlayers,
-		currentCard: cards.getCard('normal'),
+		currentCard: cards.getNormalCard(),
 		letMorePlayersIn: true,
 		whoIsPlaying: 0,
 		direction: 1,
 		cardGrabbed: false,
 		cardsToVictim: 0,
 		order: [],
+		table,
 		players:
 		{
 			[username]:
 			{
-				deck: cards.generateDeck(),
+				deck: [],
 				won: false,
 				ws
 			}
 		}
 	}
+
+	//Crear el deck del jugador, se crea a parte porque es necesario que el juego esté creado para poder obtener cartas
+	game.activeGames[roomID].players[username].deck = cards.generateDeck(roomID);
+	
 	console.log('Estado de los juegos', game.activeGames);
 	//console.log('Estado del usuario', game.activeGames[roomID].players[username]);
 
