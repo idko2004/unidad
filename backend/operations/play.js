@@ -142,7 +142,7 @@ module.exports = function(dataObject, ws)
 		switch(cardProperties.value)
 		{
 			default:
-			ws.send(JSON.stringify(
+				ws.send(JSON.stringify(
 				{
 					operation: 'errorPlaying',
 					error: 'not implemented yet'
@@ -150,9 +150,9 @@ module.exports = function(dataObject, ws)
 				console.log('errorPlaying: not implemented yet: cartas especiales');
 				return;
 
-				case '+6':
-					playPlusCard(6, dataObject, ws, room, messages);
-					break;
+			case '+6':
+				playPlusCard(6, dataObject, ws, room, messages);
+				break;
 		}
 	}
 
@@ -178,6 +178,10 @@ module.exports = function(dataObject, ws)
 			
 			case '+4':
 				playPlusCard(4, dataObject, ws, room, messages);
+				break;
+
+			case 'BLOCK':
+				playBlockCard(dataObject, ws, room, messages);
 				break;
 		}
 	}
@@ -242,6 +246,8 @@ module.exports = function(dataObject, ws)
 	}
 }
 
+
+
 function playPlusCard(howManyCards, dataObject, ws, room, messages)
 {
 	if([dataObject, ws, room, howManyCards].includes(undefined))
@@ -294,4 +300,57 @@ function playPlusCard(howManyCards, dataObject, ws, room, messages)
 
 	game.utils.nextTurn(roomID); //Cambiar de turno dos veces para saltar el turno de la víctima
 	game.utils.updatePlayers(roomID, messages);
+}
+
+
+
+function playBlockCard(dataObject, ws, room, messages)
+{
+	if([dataObject, ws, room, messages].includes(undefined))
+	{
+		console.log(colors.red('play.playBlockCard: alguno de los parámetros es undefined'));
+		return;
+	}
+
+	const play = dataObject.play;
+	const username = dataObject.username;
+	const roomID = dataObject.roomID;
+
+	room.currentCard = play.card; //Actualizar la carta actual
+	room.cardGrabbed = false; //Para que el jugador del turno siguiente pueda agarrar una carta del mazo
+	room.players[username].deck = cards.deleteFromDeck(play.card, room.players[username].deck); //Quitar la carta jugada del mazo
+
+
+
+	messages.push(msg.getMessage(msg.msgValues.cardPlayed,
+	{
+		username,
+		cardname: msg.cardNames[play.card]
+	}));
+
+
+
+	if(room.cardsToVictim > 0) //Bloquear cartas +
+	{
+		messages.push(msg.getMessage(msg.msgValues.eatCardsCanceled,
+		{
+			username,
+			cardsnumber: room.cardsToVictim
+		}));
+
+		room.cardsToVictim = 0;
+		game.utils.nextTurn(roomID);
+		game.utils.updatePlayers(roomID, messages);
+	}
+	else //Bloquear al siguiente jugador
+	{
+		messages.push(msg.getMessage(msg.msgValues.blocked,
+		{
+			victim: room.order[game.utils.whosNext(roomID)]
+		}));
+	
+		game.utils.nextTurn(roomID);
+		game.utils.nextTurn(roomID);
+		game.utils.updatePlayers(roomID, messages);
+	}
 }

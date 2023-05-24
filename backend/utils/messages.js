@@ -7,7 +7,9 @@ const msgValues =
 	cardPlayed: 'cardPlayed',
 	skipTurn: 'skipTurn',
 	accumuledCards: 'accumuledCards',
-	cardsEaten: 'cardsEaten'
+	cardsEaten: 'cardsEaten',
+	eatCardsCanceled: 'eatCardsCanceled',
+	blocked: 'blocked'
 }
 
 const messages =
@@ -17,7 +19,9 @@ const messages =
 	cardPlayed: '%username% tiró un %cardname%',
 	skipTurn: '%username% no tira nada',
 	accumuledCards: '%username% tiró un %cardname%. ¡Hay %cardsnumber% acumuladas!',
-	cardsEaten: '¡%victim% se comió %cardsnumber% cartas!'
+	cardsEaten: '¡%victim% se comió %cardsnumber% cartas!',
+	eatCardsCanceled: '%username% evitó comerse %cardsnumber% cartas',
+	blocked: '%victim% no puede jugar'
 }
 
 const cardNames =
