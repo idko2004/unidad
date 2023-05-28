@@ -259,7 +259,6 @@ function moveAddCardToLast()
 	parent.appendChild(card);
 }
 
-const skipButton = document.getElementById('skipButton');
 function changeSkipCondition(nowCanSkip)
 {
 	if(typeof nowCanSkip !== 'boolean') return;
