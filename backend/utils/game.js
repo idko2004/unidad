@@ -77,12 +77,12 @@ function whosNext(roomID)
 	const room = activeGames[roomID];
 	if(room === undefined)
 	{
-		console.log(colors.red(`game.utils.nextTurn: ${roomID} is not a valid room`));
+		console.log(colors.red(`game.utils.whosNext: ${roomID} is not a valid room`));
 		return;
 	}
 	if(![-1, 1].includes(room.direction))
 	{
-		console.log(colors.red(`game.utils.nextTurn: ${room.direction} is not a valid direction`));
+		console.log(colors.red(`game.utils.whosNext: ${room.direction} is not a valid direction`));
 		return;
 	}
 
@@ -90,6 +90,33 @@ function whosNext(roomID)
 	const direction = room.direction;
 
 	let who = player + direction;
+
+	if(who > room.order.length - 1) who = 0;
+	else if(who < 0) who = room.order.length - 1;
+
+	return who;
+}
+
+
+
+function whoWasBefore(roomID)
+{
+	const room = activeGames[roomID];
+	if(room === undefined)
+	{
+		console.log(colors.red(`game.utils.whoWasBefore: ${roomID} is not a valid room`));
+		return;
+	}
+	if(![-1, 1].includes(room.direction))
+	{
+		console.log(colors.red(`game.utils.whoWasBefore: ${room.direction} is not a valid direction`));
+		return;
+	}
+
+	const player = room.whoIsPlaying;
+	const direction = room.direction;
+
+	let who = player - direction;
 
 	if(who > room.order.length - 1) who = 0;
 	else if(who < 0) who = room.order.length - 1;
@@ -162,6 +189,29 @@ function updatePlayers(roomID, messages) //Para enviar el estado de la partida a
 
 
 
+function changeDirection(roomID)
+{
+	if(roomID === undefined)
+	{
+		console.log(colors.red(`game.utils.changeDirection: roomID es undefined`));
+		return;
+	}
+
+	const room = activeGames[roomID];
+	if(room === undefined)
+	{
+		console.log(colors.red(`game.utils.changeDirection: ${roomID} no es una sala válida`));
+		return;
+	}
+
+	if(room.direction === 1) room.direction = -1;
+	else room.direction = 1;
+
+	return room.direction;
+}
+
+
+
 module.exports =
 {
 	activeGames,
@@ -169,6 +219,8 @@ module.exports =
 	{
 		updatePlayers,
 		nextTurn,
-		whosNext
+		whosNext,
+		whoWasBefore,
+		changeDirection
 	}
 };

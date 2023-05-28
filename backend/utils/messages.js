@@ -9,7 +9,9 @@ const msgValues =
 	accumuledCards: 'accumuledCards',
 	cardsEaten: 'cardsEaten',
 	eatCardsCanceled: 'eatCardsCanceled',
-	blocked: 'blocked'
+	eatCardsReflected: 'eatCardsReflected',
+	blocked: 'blocked',
+	directionChanged: 'directionChanged'
 }
 
 const messages =
@@ -21,7 +23,9 @@ const messages =
 	accumuledCards: '%username% tiró un %cardname%. ¡Hay %cardsnumber% acumuladas!',
 	cardsEaten: '¡%victim% se comió %cardsnumber% cartas!',
 	eatCardsCanceled: '%username% evitó comerse %cardsnumber% cartas',
-	blocked: '%victim% no puede jugar'
+	eatCardsReflected: '%username% le devolvió %cardsnumber% cartas a %victim%',
+	blocked: '%victim% no puede jugar',
+	directionChanged: 'Los turnos ahora van en la dirección contraria',
 }
 
 const cardNames =

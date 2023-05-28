@@ -183,6 +183,10 @@ module.exports = function(dataObject, ws)
 			case 'BLOCK':
 				playBlockCard(dataObject, ws, room, messages);
 				break;
+
+			case 'REVERSE':
+				playReverseCard(dataObject, ws, room, messages);
+				break;
 		}
 	}
 
@@ -277,7 +281,11 @@ function playPlusCard(howManyCards, dataObject, ws, room, messages)
 
 	if(!cards.deckContainsSpecificsCards(
 	[
-		'+4', '+2r', '+2g', '+2y', '+2y', 'BLOCKr', 'BLOCKg', 'BLOCKb', 'BLOCKy'
+		'+4',
+		'+2r', '+2g', '+2y', '+2y',
+		'+6r', '+6g', '+6b', '+6y',
+		'BLOCKr', 'BLOCKg', 'BLOCKb', 'BLOCKy',
+		'REVERSEr', 'REVERSEg', 'REVERSEb', 'REVERSEy'
 	],room.players[victim].deck)) //Si la víctima no tiene cartas para defenderse
 	{
 		console.log('La victima no puede defenderse');
@@ -353,4 +361,68 @@ function playBlockCard(dataObject, ws, room, messages)
 		game.utils.nextTurn(roomID);
 		game.utils.updatePlayers(roomID, messages);
 	}
+}
+
+
+
+function playReverseCard(dataObject, ws, room, messages)
+{
+	if([dataObject, ws, room].includes(undefined))
+	{
+		console.log(colors.red('play.playReverseCard: alguno de los parámetros es undefined'));
+		return;
+	}
+
+	const play = dataObject.play;
+	const username = dataObject.username;
+	const roomID = dataObject.roomID;
+
+	room.currentCard = play.card; //Actualizar la carta actual
+	room.cardGrabbed = false; //Para que el jugador del turno siguiente pueda agarrar una carta del mazo
+	room.players[username].deck = cards.deleteFromDeck(play.card, room.players[username].deck); //Quitar la carta jugada del mazo
+
+	messages.push(msg.getMessage(msg.msgValues.cardPlayed,
+	{
+		username,
+		cardname: msg.cardNames[play.card]
+	}));
+
+
+	if(room.cardsToVictim > 0) //Si hay cartas +, reflejarlas al del turno anterior
+	{
+		const victim = room.order[game.utils.whoWasBefore(roomID)];
+
+		messages.push(msg.getMessage(msg.msgValues.eatCardsReflected,
+		{
+			username,
+			victim,
+			cardsnumber: room.cardsToVictim
+		}));
+
+		cards.giveCardsToVictim(roomID, victim);
+
+		game.utils.nextTurn(roomID);
+	}
+
+
+	else if(room.order.length > 2) //Si son más de dos personas jugando cambiar el sentido de los turnos
+	{
+		game.utils.changeDirection(roomID);
+		game.utils.nextTurn(roomID);
+
+		messages.push(msg.getMessage(msg.msgValues.directionChanged));
+	}
+
+
+	else //Si solo son dos personas jugando, la persona que tiró la carta vuelve a tener el turno
+	{
+		const victim = room.order[game.utils.whosNext(roomID)];
+
+		messages.push(msg.getMessage(msg.msgValues.blocked,
+		{
+			victim
+		}));
+	}
+
+	game.utils.updatePlayers(roomID, messages);
 }
