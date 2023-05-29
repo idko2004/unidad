@@ -205,3 +205,41 @@ async function closeWindow(callback)
 	});
 };
 
+const colorWindowBg = document.getElementById('colorWindowBg');
+const colorWindow = document.getElementById('colorWindow');
+
+function openColorWindow()
+{
+	colorWindowBg.hidden = false;
+	colorWindow.classList.remove('closeWin');
+	colorWindow.classList.add('openWin');
+
+	colorWindowBg.classList.remove('closeBg');
+	colorWindowBg.classList.add('openBg');
+
+	thereIsAWindows = true;
+}
+
+let colorAnimationCallback;
+async function closeColorWindow()
+{
+	return new Promise(function(resolve, reject)
+	{
+		colorWindow.classList.remove('openWin');
+		colorWindow.classList.add('closeWin');
+
+		colorWindowBg.classList.remove('openBg');
+		colorWindowBg.classList.add('closeBg');
+
+		colorAnimationCallback = function(e)
+		{
+			if(e.animationName !== 'closeWindow') return;
+			colorWindowBg.hidden = true;
+			colorWindow.removeEventListener('animationend', colorAnimationCallback);
+			thereIsAWindows = false;
+			resolve();
+		}
+
+		colorWindow.addEventListener('animationend', colorAnimationCallback);
+	});
+}
