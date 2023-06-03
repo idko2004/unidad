@@ -18,6 +18,12 @@ function validCard(card, currentCard)
 	const cardProps = cardsProperties[card];
 	const currentCardProps = cardsProperties[currentCard];
 
+	if([cardProps, currentCardProps].includes(undefined))
+	{
+		console.log(colors.red(`cards.cardIsValid: cardProps(${cardProps === undefined}) currentCardProps(${currentCardProps === undefined}), uno de estos es undefined`));
+		return false;
+	}
+
 	let sameColor = false;
 	let sameValue = false;
 
@@ -33,6 +39,9 @@ function validCard(card, currentCard)
 	//Si la carta actual es un +2 o +6 y la carta elegida es para bloquear
 	if(['+2', '+6'].includes(currentCardProps.value) && cardProps.value === 'BLOCK') return true;
 	*/
+
+	//Si la carta que estamos tirando es un cambiacolor, da igual que carta sea la actual
+	if(cardProps.value === 'COLOR') return true;
 
 	return sameColor || sameValue;
 }

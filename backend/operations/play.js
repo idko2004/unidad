@@ -187,6 +187,10 @@ module.exports = function(dataObject, ws)
 			case 'REVERSE':
 				playReverseCard(dataObject, ws, room, messages);
 				break;
+
+			case 'COLOR':
+				playColorCard(dataObject, ws, room, messages);
+				break;
 		}
 	}
 
@@ -424,5 +428,92 @@ function playReverseCard(dataObject, ws, room, messages)
 		}));
 	}
 
+	game.utils.updatePlayers(roomID, messages);
+}
+
+
+
+function playColorCard(dataObject, ws, room, messages)
+{
+	if([dataObject, ws, room].includes(undefined))
+	{
+		console.log(colors.red('play.playColorCard: alguno de los parámetros es undefined'));
+		return;
+	}
+
+	const play = dataObject.play;
+	const username = dataObject.username;
+	const roomID = dataObject.roomID;
+
+
+	if(room.cardsToVictim > 0) //No creo que llegue a ocurrir, pero en caso de que sí, si te estan tirando cartas + y por algún motivo respondes con una carta de color, que funcione igual a que si respondes con una carta normal
+	{
+		messages.push(msg.getMessage(msg.msgValues.cardsEaten, //Mensaje de que la víctima se comió cartas
+		{
+			victim: username,
+			cardsnumber: room.cardsToVictim
+		}));
+		cards.giveCardsToVictim(roomID, username); //Dar las cartas al jugador
+		game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
+		game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
+		return;
+	}
+
+
+	//room.currentCard = play.card; //Actualizar la carta actual
+	room.cardGrabbed = false; //Para que el jugador del turno siguiente pueda agarrar una carta del mazo
+	room.players[username].deck = cards.deleteFromDeck(play.card, room.players[username].deck); //Quitar la carta jugada del mazo
+
+
+	const cardProperties = cards.properties[play.card];
+	if(!cardProperties)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'play',
+			error: 'invalidCard'
+		}));
+		console.log(`play.playColorCard: ${play.card} no es una carta válida`);
+		return;
+	}
+
+	if(cardProperties.color === null && play.color !== undefined)
+	{
+		const colorProperties = cards.properties[play.color];
+		if(!colorProperties)
+		{
+			ws.send(JSON.stringify(
+			{
+				operation: 'play',
+				error: 'invalidCard'
+			}));
+			console.log(`play.playColorCard: ${play.color} no es un color válido para COLOR`);
+			return;
+		}
+
+		room.currentCard = play.color;
+	}
+	else if(cardProperties.color !== null && play.color === undefined)
+	{
+		room.currentCard = play.card;
+	}
+	else
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'play',
+			error: 'invalidCard'
+		}));
+		console.log(`play.playColorCard: no se cumplieron ninguno de los requisitos para jugar una carta de color\ncardProperties.color = ${cardProperties.color} | play.color = ${play.color}`);
+		return;
+	}
+
+	messages.push(msg.getMessage(msg.msgValues.colorChanged,
+	{
+		username,
+		color: msg.colorNames[cards.properties[room.currentCard].color]
+	}));
+
+	game.utils.nextTurn(roomID);
 	game.utils.updatePlayers(roomID, messages);
 }

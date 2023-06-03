@@ -102,17 +102,27 @@ function clickACardInDeck(e)
 
 	if(canPlay) //Es tu turno
 	{
-		ws.send(JSON.stringify(
-		{
-			operation: 'play',
-			roomID,
-			username,
-			play:
-			{
-				card
-			}
-		}));
 		window.scroll({top: 0, behavior: 'smooth'});
+
+		switch(card)
+		{
+			default:
+				ws.send(JSON.stringify(
+				{
+					operation: 'play',
+					roomID,
+					username,
+					play:
+					{
+						card
+					}
+				}));
+				break;
+
+			case 'COLOR':
+				openColorWindow();
+				break;
+		}
 	}
 }
 
@@ -379,4 +389,54 @@ function updateCurrentCard(card)
 	if(currentCardImg.src !== '') currentCardImg.classList.add('currentCard-out'); //Si no hay carta anterior, no hacer animación
 	else currentCardImg.src = `img/${card}.png`;
 	currentCard = card;
+}
+
+
+//ELEGIR UNA CARTA DE COLOR
+document.getElementById('colorCardRed').addEventListener('click', () => {playColorCard('r')});
+document.getElementById('colorCardGreen').addEventListener('click', () => {playColorCard('g')});
+document.getElementById('colorCardBlue').addEventListener('click', () => {playColorCard('b')});
+document.getElementById('colorCardYellow').addEventListener('click', () => {playColorCard('y')});
+
+async function playColorCard(color)
+{
+	await closeColorWindow();
+
+	if(!canPlay) return;
+	
+	const cardColors =
+	{
+		r: 'COLORr',
+		g: 'COLORg',
+		b: 'COLORb',
+		y: 'COLORy'
+	}
+
+	const card = cardColors[color];
+	if(!card)
+	{
+		floatingWindow(
+		{
+			title: 'Algo salió mal',
+			text: `${color} no es una carta de color válida`,
+			button:
+			{
+				text: 'Aceptar',
+				callback: closeWindow
+			}
+		});
+		return;
+	}
+
+	ws.send(JSON.stringify(
+	{
+		operation: 'play',
+		roomID,
+		username,
+		play:
+		{
+			card: 'COLOR',
+			color: card
+		}
+	}));
 }

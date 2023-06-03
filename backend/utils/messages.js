@@ -11,7 +11,8 @@ const msgValues =
 	eatCardsCanceled: 'eatCardsCanceled',
 	eatCardsReflected: 'eatCardsReflected',
 	blocked: 'blocked',
-	directionChanged: 'directionChanged'
+	directionChanged: 'directionChanged',
+	colorChanged: 'colorChanged'
 }
 
 const messages =
@@ -26,6 +27,7 @@ const messages =
 	eatCardsReflected: '%username% le devolvió %cardsnumber% cartas a %victim%',
 	blocked: '%victim% no puede jugar',
 	directionChanged: 'Los turnos ahora van en la dirección contraria',
+	colorChanged: '%username% cambió el color a %color%'
 }
 
 const cardNames =
@@ -106,6 +108,14 @@ const cardNames =
 	'INTERCHANGEy': "Intercambio amarillo"
 }
 
+const colorNames =
+{
+	r: 'Rojo',
+	g: 'Verde',
+	b: 'Azul',
+	y: 'Amarillo'
+}
+
 function getMessage(msg, replace)
 {
 	let text = messages[msg];
@@ -131,5 +141,6 @@ module.exports =
 {
 	getMessage,
 	msgValues,
-	cardNames
+	cardNames,
+	colorNames
 }
