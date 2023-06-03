@@ -225,6 +225,8 @@ function joinedToGame(response)
 	{
 		addPlayerToWaitingList(response.players[i]);
 	}
+
+	askForCardProperties();
 }
 
 function playerJoined(response)

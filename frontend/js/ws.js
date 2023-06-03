@@ -74,6 +74,10 @@ function parseOperations(response)
 			joinedToGame(response);
 			break;
 
+		case 'getCardProperties':
+			receiveCardProperties(response);
+			break;
+
 		case 'playerJoined':
 			playerJoined(response);
 			break;
