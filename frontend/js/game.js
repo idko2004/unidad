@@ -37,7 +37,7 @@ function createCardsInDeck(deck)
 
 		deckDiv.appendChild(img);
 	}
-	moveAddCardToLast();
+	//moveAddCardToLast();
 }
 
 const logsDiv = document.getElementById('logsDiv');
@@ -213,7 +213,7 @@ function updateDeck(deck)
 
 	removeCards();
 	addCards();
-	moveAddCardToLast();
+	//moveAddCardToLast();
 
 	function findCard(card)
 	{
@@ -261,13 +261,16 @@ function updateDeck(deck)
 const deckElement = document.getElementById('deck');
 const addCardElement = document.getElementById('addCard');
 
+/*
 function moveAddCardToLast()
 {
+	return;
 	const parent = deckElement;
 	const card = addCardElement;
 
 	parent.appendChild(card);
 }
+*/
 
 function changeSkipCondition(nowCanSkip)
 {
