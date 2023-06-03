@@ -140,3 +140,37 @@ img
 {
 	image-rendering: pixelated;
 }
+
+.body-yourTurn
+{
+	animation: bgRed 400ms ease-out forwards;
+}
+
+.body-notYourTurn
+{
+	animation: bgBlack 400ms ease-out forwards;
+}
+
+@keyframes bgRed
+{
+	0%
+	{
+		background-color: var(--black);
+	}
+	100%
+	{
+		background-color: var(--darker-red);
+	}
+}
+
+@keyframes bgBlack
+{
+	0%
+	{
+		background-color: var(--darker-red);
+	}
+	100%
+	{
+		background-color: var(--black);
+	}
+}

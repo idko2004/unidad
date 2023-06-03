@@ -11,6 +11,7 @@ function startGame(response)
 	updateCurrentCard(response.currentCard);
 	createCardsInDeck(response.deck);
 	newMessages(response.message);
+	updateBackgroundColor(response.yourTurn);
 }
 
 function createCardsInDeck(deck)
@@ -176,6 +177,7 @@ function gameUpdate(response)
 	updateCurrentCard(response.currentCard);
 	newMessages(response.messages);
 	updateDeck(response.deck);
+	updateBackgroundColor(response.yourTurn);
 	
 	canPlay = response.yourTurn;
 
@@ -392,6 +394,20 @@ function updateCurrentCard(card)
 	if(currentCardImg.src !== '') currentCardImg.classList.add('currentCard-out'); //Si no hay carta anterior, no hacer animación
 	else currentCardImg.src = `img/${card}.png`;
 	currentCard = card;
+}
+
+function updateBackgroundColor(accent)
+{
+	if(accent && !document.body.classList.contains('body-yourTurn'))
+	{
+		document.body.classList.remove('body-notYourTurn');
+		document.body.classList.add('body-yourTurn');
+	}
+	else if(!document.body.classList.contains('body-notYourTurn'))
+	{
+		document.body.classList.remove('body-yourTurn');
+		document.body.classList.add('body-notYourTurn');
+	}
 }
 
 

@@ -8,6 +8,7 @@ html
 	--red-win-bg: rgba(165,29,45, 0.20);
 	--dark-red: #a51d2d;
 	--dark-gray: #9a9996;
+	--darker-red: #5C000B;
 }
 
 button:hover
@@ -22,6 +23,8 @@ body
 	border: 0;
 	background-color: var(--black);
 	color: var(--white);
+
+	animation: background-color 300ms ease-out;
 }
 
 .bigTitleContainer
