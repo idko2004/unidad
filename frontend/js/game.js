@@ -82,9 +82,12 @@ function updateMessage()
 	}
 }
 
+let cardClicked;
 function clickACardInDeck(e)
 {
 	const card = e.target.attributes.card.value;
+	cardClicked = e.target;
+	console.log(cardClicked);
 
 	if(!validCard(card, currentCard))
 	{
@@ -219,6 +222,8 @@ function updateDeck(deck)
 
 	function findCard(card)
 	{
+		if(cardClicked !== undefined && cardClicked.attributes.card.value === card) return cardClicked;
+
 		for(let j = 0; j < elementsInDeck.length; j++)
 		{
 			if(card === elementsInDeck[j].attributes.card.value
