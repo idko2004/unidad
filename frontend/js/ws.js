@@ -4,6 +4,7 @@ ws.addEventListener('open', function(e)
 {
 	console.log('¡Conectado al servidor!');
 	connected = true;
+	changeMenus('main');
 });
 
 ws.addEventListener('error', function(e)

@@ -5,9 +5,14 @@ function changeMenus(menu)
 	document.getElementById('findGameMenu').hidden = true;
 	document.getElementById('waitForPlayersMenu').hidden = true;
 	document.getElementById('game').hidden = true;
+	document.getElementById('loadingScreen').hidden = true;
 
 	switch(menu)
 	{
+		case 'loading':
+			document.getElementById('loadingScreen').hidden = false;
+			break;
+
 		case 'main':
 			document.getElementById('mainMenu').hidden = false;
 			break;
@@ -85,7 +90,7 @@ document.getElementById('searchGameButton').addEventListener('click', function()
 	ws.send(JSON.stringify(obj));
 
 	gameMaster = false;
-	changeMenus('waitPlayers');
+	changeMenus('loading');
 });
 
 //
@@ -133,7 +138,7 @@ document.getElementById('createGameButton').addEventListener('click', function()
 	ws.send(JSON.stringify(obj));
 
 	gameMaster = true;
-	changeMenus('waitPlayers');
+	changeMenus('loading');
 });
 
 //
@@ -227,6 +232,7 @@ function joinedToGame(response)
 	}
 
 	askForCardProperties();
+	changeMenus('waitPlayers');
 }
 
 function playerJoined(response)

@@ -64,6 +64,25 @@ section
 	padding: 0.5rem;
 }
 
+.loadingCard
+{
+	height: 5rem;
+	animation: speen 1.5s linear infinite;
+}
+
+@keyframes speen
+{
+	0%
+	{
+		transform: rotateZ(0deg);
+	}
+
+	100%
+	{
+		transform: rotateZ(360deg);
+	}
+}
+
 .menuContent
 {
 	text-align: center;
