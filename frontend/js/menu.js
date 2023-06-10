@@ -77,6 +77,11 @@ document.getElementById('customServerBackButton').addEventListener('click', func
 	changeMenus('server');
 });
 
+document.getElementById('customUrlField').addEventListener('keyup', function(e)
+{
+	if(e.key === 'Enter') document.getElementById('connectCustomServerButton').click();
+});
+
 //
 //	MAIN MENU
 //
@@ -133,6 +138,18 @@ document.getElementById('searchGameButton').addEventListener('click', function()
 
 	gameMaster = false;
 	changeMenus('loading');
+
+	document.getElementById('searchGameRoom').value = '';
+});
+
+document.getElementById('searchGameUsername').addEventListener('keyup', function(e)
+{
+	if(e.key === 'Enter') document.getElementById('searchGameRoom').focus();
+});
+
+document.getElementById('searchGameRoom').addEventListener('keyup', function(e)
+{
+	if(e.key === 'Enter') document.getElementById('searchGameButton').click();
 });
 
 //
