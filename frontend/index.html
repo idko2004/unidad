@@ -32,6 +32,58 @@
 			</section>
 		</div>
 
+		<div id="serverMenu" hidden>
+			<div class="bigTitleContainer">
+				<div class="bigTitleText">
+					Unidad
+				</div>
+			</div>
+			<section>
+				<div class="redTitleText">
+					Elegir tipo de servidor
+				</div>
+				<div class="menuContent">
+					<p>
+						<button id="onlineServerButton" title="Conectarse al servidor online">Servidor online (de momento localhost)</button>
+					</p>
+					<p>
+						<button id="localServerButton" title="Conectarse a un servidor en tu red local">Servidor local</button>
+					</p>
+					<hr>
+					<p>
+						<small>
+							Para usar un servidor local es necesario descargar el programa del servidor (backend) y que alguien lo ejecute en tu red local.
+						</small>
+					</p>
+				</div>
+			</section>
+		</div>
+
+		<div id="localServerMenu">
+			<div class="bigTitleContainer">
+				<div class="bigTitleText">
+					Unidad
+				</div>
+			</div>
+			<section>
+				<div class="redTitleText">
+					Servidor local
+				</div>
+				<div class="menuContent">
+					<p>
+						Escribe la dirección ip del servidor:
+					</p>
+					<p>
+						<input type="text" id="customUrlField">
+					</p>
+					<p>
+						<button id="connectCustomServerButton">Conectarse</button>
+						<button id="customServerBackButton">Volver</button>
+					</p>
+				</div>
+			</section>
+		</div>
+
 		<div id="mainMenu" hidden>
 			<div class="bigTitleContainer">
 				<div class="bigTitleText">

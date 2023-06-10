@@ -5,6 +5,8 @@ function changeMenus(menu)
 	document.getElementById('findGameMenu').hidden = true;
 	document.getElementById('waitForPlayersMenu').hidden = true;
 	document.getElementById('game').hidden = true;
+	document.getElementById('serverMenu').hidden = true;
+	document.getElementById('localServerMenu').hidden = true;
 	document.getElementById('loadingScreen').hidden = true;
 
 	switch(menu)
@@ -32,8 +34,48 @@ function changeMenus(menu)
 		case 'game':
 			document.getElementById('game').hidden = false;
 			break;
+
+		case 'server':
+			document.getElementById('serverMenu').hidden = false;
+			break;
+
+		case 'localServer':
+			document.getElementById('localServerMenu').hidden = false;
+			break;
 	}
 }
+
+//
+//	SERVER MENU
+//
+
+document.getElementById('onlineServerButton').addEventListener('click', function()
+{
+	url = onlineUrl;
+	changeMenus('loading');
+	connectToServer();
+});
+
+document.getElementById('localServerButton').addEventListener('click', function()
+{
+	changeMenus('localServer');
+});
+
+document.getElementById('connectCustomServerButton').addEventListener('click', function()
+{
+	const input = document.getElementById('customUrlField').value;
+
+	changeMenus('loading');
+
+	url = `ws://${input}`;
+
+	connectToServer();
+});
+
+document.getElementById('customServerBackButton').addEventListener('click', function()
+{
+	changeMenus('server');
+});
 
 //
 //	MAIN MENU

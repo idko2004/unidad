@@ -1,67 +1,96 @@
-const ws = new WebSocket(url);
+let ws;
 
-ws.addEventListener('open', function(e)
-{
-	console.log('¡Conectado al servidor!');
-	connected = true;
-	changeMenus('main');
-});
+changeMenus('server');
 
-ws.addEventListener('error', function(e)
+function connectToServer()
 {
-	console.log('Error conectando al servidor', e);
-	connected = false;
-	floatingWindow(
-	{
-		title: 'Algo salió mal',
-		text: 'No se pudo conectar al servidor',
-		button:
-		{
-			text: ':(',
-			callback: async function()
-			{
-				await closeWindow();
-				location.reload();
-			}
-		}
-	})
-});
-
-ws.addEventListener('close', function(e)
-{
-	console.log('El servidor se ha desconectado', e);
-	connected = false;
-	floatingWindow(
-	{
-		title: 'Servidor desconectado',
-		text: 'La conexión con el servidor se ha cerrado.',
-		button:
-		{
-			text: ':(',
-			callback: async function()
-			{
-				await closeWindow();
-				location.reload();
-			}
-		}
-	});
-});
-
-ws.addEventListener('message', function(e)
-{
-	console.log(e);
 	try
 	{
-		const response = JSON.parse(e.data);
-		console.log(response);
-
-		parseOperations(response);
+		ws = new WebSocket(url);
 	}
 	catch(err)
 	{
 		console.log(err);
+		floatingWindow(
+		{
+			title: 'No se pudo conectar',
+			text: 'Asegurate de escribir bien la dirección ip y el puerto.',
+			button:
+			{
+				text: 'Aceptar',
+				callback: function()
+				{
+					closeWindow();
+					changeMenus('localServer');
+				}
+			}
+		});
 	}
-});
+
+	ws.addEventListener('open', function()
+	{
+		console.log('¡Conectado al servidor!');
+		connected = true;
+		changeMenus('main');
+	});
+
+	ws.addEventListener('error', function(e)
+	{
+		console.log('Error conectando al servidor', e);
+		connected = false;
+		floatingWindow(
+		{
+			title: 'Algo salió mal',
+			text: 'No se pudo conectar al servidor',
+			button:
+			{
+				text: ':(',
+				callback: async function()
+				{
+					await closeWindow();
+					location.reload();
+				}
+			}
+		});
+	});
+
+	ws.addEventListener('close', function(e)
+	{
+		console.log('El servidor se ha desconectado', e);
+		connected = false;
+		floatingWindow(
+		{
+			title: 'Servidor desconectado',
+			text: 'La conexión con el servidor se ha cerrado.',
+			button:
+			{
+				text: ':(',
+				callback: async function()
+				{
+					await closeWindow();
+					location.reload();
+				}
+			}
+		});
+	});
+
+	ws.addEventListener('message', function(e)
+	{
+		console.log(e);
+		try
+		{
+			const response = JSON.parse(e.data);
+			console.log(response);
+
+			parseOperations(response);
+		}
+		catch(err)
+		{
+			console.log(err);
+		}
+	});
+}
+
 
 function parseOperations(response)
 {
