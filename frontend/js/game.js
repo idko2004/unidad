@@ -398,12 +398,12 @@ function updateCurrentCard(card)
 
 function updateBackgroundColor(accent)
 {
-	if(accent && !document.body.classList.contains('body-yourTurn'))
+	if(accent)
 	{
 		document.body.classList.remove('body-notYourTurn');
 		document.body.classList.add('body-yourTurn');
 	}
-	else if(!document.body.classList.contains('body-notYourTurn'))
+	else
 	{
 		document.body.classList.remove('body-yourTurn');
 		document.body.classList.add('body-notYourTurn');
