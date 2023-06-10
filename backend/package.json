@@ -12,6 +12,7 @@
 	"dependencies": {
 		"colors": "^1.4.0",
 		"generate-key": "^0.0.6",
+		"ip": "^1.1.8",
 		"ws": "^8.13.0"
 	}
 }

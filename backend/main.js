@@ -1,4 +1,5 @@
 console.log('Iniciando servidor');
+console.log(`Dirección IP local: ${require('ip').address()}:8888`);
 console.log(new Date().toString());
 
 const WebSocket = require('ws');
