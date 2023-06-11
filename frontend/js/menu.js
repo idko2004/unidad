@@ -200,6 +200,16 @@ document.getElementById('createGameButton').addEventListener('click', function()
 	changeMenus('loading');
 });
 
+document.getElementById('createGameUsername').addEventListener('keyup', function(e)
+{
+	if(e.key === 'Enter') document.getElementById('createGamePlayers').focus();
+});
+
+document.getElementById('createGamePlayers').addEventListener('keyup', function(e)
+{
+	if(e.key === 'Enter') document.getElementById('createGameButton').click();
+});
+
 //
 //	WAIT FOR PLAYERS MENU
 //
@@ -302,6 +312,7 @@ function playerJoined(response)
 	//Hacer aparecer el botón de empezar
 	if(gameMaster && (players.length === maxPlayers))
 	{
+		document.getElementById('waitingPlayersText').hidden = true;
 		document.getElementById('waitStartButton').hidden = false;
 	}
 }
@@ -322,7 +333,7 @@ function addPlayerToWaitingList(playerName)
 		const btnFloatRight = document.createElement('button');
 		btnFloatRight.classList.add('btnFloatRight');
 		btnFloatRight.innerText = '(X)';
-		playerInTheList.appendChild(btnFloatRight);	
+		playerInTheList.appendChild(btnFloatRight);
 	}
 
 	playersList.appendChild(playerInTheList);
@@ -334,12 +345,12 @@ document.getElementById('waitStartButton').addEventListener('click', function(e)
 
 	if(players.length < maxPlayers) return;
 
+	changeMenus('loading');
+
 	ws.send(JSON.stringify(
 	{
 		operation: 'startGame',
 		roomID,
 		username
 	}));
-
-	e.target.innerText = 'Iniciando juego...';
 });
