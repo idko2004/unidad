@@ -3,7 +3,8 @@
 */
 
 #floatWindow,
-#colorWindowBg
+#colorWindowBg,
+#winScreen
 {
 	position: fixed;
 	top: 0;
