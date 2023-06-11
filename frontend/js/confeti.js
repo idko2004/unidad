@@ -2,6 +2,9 @@ let confeti = [];
 
 let numberOfConfeti = 150;
 
+let confetiDeltaTime = 1000/30;
+let v = 0;
+
 const confetiContainer = document.getElementById('confetiContainer');
 
 function generateConfeti()
@@ -32,9 +35,9 @@ function randomizeConfeti()
 	for(let i = 0; i < confeti.length; i++)
 	{
 		confeti[i].x = randomRange(0, innerWidth);
-		confeti[i].y = -10;
+		confeti[i].y = -20;
 		confeti[i].e = Math.random();
-		if(confeti[i].e < 0.1) confeti[i].e = 0.1;
+		if(confeti[i].e < 0.1) confeti[i].e += 1 * Math.random();
 		confeti[i].rx = randomRange(0, 360);
 		confeti[i].ry = randomRange(0, 360);
 		confeti[i].rz = randomRange(0, 360);
@@ -69,28 +72,31 @@ function moveConfeti()
 
 		negativeX = randomRange(0, 10);
 		positiveX = randomRange(0, 10);
-		newX = currentX + (positiveX - negativeX) * e;
-		newY = currentY + 30 * e;
-		newRx = Math.round(currentRx + randomRange(0, 30) * e);
-		newRy = Math.round(currentRy + randomRange(0, 30) * e);
-		newRz = Math.round(currentRz + randomRange(0, 30) * e);
+		newX = currentX + (positiveX - negativeX) * e * v;
+		newY = currentY + (remSize * 1.5) * e * v;
+		newRx = Math.round(currentRx + randomRange(0, 30) * e * v);
+		newRy = Math.round(currentRy + randomRange(0, 30) * e * v);
+		newRz = Math.round(currentRz + randomRange(0, 30) * e * v);
 
 		if(newY > innerHeight + 10)
 		{
-			newY = -10;
+			newY = -10 - randomRange(0, 20);
 			newX = randomRange(0, innerWidth);
 		}
 		if(newX > innerWidth + 10) newX -= innerWidth - 10;
 		if(newRx > 360) newRx -= 360;
 		if(newRy > 360) newRy -= 360;
 		if(newRz > 360) newRz -= 360;
-
+		
 		confeti[i].x = newX;
 		confeti[i].y = newY;
 		confeti[i].rx = newRx;
 		confeti[i].ry = newRy;
 		confeti[i].rz = newRz;
 	}
+
+	v += confetiDeltaTime / 1000;
+	if(v > 1) v = 1;
 }
 
 function updateConfeti()
@@ -117,7 +123,7 @@ function startConfetiLoop()
 	{
 		updateConfeti();
 		moveConfeti();
-	}, 1000/30);
+	}, confetiDeltaTime);
 }
 
 function randomRange(min, max)

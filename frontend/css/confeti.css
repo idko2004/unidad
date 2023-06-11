@@ -4,52 +4,59 @@
 	width: 1rem;
 	position: absolute;
 	border: 2px solid var(--black);
+	pointer-events: none;
 }
 
-#youWinText
+.youWinText
 {
-	/*
-	width: 40%;
-	min-width: 20rem;
-	max-width: 40rem;
-
 	position: fixed;
 	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	*/
-
 	width: 100%;
-	height: 100%;
+	transform: translate(0, -50%);
 
-	line-height: 100vh;
-	vertical-align: center;
-
+	background-color: transparent;
 	text-align: center;
-	font-size: 5rem;
-	font-family: 'Tilt Warp', cursive;
-	text-shadow: 0 0 50px var(--dark-red);
 
-	cursor: pointer;
-
-	animation: youWinTextAnim 1000ms ease-out 1;
+	animation: slowlySlideDown 1000ms cubic-bezier(.68,-0.55,.27,1.55) 1;
 }
 
-@keyframes youWinTextAnim
+.youWinText h1
+{
+	font-family: 'Tilt Warp', cursive;
+	font-size: 5rem;
+	text-shadow: 0 0 50px var(--dark-red);
+}
+
+@keyframes slowlySlideDown
 {
 	0%
 	{
-		transform: scale(0);
+		opacity: 0;
+		top: 30%;
+		transform: translate(0, -30%);
+	}
+	100%
+	{
+		opacity: 1;
+		top: 50%;
+		transform: translate(0, -50%);
+	}
+}
+
+#loseScreen
+{
+	background-color: var(--black);
+	animation: fadeToBlack 700ms linear 1 forwards;
+}
+
+@keyframes fadeToBlack
+{
+	0%
+	{
 		opacity: 0;
 	}
 	100%
 	{
-		transform: scale(1);
 		opacity: 1;
 	}
-}
-
-#loseScreenFade
-{
-	
 }

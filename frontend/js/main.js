@@ -16,6 +16,8 @@ let canSkip = false;
 let canSkipDirectly = false;
 let canGrabACard = true;
 
+const remSize = parseFloat(getComputedStyle(document.body).fontSize);
+
 /*floatingWindow(
 {
 	title: 'ola',

@@ -468,31 +468,27 @@ async function playColorCard(color)
 function winAnimation()
 {
 	generateConfeti();
-	document.getElementById('winScreen').hidden = false;
-	startConfetiLoop();
-	document.getElementById('youWinText').addEventListener('click', function()
+	document.getElementById('winReload').addEventListener('click', function()
 	{
-		floatingWindow(
-		{
-			title: '¡Has ganado!',
-			text: '¿Volver a la pantalla de título?',
-			buttons:
-			[
-				{
-					text: 'Seguir mirando el confeti',
-					primary: false,
-					callback: closeWindow
-				},
-				{
-					text: 'Aceptar',
-					primary: true,
-					callback: async function()
-					{
-						await closeWindow();
-						location.reload();
-					}
-				}
-			]
-		});
+		location.reload();
+	});
+	const winScreen = document.getElementById('winScreen');
+	winScreen.classList.add('openBg');
+	winScreen.hidden = false;
+	startConfetiLoop();
+}
+
+function loseAnimation()
+{
+	const loseScreen = document.getElementById('loseScreen');
+	loseScreen.addEventListener('animationend', function()
+	{
+		loseScreen.children[0].hidden = false;
+	});
+	loseScreen.hidden = false;
+
+	document.getElementById('loseReload').addEventListener('click', function()
+	{
+		location.reload();
 	});
 }

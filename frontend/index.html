@@ -222,14 +222,21 @@
 			<div id="confetiContainer">
 				<!--div class="confeti"></div-->
 			</div>
-			<div id="youWinText">
-				¡Has ganado!
+			<div class="youWinText">
+				<h1>¡Has ganado!</h1>
+				<p>
+					<button id="winReload">Volver al menú principal</button>
+				</p>
 			</div>
 		</div>
 
-		<div id="loseScreenFade"></div>
-		<div id="loseScreen">
-
+		<div id="loseScreen" hidden>
+			<div class="youWinText" hidden>
+				<h1>Has perdido</h1>
+				<p>
+					<button id="loseReload">Volver al menú principal</button>
+				</p>
+			</div>
 		</div>
 
 		<div id='floatWindow' hidden>

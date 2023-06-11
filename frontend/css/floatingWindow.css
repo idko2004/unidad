@@ -4,7 +4,8 @@
 
 #floatWindow,
 #colorWindowBg,
-#winScreen
+#winScreen,
+#loseScreen
 {
 	position: fixed;
 	top: 0;
