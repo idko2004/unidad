@@ -1,6 +1,7 @@
 console.log('Iniciando servidor');
-console.log(`Dirección IP local: ${require('ip').address()}:8888`);
+console.log(`\nDirección IP local: ${require('ip').address()}:8888\n`);
 console.log(new Date().toString());
+console.log('\nPROHIBIDO MIRAR ESTA PANTALLA DURANTE UNA PARTIDA, ES TRAMPA\n');
 
 const WebSocket = require('ws');
 

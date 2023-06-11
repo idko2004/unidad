@@ -147,7 +147,9 @@ function updatePlayers(roomID, messages) //Para enviar el estado de la partida a
 	let winner;
 	for(let i = 0; i < room.order.length; i++)
 	{
-		if(room.players[room.order[i]].deck.length === 0) winner = room.order[i];
+		const numberOfCards = room.players[room.order[i]].deck.length;
+		console.log(`${room.order[i]} tiene ${numberOfCards} cartas`);
+		if(numberOfCards === 0) winner = room.order[i];
 	}
 
 	if(winner === undefined) //Si aún nadie gana
@@ -212,13 +214,15 @@ function updatePlayers(roomID, messages) //Para enviar el estado de la partida a
 
 			const youWin = room.order[i] === winner;
 
-			ws.send(JSON.stringify(
+			player.ws.send(JSON.stringify(
 			{
 				operation: 'gameEnd',
-				youWin
+				youWin,
+				currentCard: room.currentCard,
+				deck: player.deck
 			}));
 		}
-		delete room;
+		delete activeGames[roomID];
 		console.log('Sala borrada', activeGames);
 	}
 }

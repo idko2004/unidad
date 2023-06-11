@@ -467,10 +467,12 @@ async function playColorCard(color)
 
 function gameEnd(response)
 {
+	yourTurn = false;
+	updateCurrentCard(response.currentCard);
+	updateDeck(response.deck);
+
 	if(response.youWin) winAnimation();
 	else loseAnimation();
-
-	yourTurn = false;
 }
 
 function winAnimation()
