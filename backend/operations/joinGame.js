@@ -98,7 +98,6 @@ module.exports = function(dataObject, ws)
 	room.players[username] =
 	{
 		deck: cards.generateDeck(roomID),
-		won: false,
 		ws
 	}
 

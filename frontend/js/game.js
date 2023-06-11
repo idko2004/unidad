@@ -465,6 +465,14 @@ async function playColorCard(color)
 	}));
 }
 
+function gameEnd(response)
+{
+	if(response.youWin) winAnimation();
+	else loseAnimation();
+
+	yourTurn = false;
+}
+
 function winAnimation()
 {
 	generateConfeti();

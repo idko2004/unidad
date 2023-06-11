@@ -30,13 +30,11 @@ const gamesExample =
 					'REVERSEg', //La carta de reversa verde
 					'COLOR', //Cambiacolor
 				],
-				won: false, //Índica si el jugador ya ganó,
 				ws: null //Aquí debería de ir el WebSocket de este usuario para poder enviarle información luego
 			},
 			'fulanito':
 			{
 				deck: ['7g'],
-				won: false,
 				ws: null
 			}
 		}
@@ -145,45 +143,83 @@ function updatePlayers(roomID, messages) //Para enviar el estado de la partida a
 
 	let turnMessageIndex = messages.length;
 
+	//Comprobar si alguien ya ganó
+	let winner;
 	for(let i = 0; i < room.order.length; i++)
 	{
-		const player = room.players[room.order[i]];
-		if(player === undefined)
+		if(room.players[room.order[i]].deck.length === 0) winner = room.order[i];
+	}
+
+	if(winner === undefined) //Si aún nadie gana
+	{
+		for(let i = 0; i < room.order.length; i++)
 		{
-			console.log(colors.red(`game.utils.updatePlayers: ${room.order[i]} no es un jugador de la partida`));
-			continue;
+			const player = room.players[room.order[i]];
+			if(player === undefined)
+			{
+				console.log(colors.red(`game.utils.updatePlayers: ${room.order[i]} no es un jugador de la partida`));
+				continue;
+			}
+	
+			if(player.ws === undefined)
+			{
+				console.log(colors.red(`game.utils.updatePlayers: ${room.order[i]} no tiene un websocket asignado`));
+				continue;
+			}
+	
+			const yourTurn = room.order[room.whoIsPlaying] === room.order[i];
+	
+			// Cambiar el mensaje del turno de quién es
+			if(yourTurn) messages[turnMessageIndex] = msg.getMessage(msg.msgValues.yourTurn);
+			else messages[turnMessageIndex] = msg.getMessage(msg.msgValues.turn,
+			{
+				username: room.order[room.whoIsPlaying]
+			});
+	
+			console.log('Mensajes:', messages);
+	
+	
+			//Dejarte saltar un turno si te están tirando una carta +
+			let canSkipDirectly = room.cardsToVictim > 0 && yourTurn;
+	
+			player.ws.send(JSON.stringify(
+			{
+				operation: 'gameUpdate',
+				currentCard: room.currentCard,
+				deck: player.deck,
+				yourTurn,
+				canSkipDirectly,
+				messages
+			}));
 		}
-
-		if(player.ws === undefined)
+	}
+	else //Si alguien ya ganó
+	{
+		for(let i = 0; i < room.order.length; i++)
 		{
-			console.log(colors.red(`game.utils.updatePlayers: ${room.order[i]} no tiene un websocket asignado`));
-			continue;
+			const player = room.players[room.order[i]];
+			if(player === undefined)
+			{
+				console.log(colors.red(`game.utils.updatePlayers: ${room.order[i]} no es un jugador de la partida`));
+				continue;
+			}
+	
+			if(player.ws === undefined)
+			{
+				console.log(colors.red(`game.utils.updatePlayers: ${room.order[i]} no tiene un websocket asignado`));
+				continue;
+			}
+
+			const youWin = room.order[i] === winner;
+
+			ws.send(JSON.stringify(
+			{
+				operation: 'gameEnd',
+				youWin
+			}));
 		}
-
-		const yourTurn = room.order[room.whoIsPlaying] === room.order[i];
-
-		// Cambiar el mensaje del turno de quién es
-		if(yourTurn) messages[turnMessageIndex] = msg.getMessage(msg.msgValues.yourTurn);
-		else messages[turnMessageIndex] = msg.getMessage(msg.msgValues.turn,
-		{
-			username: room.order[room.whoIsPlaying]
-		});
-
-		console.log('Mensajes:', messages);
-
-
-		//Dejarte saltar un turno si te están tirando una carta +
-		let canSkipDirectly = room.cardsToVictim > 0 && yourTurn;
-
-		player.ws.send(JSON.stringify(
-		{
-			operation: 'gameUpdate',
-			currentCard: room.currentCard,
-			deck: player.deck,
-			yourTurn,
-			canSkipDirectly,
-			messages
-		}));
+		delete room;
+		console.log('Sala borrada', activeGames);
 	}
 }
 

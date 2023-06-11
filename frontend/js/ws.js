@@ -127,5 +127,9 @@ function parseOperations(response)
 		case 'grabCard':
 			grabCard(response);
 			break;
+
+		case 'gameEnd':
+			gameEnd(response);
+			break;
 	}
 }

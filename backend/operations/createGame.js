@@ -80,7 +80,6 @@ module.exports = function(dataObject, ws)
 			[username]:
 			{
 				deck: [],
-				won: false,
 				ws
 			}
 		}
