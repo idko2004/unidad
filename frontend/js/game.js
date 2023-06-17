@@ -222,7 +222,12 @@ function updateDeck(deck)
 
 	function findCard(card)
 	{
-		if(cardClicked !== undefined && cardClicked.attributes.card.value === card) return cardClicked;
+		if(cardClicked !== undefined && cardClicked.attributes.card.value === card)
+		{
+			let copyOfCardClicked = cardClicked;
+			cardClicked = undefined;
+			return copyOfCardClicked;
+		}
 
 		for(let j = 0; j < elementsInDeck.length; j++)
 		{
