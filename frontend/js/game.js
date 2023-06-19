@@ -5,7 +5,7 @@ function startGame(response)
 
 	changeMenus('game');
 
-	playerDeck = response.deck;
+	//playerDeck = response.deck;
 	canPlay = response.yourTurn;
 
 	updateCurrentCard(response.currentCard);
@@ -191,82 +191,88 @@ function gameUpdate(response)
 
 function updateDeck(deck)
 {
-	console.log('old deck', JSON.stringify(playerDeck));
-	console.log('how new is supposed to be', JSON.stringify(deck));
-	playerDeck = JSON.parse(JSON.stringify(deck));
-
-	const elementsInDeck = document.getElementsByClassName('cardInDeck');
-
-	const pairedCards = [];
-
-	for(let i = 0; i < deck.length; i++)
+	if(!Array.isArray(deck))
 	{
-		// Por cada elemento de la array del deck, buscar una carta en el html que se corresponda
-		const deckElement = findCard(deck[i]);
-		if(deckElement !== undefined)
-		{
-			pairedCards.push(deckElement);
-			deck[i] = null;
-		}
-
-		// Todos los elementos de deck que no sean null son cartas nuevas
-		// Todas las cartas html que no están paireadas deben ser eliminadas
+		console.log(`game.updateDeck: deck is not an array: ${deck}`);
+		return;
 	}
 
-	console.log(pairedCards);
-	console.log(deck);
+	const currentDeck = getCurrentDeck();
 
-	removeCards();
-	addCards();
-	//moveAddCardToLast();
+	const newDeck = deck;
 
-	function findCard(card)
+	const intersection = getArraysIntersection(currentDeck, newDeck);
+
+	const newElements = getDifferentElements(intersection, newDeck);
+	console.log('Nuevos elementos:', newElements);
+
+	const deletedElements = getDifferentElements(intersection, currentDeck);
+	console.log('Elementos eliminados:', deletedElements);
+
+	removeCardsFromDeck(deletedElements);
+	addCardsToDeck(newElements);
+
+	function getCurrentDeck()
 	{
-		if(cardClicked !== undefined && cardClicked.attributes.card.value === card)
-		{
-			let copyOfCardClicked = cardClicked;
-			cardClicked = undefined;
-			return copyOfCardClicked;
-		}
+		const elementsInDeck = document.getElementsByClassName('cardInDeck');
+		const cardsNames = [];
 
-		for(let j = 0; j < elementsInDeck.length; j++)
+		for(let i = 0; i < elementsInDeck.length; i++)
 		{
-			if(card === elementsInDeck[j].attributes.card.value
-			&& !pairedCards.includes(elementsInDeck[j]))
+			cardsNames.push(elementsInDeck[i].attributes.card.value);
+		}
+		return cardsNames;
+	}
+
+	function getArraysIntersection(arr1, arr2)
+	{
+		const intersec = [];
+		for(let i = 0; i < arr1.length; i++)
+		{
+			if(arr2.includes(arr1[i])) intersec.push(arr1[i]);
+		}
+		return intersec;
+	}
+
+	function getDifferentElements(intersection, arr)
+	{
+		const elements = [];
+		for(let i = 0; i < arr.length; i++)
+		{
+			if(!intersection.includes(arr[i]))
 			{
-				return elementsInDeck[j];
+				elements.push(arr[i]);
 			}
 		}
-		console.log('updateDeck.findCard: no se pudo encontrar la carta');
-		return undefined;
+		return elements;
 	}
 
-	function removeCards()
+	function addCardsToDeck(cards)
 	{
-		let toRemove = [];
-		for(let j = 0; j < elementsInDeck.length; j++)
+		createCardsInDeck(cards);
+	}
+
+	function removeCardsFromDeck(cards)
+	{
+		const elementsInDeck = document.getElementsByClassName('cardInDeck');
+		for(let i = 0; i < cards.length; i++)
 		{
-			if(!pairedCards.includes(elementsInDeck[j]))
+			if(cardClicked !== undefined && cardClicked.attributes.card.value === cards[i])
 			{
-				toRemove.push(elementsInDeck[j]);
+				cardClicked.classList.add('card-delete');
+				cardClicked = undefined;
+			}
+			else
+			{
+				elementsInDeck.forEach(function(e)
+				{
+					if(e.attributes.card.value === cards[i])
+					{
+						e.classList.add('card-delete');
+					}
+				});
 			}
 		}
-
-		toRemove.forEach(function(e)
-		{
-			e.classList.add('card-delete');
-		});
-	}
-
-	function addCards()
-	{
-		let toAdd = [];
-		for(let j = 0; j < deck.length; j++)
-		{
-			if(deck[j] !== null) toAdd.push(deck[j]);
-		}
-
-		createCardsInDeck(toAdd);
 	}
 }
 
@@ -357,8 +363,8 @@ function grabCard(response)
 
 	const card = response.card;
 	createCardsInDeck([card]);
-	playerDeck.push(card);
-	console.log('deck después de agarrar una carta', playerDeck);
+	//playerDeck.push(card);
+	//console.log('deck después de agarrar una carta', playerDeck);
 	changeSkipCondition(true);
 	canGrabACard = false;
 }

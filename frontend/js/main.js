@@ -10,7 +10,7 @@ let maxPlayers;
 let username;
 let roomID;
 let currentCard;
-let playerDeck = [];
+//let playerDeck = [];
 let canPlay = false;
 let canSkip = false;
 let canSkipDirectly = false;
