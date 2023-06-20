@@ -394,13 +394,13 @@ function updateDeck(deck)
 			}
 			else
 			{
-				elementsInDeck.forEach(function(e)
+				for(let j = 0; j < elementsInDeck.length; j++)
 				{
-					if(e.attributes.card.value === cards[i])
+					if(elementsInDeck[j].attributes.card.value === cards[i])
 					{
-						e.classList.add('card-delete');
+						elementsInDeck[j].classList.add('card-delete');
 					}
-				});
+				}
 			}
 		}
 	}

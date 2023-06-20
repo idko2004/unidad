@@ -212,13 +212,22 @@ module.exports = function(dataObject, ws)
 			return;
 		}
 
-		ws.send(JSON.stringify(
+		switch(cardProperties.value)
 		{
-			operation: 'errorPlaying',
-			error: 'not implemented yet'
-		}));
-		console.log('errorPlaying: not implemented yet: cartas no especiales que hacen cosas');
-		return;
+			default:
+				ws.send(JSON.stringify(
+				{
+					operation: 'errorPlaying',
+					error: 'not implemented yet'
+				}));
+				console.log('errorPlaying: not implemented yet: cartas no especiales que hacen cosas');
+				return;
+
+			case '0':
+				playZeroCard(dataObject, ws, room, messages);
+				break;
+		}
+
 	}
 
 
@@ -470,7 +479,7 @@ function playColorCard(dataObject, ws, room, messages)
 	{
 		ws.send(JSON.stringify(
 		{
-			operation: 'play',
+			operation: 'errorPlaying',
 			error: 'invalidCard'
 		}));
 		console.log(`play.playColorCard: ${play.card} no es una carta válida`);
@@ -484,7 +493,7 @@ function playColorCard(dataObject, ws, room, messages)
 		{
 			ws.send(JSON.stringify(
 			{
-				operation: 'play',
+				operation: 'errorPlaying',
 				error: 'invalidCard'
 			}));
 			console.log(`play.playColorCard: ${play.color} no es un color válido para COLOR`);
@@ -501,7 +510,7 @@ function playColorCard(dataObject, ws, room, messages)
 	{
 		ws.send(JSON.stringify(
 		{
-			operation: 'play',
+			operation: 'errorPlaying',
 			error: 'invalidCard'
 		}));
 		console.log(`play.playColorCard: no se cumplieron ninguno de los requisitos para jugar una carta de color\ncardProperties.color = ${cardProperties.color} | play.color = ${play.color}`);
@@ -512,6 +521,67 @@ function playColorCard(dataObject, ws, room, messages)
 	{
 		username,
 		color: msg.colorNames[cards.properties[room.currentCard].color]
+	}));
+
+	game.utils.nextTurn(roomID);
+	game.utils.updatePlayers(roomID, messages);
+}
+
+
+
+function playZeroCard(dataObject, ws, room, messages)
+{
+	if([dataObject, ws, room].includes(undefined))
+	{
+		console.log(colors.red('play.playZeroCard: alguno de los parámetros es undefined'));
+		return;
+	}
+
+	const play = dataObject.play;
+	const username = dataObject.username;
+	const roomID = dataObject.roomID;
+
+	const victim = play.change;
+	if(victim === undefined)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'errorPlaying',
+			error: 'invalidVictim'
+		}));
+		return;
+	}
+	if(!room.order.includes(victim) && victim !== null)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'errorPlaying',
+			error: 'invalidVictim'
+		}));
+		return;
+	}
+
+	room.currentCard = play.card; //Actualizar la carta actual
+	room.cardGrabbed = false; //Para que el jugador del turno siguiente pueda agarrar una carta del mazo
+	room.players[username].deck = cards.deleteFromDeck(play.card, room.players[username].deck); //Quitar la carta jugada del mazo
+
+	if(victim !== null)
+	{
+		//Cambiar los mazos del jugador y la victima
+		let aux = room.players[username].deck;
+		room.players[username].deck = room.players[victim].deck;
+		room.players[victim].deck = aux;
+	
+		messages.push(msg.getMessage(msg.msgValues.interchangeDecks,
+		{
+			username,
+			victim
+		}));
+	}
+	else messages.push(msg.getMessage(msg.msgValues.cardPlayed,
+	{
+		username,
+		cardname: msg.cardNames[play.card]
 	}));
 
 	game.utils.nextTurn(roomID);

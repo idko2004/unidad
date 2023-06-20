@@ -12,7 +12,8 @@ const msgValues =
 	eatCardsReflected: 'eatCardsReflected',
 	blocked: 'blocked',
 	directionChanged: 'directionChanged',
-	colorChanged: 'colorChanged'
+	colorChanged: 'colorChanged',
+	interchangeDecks: 'interchangeDecks'
 }
 
 const messages =
@@ -27,7 +28,8 @@ const messages =
 	eatCardsReflected: '%username% le devolvió %cardsnumber% cartas a %victim%',
 	blocked: '%victim% no puede jugar',
 	directionChanged: 'Los turnos ahora van en la dirección contraria',
-	colorChanged: '%username% cambió el color a %color%'
+	colorChanged: '%username% cambió el color a %color%',
+	interchangeDecks: '%username% intercambió mazos con %victim%'
 }
 
 const cardNames =
