@@ -1,5 +1,5 @@
 /*
-	Importado de notas
+	Importado de notas y modificado un poquito
 */
 
 #floatWindow,
@@ -293,7 +293,7 @@
 }
 
 
-/*
+
 #closeMenuButton
 {
 	float: right;
@@ -304,31 +304,43 @@
 	border: 2px solid var(--green-hover);
 	border-radius: 10px;
 	font-size: 1rem;
-	font-family: var(--rubik);
+	font-family: 'Tilt Warp', cursive;
 	transition: all ease 100ms;
-	font-family: var(--rubik);
 	font-weight: 400;
 }
 
 #menuButtons
 {
 	text-align: center;
-	max-height: 80vh;
+	max-height: 70vh;
+	overflow-y: auto;
+	scrollbar-color: var(--white) var(--dark-red);
+}
+
+#menuButtons::-webkit-scrollbar
+{
+	background-color: var(--dark-red);
+	border-radius: 1em;
+}
+
+#menuButtons::-webkit-scrollbar-thumb
+{
+	background-color: var(--white);
+	border-radius: 1em;
 }
 
 #menuButtons button
 {
 	width: 90%;
 	margin: 0.3rem 0;
-	padding: 0.5rem;
+	padding: 0.4rem;
 	font-size: 1rem;
-	font-family: var(--rubik);
+	font-family: 'Tilt Warp', cursive;
 	color: white;
-	background-color: var(--green-hover);
-	border: 2px solid var(--green-hover);
+	background-color: var(--dark-red);
+	border: 2px solid var(--dark-red);
 	border-radius: 10px;
 	transition: all ease 100ms;
-	font-family: var(--rubik);
 	font-weight: 400;
 }
 
@@ -350,4 +362,4 @@
 	white-space: nowrap;
 	overflow: hidden;
 }
-*/
+

@@ -1,5 +1,5 @@
 /*
-	Importado de notas
+	Importado de notas y modificado un poquito
 */
 
 const floatWindow = document.getElementById('floatWindow');
@@ -8,6 +8,7 @@ const windowTitle = document.getElementById('windowTitle');
 const windowText = document.getElementById('windowText');
 const windowInput = document.getElementById('windowInput');
 const windowButtons = document.getElementById('windowButtons');
+const menuButtons = document.getElementById('menuButtons');
 
 const windowExample = 
 {
@@ -33,6 +34,18 @@ const windowExample =
 			primary: false,
 			callback: function(){}
 		}
+	],
+	//Si va a tener una lista como en el menú de notas
+	list:
+	[
+		{
+			text: 'Enemy lasagna Robust below wax',
+			callback: function(){}
+		},
+		{
+			text: 'Semiautomatic aqua',
+			callback: function(){}
+		}
 	]
 }
 
@@ -56,6 +69,7 @@ function floatingWindow(elements)
 	text();
 	input();
 	buttons();
+	list();
 
 	canInteract = false;
 	floatWindow.hidden = false;
@@ -150,6 +164,28 @@ function floatingWindow(elements)
 
 			windowButtons.appendChild(button);
 		}
+	}
+
+	function list()
+	{
+		if(elements.list !== undefined)
+		{
+			menuButtons.hidden = false;
+
+			for(let i = 0; i < elements.list.length; i++)
+			{
+				const article = document.createElement('article');
+				const button = document.createElement('button');
+
+				article.appendChild(button);
+
+				button.innerText = elements.list[i].text;
+				button.addEventListener('click', elements.list[i].callback);
+
+				menuButtons.appendChild(article);
+			}
+		}
+		else menuButtons.hidden = true;
 	}
 }
 
