@@ -664,7 +664,7 @@ function gameEnd(response)
 	updateDeck(response.deck);
 
 	if(response.youWin) winAnimation();
-	else loseAnimation();
+	else loseAnimation(response.winner);
 }
 
 function winAnimation()
@@ -680,13 +680,16 @@ function winAnimation()
 	startConfetiLoop();
 }
 
-function loseAnimation()
+function loseAnimation(winner)
 {
 	const loseScreen = document.getElementById('loseScreen');
 	loseScreen.addEventListener('animationend', function()
 	{
 		loseScreen.children[0].hidden = false;
 	});
+
+	document.getElementById('loseWinnerName').innerText = winner;
+
 	loseScreen.hidden = false;
 
 	document.getElementById('loseReload').addEventListener('click', function()

@@ -13,7 +13,8 @@ const msgValues =
 	blocked: 'blocked',
 	directionChanged: 'directionChanged',
 	colorChanged: 'colorChanged',
-	interchangeDecks: 'interchangeDecks'
+	interchangeDecks: 'interchangeDecks',
+	oneCard: 'oneCard'
 }
 
 const messages =
@@ -29,7 +30,8 @@ const messages =
 	blocked: '%victim% no puede jugar',
 	directionChanged: 'Los turnos ahora van en la dirección contraria',
 	colorChanged: '%username% cambió el color a %color%',
-	interchangeDecks: '%username% intercambió mazos con %victim%'
+	interchangeDecks: '%username% intercambió mazos con %victim%',
+	oneCard: '¡A %username% SOLO LE QUEDA UNA CARTA!'
 }
 
 const cardNames =

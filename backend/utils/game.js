@@ -141,8 +141,6 @@ function updatePlayers(roomID, messages) //Para enviar el estado de la partida a
 
 	if(messages === undefined || !Array.isArray(messages)) messages = [];
 
-	let turnMessageIndex = messages.length;
-
 	//Comprobar si alguien ya ganó
 	let winner;
 	for(let i = 0; i < room.order.length; i++)
@@ -150,7 +148,10 @@ function updatePlayers(roomID, messages) //Para enviar el estado de la partida a
 		const numberOfCards = room.players[room.order[i]].deck.length;
 		console.log(`${room.order[i]} tiene ${numberOfCards} cartas`);
 		if(numberOfCards === 0) winner = room.order[i];
+		if(numberOfCards === 1) messages.push(msg.getMessage(msg.msgValues.oneCard, {username: room.order[i]})); //Avisarle a todos que a esta persona solo le queda una carta
 	}
+
+	let turnMessageIndex = messages.length;
 
 	if(winner === undefined) //Si aún nadie gana
 	{
@@ -218,6 +219,7 @@ function updatePlayers(roomID, messages) //Para enviar el estado de la partida a
 			{
 				operation: 'gameEnd',
 				youWin,
+				winner,
 				currentCard: room.currentCard,
 				deck: player.deck
 			}));
