@@ -126,6 +126,13 @@ function clickACardInDeck(e)
 			case 'COLOR':
 				openColorWindow();
 				break;
+
+			case '0r':
+			case '0g':
+			case '0b':
+			case '0y':
+				openZeroCardMenu(card);
+				break;
 		}
 	}
 }
@@ -595,6 +602,57 @@ async function playColorCard(color)
 		{
 			card: 'COLOR',
 			color: card
+		}
+	}));
+}
+
+function openZeroCardMenu(card)
+{
+	if(!canPlay) return;
+
+	const list = [];
+	for(let i = 0; i < players.length; i++)
+	{
+		if(players[i] === username) continue;
+
+		list.push(
+		{
+			text: players[i],
+			callback: async function()
+			{
+				await closeWindow();
+				playZeroCard(players[i], card);
+			}
+		});
+	}
+
+	floatingWindow(
+	{
+		title: 'Cambia tus cartas con alguien',
+		list,
+		button:
+		{
+			text: 'No cambiar',
+			callback: async function()
+			{
+				await closeWindow();
+				playZeroCard(null, card);
+			}
+		}
+	});
+}
+
+function playZeroCard(change, card)
+{
+	ws.send(JSON.stringify(
+	{
+		operation: 'play',
+		roomID,
+		username,
+		play:
+		{
+			card,
+			change
 		}
 	}));
 }

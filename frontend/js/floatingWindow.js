@@ -215,6 +215,8 @@ async function closeWindow(callback)
 					windowInput.hidden = true;
 					windowButtons.innerHTML = '';
 					windowInput.children[0].value = '';
+					menuButtons.innerHTML = '';
+					menuButtons.hidden = true;
 					if(textInputCallback !== null) windowInput.children[0].removeEventListener('keypress', textInputCallback);
 					textInputCallback = null;
 		
