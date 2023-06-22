@@ -32,7 +32,7 @@ const windowExample =
 		{
 			text: 'Cancel',
 			primary: false,
-			callback: function(){}
+			callback: function(){closeWindow()}
 		}
 	],
 	//Si va a tener una lista como en el menú de notas
