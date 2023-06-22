@@ -372,6 +372,30 @@ function giveCardsToVictim(roomID, victim)
 	game.activeGames[roomID].cardsToVictim = 0; //Reiniciar el número de cartas para la siguiente víctima
 }
 
+
+function giveCardsToSomeone(roomID, someone, howMany)
+{
+	if([roomID, someone, howMany].includes(undefined))
+	{
+		console.log(`cards.giveCardsToSomeone: uno de los parámetros es undefined`, roomID, someone, howMany);
+		return;
+	}
+	if(typeof howMany !== 'number')
+	{
+		console.log(`cards.giveCardsToSomeone: se espera que howMany sea un número, `, howMany);
+		return;
+	}
+	if(howMany <= 0) return;
+
+	const newCards = [];
+	for(let i = 0; i < howMany; i++)
+	{
+		newCards.push(getCard(roomID));
+	}
+
+	game.activeGames[roomID].players[someone].deck.push(...newCards);
+}
+
 module.exports =
 {
 	getCard,
@@ -382,6 +406,7 @@ module.exports =
 	cardIsValid,
 	deckContainsSpecificsCards,
 	giveCardsToVictim,
+	giveCardsToSomeone,
 	cardsArrays:
 	{
 		allCards,

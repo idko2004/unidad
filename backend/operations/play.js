@@ -139,6 +139,11 @@ module.exports = function(dataObject, ws)
 	// Si la carta jugada es más especial, hacer la cosa
 	if(cardProperties.type === cards.cardTypes.moreSpecial)
 	{
+		if(room.players[username].deck.length === 1) // Si solo tiene una carta, es una carta especial y piensa ganar con ella, le damos un +2
+		{
+			cards.giveCardsToSomeone(roomID, username, 2);
+		}
+
 		switch(cardProperties.value)
 		{
 			default:
@@ -161,6 +166,11 @@ module.exports = function(dataObject, ws)
 	// Si la carta jugada es especial, hacer la cosa
 	else if(cardProperties.type === cards.cardTypes.special)
 	{
+		if(room.players[username].deck.length === 1) // Si solo tiene una carta, es una carta especial y piensa ganar con ella, le damos un +2
+		{
+			cards.giveCardsToSomeone(roomID, username, 2);
+		}
+
 		switch(cardProperties.value)
 		{
 			default:
@@ -292,6 +302,7 @@ function playPlusCard(howManyCards, dataObject, ws, room, messages)
 
 	const victim = room.order[game.utils.whosNext(roomID)]; //Determinar quien va a ser la víctima que se lleve las cartas
 
+	
 	if(!cards.deckContainsSpecificsCards(
 	[
 		'+4',
@@ -318,6 +329,7 @@ function playPlusCard(howManyCards, dataObject, ws, room, messages)
 	else console.log('Existen cartas defensivas en su mazo');
 	//Si la víctima no tiene cartas para defenderse, debe recibir las cartas inmediatamente y su turno debe saltarse.
 	//Pero, si la víctima es capaz de defenderse, debe hacerlo, de lo contrario, deberá de recibir las cartas
+	
 
 	game.utils.nextTurn(roomID); //Cambiar de turno dos veces para saltar el turno de la víctima
 	game.utils.updatePlayers(roomID, messages);
