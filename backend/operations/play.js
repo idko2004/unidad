@@ -158,6 +158,10 @@ module.exports = function(dataObject, ws)
 			case '+6':
 				playPlusCard(6, dataObject, ws, room, messages);
 				break;
+
+			case 'BLANK':
+				playNormalCard(dataObject, ws, room, messages);
+				break;
 		}
 	}
 
@@ -243,34 +247,50 @@ module.exports = function(dataObject, ws)
 
 
 	// Si la carta jugada no es especial, hacer la cosa
-	else
+	else playNormalCard(dataObject, ws, room, messages);
+}
+
+
+
+function playNormalCard(dataObject, ws, room, messages)
+{
+	if([dataObject, ws, room].includes(undefined))
 	{
-		if(room.cardsToVictim > 0) //Si te están tirando tremendo +4
-		{
-			messages.push(msg.getMessage(msg.msgValues.cardsEaten, //Mensaje de que la víctima se comió cartas
-			{
-				victim: username,
-				cardsnumber: room.cardsToVictim
-			}));
-			cards.giveCardsToVictim(roomID, username); //Dar las cartas al jugador
-			game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
-			game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
-			return;
-		} //Si no te están tirando tremendo +4
-
-		room.currentCard = play.card; //Actualizar la carta actual
-		room.cardGrabbed = false; //Para que el jugador del turno siguiente pueda agarrar una carta del mazo
-		room.players[username].deck = cards.deleteFromDeck(play.card, room.players[username].deck); //Quitar la carta jugada del mazo
-		game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
-		messages.push(msg.getMessage(msg.msgValues.cardPlayed, //Mensaje de la jugada realizada
-		{
-			username,
-			cardname: msg.cardNames[play.card]
-		}));
-
-		// Enviar el estado de la partida a todos los jugadores
-		game.utils.updatePlayers(roomID, messages);
+		console.log(colors.red('play.playNormalCard: alguno de los parámetros es undefined'));
+		return;
 	}
+
+	const play = dataObject.play;
+	const username = dataObject.username;
+	const roomID = dataObject.roomID;
+
+	if(messages === username) messages = [];
+
+	if(room.cardsToVictim > 0) //Si te están tirando tremendo +4
+	{
+		messages.push(msg.getMessage(msg.msgValues.cardsEaten, //Mensaje de que la víctima se comió cartas
+		{
+			victim: username,
+			cardsnumber: room.cardsToVictim
+		}));
+		cards.giveCardsToVictim(roomID, username); //Dar las cartas al jugador
+		game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
+		game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
+		return;
+	} //Si no te están tirando tremendo +4
+
+	room.currentCard = play.card; //Actualizar la carta actual
+	room.cardGrabbed = false; //Para que el jugador del turno siguiente pueda agarrar una carta del mazo
+	room.players[username].deck = cards.deleteFromDeck(play.card, room.players[username].deck); //Quitar la carta jugada del mazo
+	game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
+	messages.push(msg.getMessage(msg.msgValues.cardPlayed, //Mensaje de la jugada realizada
+	{
+		username,
+		cardname: msg.cardNames[play.card]
+	}));
+
+	// Enviar el estado de la partida a todos los jugadores
+	game.utils.updatePlayers(roomID, messages);
 }
 
 
