@@ -15,6 +15,7 @@ let canPlay = false;
 let canSkip = false;
 let canSkipDirectly = false;
 let canGrabACard = true;
+let defendTextActive = false;
 
 let messageLog = [];
 

@@ -219,9 +219,10 @@ function gameUpdate(response)
 	
 	canPlay = response.yourTurn;
 
-	canSkipDirectly = response.canSkipDirectly;
-	changeSkipCondition(response.canSkipDirectly || false);
-	canGrabACard = !response.canSkipDirectly || true;
+	canSkipDirectly = response.defend;
+	canGrabACard = !response.defend || true;
+	changeSkipCondition(response.defend || false);
+	changeDefendTextState(response.defend || false);
 }
 
 function updateDeck(deck)
@@ -725,3 +726,28 @@ function loseAnimation(winner)
 		location.reload();
 	});
 }
+
+const defendContainer = document.getElementById('defendContainer');
+
+function changeDefendTextState(show)
+{
+	if(show === defendTextActive) return;
+	defendTextActive = show;
+
+	if(show)
+	{
+		defendContainer.classList.remove('defendOff');
+		defendContainer.classList.add('defendOn');
+		defendContainer.hidden = false;
+	}
+	else
+	{
+		defendContainer.classList.remove('defendOn');
+		defendContainer.classList.add('defendOff');
+	}
+}
+
+defendContainer.addEventListener('animationend', function(e)
+{
+	if(e.animationName === 'defendAnimExit') defendContainer.hidden = true;
+});

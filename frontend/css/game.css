@@ -175,3 +175,54 @@ img
 		background-color: var(--black);
 	}
 }
+
+#defendContainer
+{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	pointer-events: none;
+}
+
+#defendContainer div
+{
+	font-size: clamp(3rem, 100vw / 20, 12vh);
+	text-align: center;
+	pointer-events: none;
+	text-shadow: 0 0 30px var(--red);
+	font-family: 'Tilt Warp', cursive;
+}
+
+.defendOn
+{
+	animation: defendAnimEnter 700ms cubic-bezier(.68,-0.55,.27,1.55) 1;
+}
+
+@keyframes defendAnimEnter
+{
+	0%
+	{
+		transform: translateY(-15vh);
+	}
+	100%
+	{
+		transform: translateY(0);
+	}
+}
+
+.defendOff
+{
+	animation: defendAnimExit 700ms cubic-bezier(.68,-0.55,.27,1.55) 1;
+}
+
+@keyframes defendAnimExit
+{
+	0%
+	{
+		transform: translateY(0);
+	}
+	100%
+	{
+		transform: translateY(-15vh);
+	}
+}

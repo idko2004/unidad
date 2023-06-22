@@ -183,7 +183,7 @@ function updatePlayers(roomID, messages) //Para enviar el estado de la partida a
 	
 	
 			//Dejarte saltar un turno si te están tirando una carta +
-			let canSkipDirectly = room.cardsToVictim > 0 && yourTurn;
+			let defend = room.cardsToVictim > 0 && yourTurn;
 	
 			player.ws.send(JSON.stringify(
 			{
@@ -191,7 +191,7 @@ function updatePlayers(roomID, messages) //Para enviar el estado de la partida a
 				currentCard: room.currentCard,
 				deck: player.deck,
 				yourTurn,
-				canSkipDirectly,
+				defend,
 				messages
 			}));
 		}
