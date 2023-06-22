@@ -23,7 +23,8 @@
 .youWinText h1
 {
 	font-family: 'Tilt Warp', cursive;
-	font-size: 5rem;
+	/*font-size: 5rem;*/
+	font-size: clamp(3rem, 100vw / 12, 15vh);
 	text-shadow: 0 0 50px var(--dark-red);
 	margin: 0;
 	padding: 0.5rem;
