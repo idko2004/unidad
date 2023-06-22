@@ -34,6 +34,7 @@
 	padding: 0.4rem;
 	border-radius: 0.5rem;
 	background-color: var(--red);
+	cursor: pointer;
 }
 
 .deckContainer

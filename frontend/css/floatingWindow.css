@@ -200,7 +200,25 @@
 	color: white;
 	font-family: 'Tilt Warp', cursive;
 	font-weight: 400;
+	max-height: 60vh;
+	overflow-y: auto;
+	scrollbar-color: var(--white) var(--dark-red);
 }
+
+#windowText::-webkit-scrollbar,
+#colorContent::-webkit-scrollbar
+{
+	background-color: var(--dark-red);
+	border-radius: 1em;
+}
+
+#windowText::-webkit-scrollbar-thumb,
+#colorContent::-webkit-scrollbar-thumb
+{
+	background-color: var(--white);
+	border-radius: 1em;
+}
+
 
 #windowInput
 {

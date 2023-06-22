@@ -53,6 +53,7 @@ function newMessages(messages)
 	if(!Array.isArray(messages)) return;
 
 	messagesPending = messages;
+	messageLog.push(...messages);
 
 	if(updateMessageJob !== undefined)
 	{
@@ -81,6 +82,33 @@ function updateMessage()
 		updateMessageJob = undefined;
 	}
 }
+
+logsDiv.addEventListener('click', function()
+{
+	if(thereIsAWindows) return;
+
+	let text = '';
+	if(messageLog.length === 0)
+	{
+		text = 'el registro está vacío';
+	}
+	else for(let i = messageLog.length - 1; i >= 0; i--)
+	{
+		console.log('messageLog', i);
+		text += `${i+1}: ${messageLog[i]}\n\n`;
+	}
+
+	floatingWindow(
+	{
+		title: 'Registro',
+		text,
+		button:
+		{
+			text: 'Cerrar',
+			callback: closeWindow
+		}
+	});
+});
 
 let cardClicked;
 function clickACardInDeck(e)

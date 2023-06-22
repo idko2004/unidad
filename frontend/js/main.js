@@ -16,6 +16,8 @@ let canSkip = false;
 let canSkipDirectly = false;
 let canGrabACard = true;
 
+let messageLog = [];
+
 const remSize = parseFloat(getComputedStyle(document.body).fontSize);
 
 /*floatingWindow(
