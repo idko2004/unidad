@@ -61,10 +61,14 @@ function nextTurn(roomID)
 		return;
 	}
 
-	room.whoIsPlaying += room.direction;
+	do
+	{
+		room.whoIsPlaying += room.direction;
 
-	if(room.whoIsPlaying > room.order.length - 1) room.whoIsPlaying = 0;
-	else if(room.whoIsPlaying < 0) room.whoIsPlaying = room.order.length - 1;
+		if(room.whoIsPlaying > room.order.length - 1) room.whoIsPlaying = 0;
+		else if(room.whoIsPlaying < 0) room.whoIsPlaying = room.order.length - 1;
+	}
+	while(room.players[room.order[room.whoIsPlaying]].ws === null)
 
 	return room.whoIsPlaying;
 }
@@ -194,6 +198,8 @@ function updatePlayers(roomID, messages) //Para enviar el estado de la partida a
 				defend,
 				messages
 			}));
+
+			updateTimeout(roomID);
 		}
 	}
 	else //Si alguien ya ganó
@@ -224,6 +230,7 @@ function updatePlayers(roomID, messages) //Para enviar el estado de la partida a
 				deck: player.deck
 			}));
 		}
+		clearTimeout(room.timeout);
 		delete activeGames[roomID];
 		console.log('Sala borrada', activeGames);
 	}
@@ -250,6 +257,35 @@ function changeDirection(roomID)
 	else room.direction = 1;
 
 	return room.direction;
+}
+
+
+
+let targetTimeoutTime = 60_000;
+function updateTimeout(roomID)
+{
+	if(roomID === undefined)
+	{
+		console.log(`game.updateTimeout: roomID es undefined`);
+		return;
+	}
+	
+	const room = activeGames[roomID];
+	if(room === undefined)
+	{
+		console.log(`game.updateTimeout: la sala no es válida`);
+		return;
+	}
+
+	if(room.timeout !== undefined) clearTimeout(room.timeout);
+
+	room.timeout = setTimeout(function()
+	{
+		const username = room.order[room.whoIsPlaying];
+		console.log(`### Timeout para ${username} en ${roomID}`);
+		nextTurn(roomID);
+		updatePlayers(roomID, [msg.getMessage(msg.msgValues.inactive, {username})]);
+	}, targetTimeoutTime);
 }
 
 

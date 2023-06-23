@@ -82,7 +82,8 @@ module.exports = function(dataObject, ws)
 				deck: [],
 				ws
 			}
-		}
+		},
+		timeout: undefined
 	}
 
 	//Crear el deck del jugador, se crea a parte porque es necesario que el juego esté creado para poder obtener cartas

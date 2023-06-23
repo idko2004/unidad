@@ -14,7 +14,8 @@ const msgValues =
 	directionChanged: 'directionChanged',
 	colorChanged: 'colorChanged',
 	interchangeDecks: 'interchangeDecks',
-	oneCard: 'oneCard'
+	oneCard: 'oneCard',
+	inactive: 'inactive'
 }
 
 const messages =
@@ -31,7 +32,8 @@ const messages =
 	directionChanged: 'Los turnos ahora van en la dirección contraria',
 	colorChanged: '%username% cambió el color a %color%',
 	interchangeDecks: '%username% intercambió mazos con %victim%',
-	oneCard: '¡A %username% SOLO LE QUEDA UNA CARTA!'
+	oneCard: '¡A %username% SOLO LE QUEDA UNA CARTA!',
+	inactive: '%username% está inactivo'
 }
 
 const cardNames =

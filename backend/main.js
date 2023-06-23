@@ -6,6 +6,8 @@ console.log('\nPROHIBIDO MIRAR ESTA PANTALLA DURANTE UNA PARTIDA, ES TRAMPA\n');
 const WebSocket = require('ws');
 
 const parseMessage = require('./utils/parseMessage');
+const game = require('./utils/game');
+const msg = require('./utils/messages');
 
 let wsClients = [];
 
@@ -35,14 +37,13 @@ wss.on('connection', function(ws)
 setInterval(function()
 {
 	console.log('### Llegó la hora de pinguear ###');
-	let game; //utils/game.js
 	for(let i = 0; i < wsClients.length; i++)
 	{
 		console.log('### Está vivo:', wsClients[i].isAlive);
 
 		if(!wsClients[i].isAlive)
 		{
-			conectionClosed(wsClients[i], i, game);
+			conectionClosed(wsClients[i], i);
 			continue;
 		}
 
@@ -61,8 +62,6 @@ function conectionClosed(ws, i, game)
 		
 		console.log(`### ${roomID}, ${username} ###`);
 
-		if(game === undefined) game = require('./utils/game');
-
 		const room = game.activeGames[roomID];
 		if(room === undefined) return;
 
@@ -70,6 +69,14 @@ function conectionClosed(ws, i, game)
 		if(user === undefined) return;
 
 		user.ws = null;
+
+		//Si es el turno de alguien desconectado pasar su turno
+		if(room.order[room.whoIsPlaying] === username)
+		{
+			console.log('### Pasando turno');
+			game.utils.nextTurn(roomID);
+			game.utils.updatePlayers(roomID, [msg.getMessage(msg.msgValues.inactive, {username})]);
+		}
 	}
 
 	wsClients[i] = undefined;
