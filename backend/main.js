@@ -52,7 +52,7 @@ setInterval(function()
 	}
 }, 30_000);
 
-function conectionClosed(ws, i, game)
+function conectionClosed(ws, i)
 {
 	console.log('### Una conexión cerrada ###');
 	if(ws.gameInfo !== undefined)

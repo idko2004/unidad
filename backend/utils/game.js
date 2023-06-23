@@ -168,9 +168,9 @@ function updatePlayers(roomID, messages) //Para enviar el estado de la partida a
 				continue;
 			}
 	
-			if(player.ws === undefined)
+			if([null, undefined].includes(player.ws))
 			{
-				console.log(colors.red(`game.utils.updatePlayers: ${room.order[i]} no tiene un websocket asignado`));
+				console.log(`game.utils.updatePlayers: ${room.order[i]} está desconectado`);
 				continue;
 			}
 	
@@ -213,9 +213,9 @@ function updatePlayers(roomID, messages) //Para enviar el estado de la partida a
 				continue;
 			}
 	
-			if(player.ws === undefined)
+			if([null, undefined].includes(player.ws))
 			{
-				console.log(colors.red(`game.utils.updatePlayers: ${room.order[i]} no tiene un websocket asignado`));
+				console.log(`game.utils.updatePlayers: ${room.order[i]} está desconectado`);
 				continue;
 			}
 
