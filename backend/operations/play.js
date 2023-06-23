@@ -162,6 +162,10 @@ module.exports = function(dataObject, ws)
 			case 'BLANK':
 				playNormalCard(dataObject, ws, room, messages);
 				break;
+
+			case '+1':
+				playPlusOneCard(dataObject, ws, room, messages);
+				break;
 		}
 	}
 
@@ -618,4 +622,48 @@ function playZeroCard(dataObject, ws, room, messages)
 
 	game.utils.nextTurn(roomID);
 	game.utils.updatePlayers(roomID, messages);
+}
+
+
+
+function playPlusOneCard(dataObject, ws, room, messages)
+{
+	if([dataObject, ws, room].includes(undefined))
+	{
+		console.log(colors.red('play.playPlusOneCard: alguno de los parámetros es undefined'));
+		return;
+	}
+
+	const play = dataObject.play;
+	const username = dataObject.username;
+	const roomID = dataObject.roomID;
+
+	if(messages === username) messages = [];
+
+	if(room.cardsToVictim > 0) //No creo que llegue a ocurrir, pero en caso de que sí, si te estan tirando cartas + y por algún motivo respondes con una carta de color, que funcione igual a que si respondes con una carta normal
+	{
+		messages.push(msg.getMessage(msg.msgValues.cardsEaten, //Mensaje de que la víctima se comió cartas
+		{
+			victim: username,
+			cardsnumber: room.cardsToVictim
+		}));
+		cards.giveCardsToVictim(roomID, username); //Dar las cartas al jugador
+		game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
+		game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
+		return;
+	}
+
+
+	//room.currentCard = play.card; //Actualizar la carta actual
+	room.cardGrabbed = false; //Para que el jugador del turno siguiente pueda agarrar una carta del mazo
+	room.players[username].deck = cards.deleteFromDeck(play.card, room.players[username].deck); //Quitar la carta jugada del mazo
+
+	for(let i = 0; i < room.order.length; i++)
+	{
+		if(room.order[i] === username) continue;
+		cards.giveCardsToSomeone(roomID, room.order[i], 1);
+	}
+
+	game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
+	game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
 }
