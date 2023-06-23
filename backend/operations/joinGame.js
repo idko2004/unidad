@@ -105,6 +105,14 @@ module.exports = function(dataObject, ws)
 
 
 
+	ws.gameInfo =
+	{
+		username,
+		roomID
+	}
+
+
+
 	// Responder
 	ws.send(JSON.stringify(
 	{

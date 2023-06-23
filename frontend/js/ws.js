@@ -77,6 +77,12 @@ function connectToServer()
 	ws.addEventListener('message', function(e)
 	{
 		console.log(e);
+		if(e.data === 'Ping!')
+		{
+			ws.send('Pong!');
+			return;
+		}
+
 		try
 		{
 			const response = JSON.parse(e.data);
