@@ -30,12 +30,14 @@ const gamesExample =
 					'REVERSEg', //La carta de reversa verde
 					'COLOR', //Cambiacolor
 				],
-				ws: null //Aquí debería de ir el WebSocket de este usuario para poder enviarle información luego
+				ws: null, //Aquí debería de ir el WebSocket de este usuario para poder enviarle información luego
+				inactive: 0 //Indica cuantos turnos ha pasado por inactividad
 			},
 			'fulanito':
 			{
 				deck: ['7g'],
-				ws: null
+				ws: null,
+				inactive: 0
 			}
 		}
 	}
@@ -285,6 +287,14 @@ function updateTimeout(roomID)
 		console.log(`### Timeout para ${username} en ${roomID}`);
 		nextTurn(roomID);
 		updatePlayers(roomID, [msg.getMessage(msg.msgValues.inactive, {username})]);
+
+
+		room.players[username].inactive++;
+
+		if(room.players[username.inactive >= 3])
+		{
+			//TODO: borrar el ws de alguien que lleva más de 3 turnos sin jugar
+		}
 	}, targetTimeoutTime);
 }
 
