@@ -1,0 +1,44 @@
+body
+{
+  background-color: black;
+}
+
+img
+{
+  height: 8rem;
+  image-rendering: pixelated;
+}
+
+.cardsprite
+{
+	display: inline-block;
+	background: url('../img/cardsheet.png');
+	image-rendering: pixelated;
+}
+
+.cardsize-small
+{
+  height: 8rem;
+  width: calc((8rem * 13) / 17);
+  background-size: calc((8rem * 13) / 17 * (988 / 13)) 8rem; /*Creditos a chatGPT*/
+}
+
+
+.card-REVERSEr
+{
+  background-position: 0px 0px;
+}
+/*
+height(8rem)    y(17px)
+width           x(13px)
+
+width = height * x / y
+width = 8rem * 13px / 17px
+
+
+100&    988
+x       13
+
+x = (100 * 13) / 988
+
+*/
