@@ -1,44 +1,127 @@
 body
 {
-  background-color: black;
+	background-color: black;
+
+	--spritesheet-width: 1063;
+	--sprite-height: 17;
+	--sprite-width: 13;
 }
 
 img
 {
-  height: 8rem;
-  image-rendering: pixelated;
+	height: 8rem;
+	image-rendering: pixelated;
 }
 
 .cardsprite
 {
-	display: inline-block;
 	background: url('../img/cardsheet.png');
 	image-rendering: pixelated;
+	background-repeat: no-repeat;
+
+	width: 100%;
+	height: 100%;
+
+	--pixel-width: calc(var(--card-width) / var(--sprite-width));
+	--pixel-height: calc(var(--card-height) / var(--sprite-height));
+
+	background-size: calc((var(--card-height) * var(--sprite-width)) / var(--sprite-height) * (var(--spritesheet-width) / var(--sprite-width))) calc(var(--card-height));
+
+	background-position: calc((var(--card-width) + var(--pixel-width)) * (var(--sprite-number) * -1)) 0px;
+}
+
+.cardsize-big
+{
+	--card-height: 40vh;
+	--card-width: calc((var(--card-height) * var(--sprite-width)) / var(--sprite-height));
+
+	height: var(--card-height);
+	width: var(--card-width);
+	display: inline-block;
 }
 
 .cardsize-small
 {
-  height: 8rem;
-  width: calc((8rem * 13) / 17);
-  background-size: calc((8rem * 13) / 17 * (988 / 13)) 8rem; /*Creditos a chatGPT*/
+	--card-height: 8rem;
+	--card-width: calc((var(--card-height) * var(--sprite-width)) / var(--sprite-height));
+	
+	height: var(--card-height);
+	width: var(--card-width);
+	display: inline-block;
 }
 
+
+/*
+	CARTAS
+*/
 
 .card-REVERSEr
 {
-  background-position: 0px 0px;
+	--sprite-number: 0;
 }
-/*
-height(8rem)    y(17px)
-width           x(13px)
 
-width = height * x / y
-width = 8rem * 13px / 17px
+.card-REVERSEg
+{
+	--sprite-number: 1;
+}
 
+.card-REVERSEb
+{
+	--sprite-number: 2;
+}
 
-100&    988
-x       13
+.card-REVERSEy
+{
+	--sprite-number: 3;
+}
 
-x = (100 * 13) / 988
+.card-COLOR
+{
+	--sprite-number: 4;
+}
 
-*/
+.card-COLORr
+{
+	--sprite-number: 5;
+}
+
+.card-COLORg
+{
+	--sprite-number: 6;
+}
+
+.card-COLORb
+{
+	--sprite-number: 7;
+}
+
+.card-COLORy
+{
+	--sprite-number: 8;
+}
+
+.card-BLOCKr
+{
+	--sprite-number: 9;
+}
+
+.card-BLOCKg
+{
+	--sprite-number: 10;
+}
+
+.card-BLOCKb
+{
+	--sprite-number: 11;
+}
+
+.card-BLOCKy
+{
+	--sprite-number: 12;
+}
+
+.card-plus4
+{
+	--sprite-number: 13;
+}
+
