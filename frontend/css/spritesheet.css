@@ -1,4 +1,4 @@
-body
+html
 {
 	background-color: black;
 
@@ -120,8 +120,27 @@ img
 	--sprite-number: 12;
 }
 
-.card-plus4
+.card-PLUS4
 {
 	--sprite-number: 13;
 }
 
+.card-PLUS2r
+{
+	--sprite-number: 14;
+}
+
+.card-PLUS2g
+{
+	--sprite-number: 15;
+}
+
+.card-PLUS2b
+{
+	--sprite-number: 16;
+}
+
+.card-PLUS2y
+{
+	--sprite-number: 17;
+}
