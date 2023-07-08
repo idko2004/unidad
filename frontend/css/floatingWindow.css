@@ -292,20 +292,24 @@
 
 #colorContent
 {
+	padding: 0.5rem;
 	text-align: center;
 }
 
-#colorWindow img
+
+#colorWindow .cardsize-smaller
 {
-	width: calc(100% / 4 - 2ch);
+	/*width: calc(100% / 4 - 2ch);
 	min-width: 3rem;
 	margin: 0.5ch;
-
+	*/
 	transition: transform 150ms;
 	cursor: pointer;
+
+	margin: 0.2rem;
 }
 
-#colorWindow img:hover
+#colorWindow .cardsize-smaller:hover
 {
 	transform: scale(1.1);
 }

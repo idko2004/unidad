@@ -1,16 +1,8 @@
 html
 {
-	background-color: black;
-
 	--spritesheet-width: 1063;
 	--sprite-height: 17;
 	--sprite-width: 13;
-}
-
-img
-{
-	height: 8rem;
-	image-rendering: pixelated;
 }
 
 .cardsprite
@@ -18,6 +10,7 @@ img
 	background: url('../img/cardsheet.png');
 	image-rendering: pixelated;
 	background-repeat: no-repeat;
+	pointer-events: none;
 
 	width: 100%;
 	height: 100%;
@@ -51,96 +44,93 @@ img
 }
 
 
+.cardsize-smaller
+{
+	--card-height: 5rem;
+	--card-width: calc((var(--card-height) * var(--sprite-width)) / var(--sprite-height));
+	
+	height: var(--card-height);
+	width: var(--card-width);
+	display: inline-block;
+}
+
 /*
 	CARTAS
 */
 
-.card-REVERSEr
-{
-	--sprite-number: 0;
-}
-
-.card-REVERSEg
-{
-	--sprite-number: 1;
-}
-
-.card-REVERSEb
-{
-	--sprite-number: 2;
-}
-
-.card-REVERSEy
-{
-	--sprite-number: 3;
-}
-
-.card-COLOR
-{
-	--sprite-number: 4;
-}
-
-.card-COLORr
-{
-	--sprite-number: 5;
-}
-
-.card-COLORg
-{
-	--sprite-number: 6;
-}
-
-.card-COLORb
-{
-	--sprite-number: 7;
-}
-
-.card-COLORy
-{
-	--sprite-number: 8;
-}
-
-.card-BLOCKr
-{
-	--sprite-number: 9;
-}
-
-.card-BLOCKg
-{
-	--sprite-number: 10;
-}
-
-.card-BLOCKb
-{
-	--sprite-number: 11;
-}
-
-.card-BLOCKy
-{
-	--sprite-number: 12;
-}
-
-.card-PLUS4
-{
-	--sprite-number: 13;
-}
-
-.card-PLUS2r
-{
-	--sprite-number: 14;
-}
-
-.card-PLUS2g
-{
-	--sprite-number: 15;
-}
-
-.card-PLUS2b
-{
-	--sprite-number: 16;
-}
-
-.card-PLUS2y
-{
-	--sprite-number: 17;
-}
+.card-REVERSEr     { --sprite-number: 0; }
+.card-REVERSEg     { --sprite-number: 1; }
+.card-REVERSEb     { --sprite-number: 2; }
+.card-REVERSEy     { --sprite-number: 3; }
+.card-COLOR        { --sprite-number: 4; }
+.card-COLORr       { --sprite-number: 5; }
+.card-COLORg       { --sprite-number: 6; }
+.card-COLORb       { --sprite-number: 7; }
+.card-COLORy       { --sprite-number: 8; }
+.card-BLOCKr       { --sprite-number: 9; }
+.card-BLOCKg       { --sprite-number: 10;}
+.card-BLOCKb       { --sprite-number: 11;}
+.card-BLOCKy       { --sprite-number: 12;}
+.card-PLUS4        { --sprite-number: 13;}
+.card-PLUS2r       { --sprite-number: 14;}
+.card-PLUS2g       { --sprite-number: 15;}
+.card-PLUS2b       { --sprite-number: 16;}
+.card-PLUS2y       { --sprite-number: 17;}
+.card-0r           { --sprite-number: 18;}
+.card-0g           { --sprite-number: 19;}
+.card-0b           { --sprite-number: 20;}
+.card-0y           { --sprite-number: 21;}
+.card-1r           { --sprite-number: 22;}
+.card-1g           { --sprite-number: 23;}
+.card-1b           { --sprite-number: 24;}
+.card-1y           { --sprite-number: 25;}
+.card-2r           { --sprite-number: 26;}
+.card-2g           { --sprite-number: 27;}
+.card-2b           { --sprite-number: 28;}
+.card-2y           { --sprite-number: 29;}
+.card-3r           { --sprite-number: 30;}
+.card-3g           { --sprite-number: 31;}
+.card-3b           { --sprite-number: 32;}
+.card-3y           { --sprite-number: 33;}
+.card-4r           { --sprite-number: 34;}
+.card-4g           { --sprite-number: 35;}
+.card-4b           { --sprite-number: 36;}
+.card-4y           { --sprite-number: 37;}
+.card-5r           { --sprite-number: 38;}
+.card-5g           { --sprite-number: 39;}
+.card-5b           { --sprite-number: 40;}
+.card-5y           { --sprite-number: 41;}
+.card-6r           { --sprite-number: 42;}
+.card-6g           { --sprite-number: 43;}
+.card-6b           { --sprite-number: 44;}
+.card-6y           { --sprite-number: 45;}
+.card-7r           { --sprite-number: 46;}
+.card-7g           { --sprite-number: 47;}
+.card-7b           { --sprite-number: 48;}
+.card-7y           { --sprite-number: 49;}
+.card-8r           { --sprite-number: 50;}
+.card-8g           { --sprite-number: 51;}
+.card-8b           { --sprite-number: 52;}
+.card-8y           { --sprite-number: 53;}
+.card-9r           { --sprite-number: 54;}
+.card-9g           { --sprite-number: 55;}
+.card-9b           { --sprite-number: 56;}
+.card-9y           { --sprite-number: 57;}
+.card-ADD          { --sprite-number: 58;}
+.card-SKIP         { --sprite-number: 59;}
+.card-PLUS1r       { --sprite-number: 60;}
+.card-PLUS1g       { --sprite-number: 61;}
+.card-PLUS1b       { --sprite-number: 62;}
+.card-PLUS1y       { --sprite-number: 63;}
+.card-PLUS6r       { --sprite-number: 64;}
+.card-PLUS6g       { --sprite-number: 65;}
+.card-PLUS6b       { --sprite-number: 66;}
+.card-PLUS6y       { --sprite-number: 67;}
+.card-BLANKr       { --sprite-number: 68;}
+.card-BLANKg       { --sprite-number: 69;}
+.card-BLANKb       { --sprite-number: 70;}
+.card-BLANKy       { --sprite-number: 71;}
+.card-INTERCHANGEr { --sprite-number: 72;}
+.card-INTERCHANGEg { --sprite-number: 73;}
+.card-INTERCHANGEb { --sprite-number: 74;}
+.card-INTERCHANGEy { --sprite-number: 75;}

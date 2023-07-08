@@ -18,25 +18,40 @@ function createCardsInDeck(deck)
 {
 	for(let i = 0; i < deck.length; i++)
 	{
-		const img = document.createElement('img');
+		const sprite = document.createElement('div');
+		sprite.classList.add('cardsprite');
+		sprite.classList.add(spriteClass[deck[i]]);
+
+		const div = document.createElement('div');
+		div.appendChild(sprite);
+		div.classList.add('cardsize-small');
+		div.classList.add('cardInDeck');
+		div.classList.add('cardHoverAnim');
+		div.classList.add('card-spawn');
+
+		div.setAttribute('card', deck[i]);
+		/*const img = document.createElement('img');
 		img.classList.add('cardInDeck');
 		img.classList.add('cardHoverAnim');
 		img.classList.add('card-spawn');
+		*/
 
+		/*
 		img.src = `img/${deck[i]}.png`;
 		img.setAttribute('card', deck[i]);
+		*/
 
-		img.addEventListener('click', function(e)
+		div.addEventListener('click', function(e)
 		{
 			clickACardInDeck(e);
 		});
 
-		img.addEventListener('animationend', function(e)
+		div.addEventListener('animationend', function(e)
 		{
 			cardAnimationEnd(e);
 		});
 
-		deckDiv.appendChild(img);
+		deckDiv.appendChild(div);
 	}
 	//moveAddCardToLast();
 }
@@ -455,8 +470,16 @@ function changeSkipCondition(nowCanSkip)
 
 	canSkip = nowCanSkip;
 
-	if(nowCanSkip) addCardElement.src = 'img/skipturn.png';
-	else addCardElement.src = 'img/add.png';
+	if(nowCanSkip)
+	{
+		addCardElement.children[0].classList.remove('card-ADD');
+		addCardElement.children[0].classList.add('card-SKIP');
+	}
+	else
+	{
+		addCardElement.children[0].classList.remove('card-SKIP');
+		addCardElement.children[0].classList.add('card-ADD');
+	}
 }
 
 //La carta de pedir más cartas y saltar turno
@@ -544,21 +567,27 @@ function cardAnimationEnd(e)
 }
 
 // Current card animation
-const currentCardImg = document.getElementById('currentCard');
+const currentCardSprite = document.getElementById('currentCardSprite');
+const currentCardDiv = document.getElementById('currentCardDiv');
 const deckDiv = document.getElementById('deck');
 
-currentCardImg.addEventListener('animationend', function(e)
+currentCardDiv.addEventListener('animationend', function(e)
 {
 	switch(e.animationName)
 	{
 		case 'cardDeleteAnim':
+			currentCardDiv.classList.remove('currentCard-out');
+			currentCardSprite.className = `cardsprite ${spriteClass[currentCard]}`;
+			currentCardDiv.classList.add('currentCard-in');
+			/*
 			currentCardImg.classList.remove('currentCard-out');
 			currentCardImg.src = `img/${currentCard}.png`;
 			currentCardImg.classList.add('currentCard-in');
+			*/
 			break;
 
 		case 'currentCardInAnim':
-			currentCardImg.classList.remove('currentCard-in');
+			currentCardDiv.classList.remove('currentCard-in');
 			break;
 	}
 });
@@ -566,8 +595,12 @@ currentCardImg.addEventListener('animationend', function(e)
 function updateCurrentCard(card)
 {
 	if(card === currentCard) return; //Si la carta es igual, no hacer animación
-	if(currentCardImg.src !== '') currentCardImg.classList.add('currentCard-out'); //Si no hay carta anterior, no hacer animación
-	else currentCardImg.src = `img/${card}.png`;
+	if(!currentCardSprite.classList.contains('card-SKIP')) currentCardDiv.classList.add('currentCard-out'); //Si no hay carta anterior, no hacer animación
+	else
+	{
+		currentCardSprite.classList.remove('card-SKIP');
+		currentCardSprite.classList.add(spriteClass[card]);
+	}
 	currentCard = card;
 }
 

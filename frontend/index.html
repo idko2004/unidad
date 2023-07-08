@@ -5,11 +5,13 @@
 		<title>Unidad</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="prefetch" href="img/cardsheet.png" as="image">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap" rel="stylesheet">
 
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/spritesheet.css">
 		<link rel="stylesheet" type="text/css" href="css/floatingWindow.css">
 		<link rel="stylesheet" type="text/css" href="css/game.css">
 		<link rel="stylesheet" type="text/css" href="css/confeti.css">
@@ -17,6 +19,7 @@
 		<script defer src="js/floatingWindow.js"></script>
 		<script defer src="js/main.js"></script>
 		<script defer src="js/menu.js"></script>
+		<script defer src="js/spritesheet.js"></script>
 		<script defer src="js/cards.js"></script>
 		<script defer src="js/game.js"></script>
 		<script defer src="js/confeti.js"></script>
@@ -31,7 +34,8 @@
 				</div>
 			</div>
 			<section class="menuContent">
-				<img src="img/REVERSEr.png" alt="loading icon" class="loadingCard">
+				<!--img src="img/REVERSEr.png" alt="loading icon" class="loadingCard"-->
+				<div class="cardsize-small loadingCard"><div class="cardsprite card-REVERSEr" alt="loading icon"></div></div>
 			</section>
 		</div>
 
@@ -207,7 +211,8 @@
 				<div>¡Defiéndete!</div>
 			</div>
 			<div class="mainCardContainer">
-				<img id="currentCard">
+				<!--img id="currentCard"-->
+				<div class="cardsize-big" id="currentCardDiv"><div class="cardsprite card-SKIP" id="currentCardSprite"></div></div>
 			</div>
 			<div class="logContainer" id="logsDiv">
 				Es el turno de alguien.
@@ -217,7 +222,8 @@
 					<!--img class="cardInDeck" src="img/examplecard.png"-->
 				</div>
 				<div class="centerAlign">
-					<img id="addCard" src="img/add.png">
+					<!--img id="addCard" src="img/add.png"-->
+					<div class="cardsize-small" id="addCard"><div class="cardsprite card-ADD"></div></div>
 				</div>
 			</div>
 		</div>
@@ -262,10 +268,14 @@
 			<div id='colorWindow' class="open">
 				<h1 id='colorTitle'>Elige un color</h1>
 				<div id='colorContent'>
-					<img src="img/COLORr.png" id="colorCardRed">
+					<div class="cardsize-smaller" id="colorCardRed"><div class="cardsprite card-COLORr"></div></div>
+					<div class="cardsize-smaller" id="colorCardGreen"><div class="cardsprite card-COLORg"></div></div>
+					<div class="cardsize-smaller" id="colorCardBlue"><div class="cardsprite card-COLORb"></div></div>
+					<div class="cardsize-smaller" id="colorCardYellow"><div class="cardsprite card-COLORy"></div></div>
+					<!--img src="img/COLORr.png" id="colorCardRed">
 					<img src="img/COLORg.png" id="colorCardGreen">
 					<img src="img/COLORb.png" id="colorCardBlue">
-					<img src="img/COLORy.png" id="colorCardYellow">
+					<img src="img/COLORy.png" id="colorCardYellow"-->
 				</div>
 			</div>
 		</div>
