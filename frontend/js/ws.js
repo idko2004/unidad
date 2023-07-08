@@ -25,6 +25,7 @@ function connectToServer()
 				}
 			}
 		});
+		return;
 	}
 
 	ws.addEventListener('open', function()
