@@ -147,7 +147,7 @@ function newTable()
 		'+1r', '+1g', '+1b', '+1y',
 		'+6r', '+6g', '+6b', '+6y',
 		'BLANKr', 'BLANKg', 'BLANKb', 'BLANKy',
-		/*'INTERCHANGEr', 'INTERCHANGEg', 'INTERCHANGEb', 'INTERCHANGEy',*/
+		'INTERCHANGEr', 'INTERCHANGEg', 'INTERCHANGEb', 'INTERCHANGEy',
 		'COLORr', 'COLORg', 'COLORb', 'COLORy',
 	];
 

@@ -15,7 +15,8 @@ const msgValues =
 	colorChanged: 'colorChanged',
 	interchangeDecks: 'interchangeDecks',
 	oneCard: 'oneCard',
-	inactive: 'inactive'
+	inactive: 'inactive',
+	interchangeCards: 'interchangeCards'
 }
 
 const messages =
@@ -33,7 +34,8 @@ const messages =
 	colorChanged: '%username% cambió el color a %color%',
 	interchangeDecks: '%username% intercambió mazos con %victim%',
 	oneCard: '¡A %username% SOLO LE QUEDA UNA CARTA!',
-	inactive: '%username% está inactivo'
+	inactive: '%username% está inactivo',
+	interchangeCards: '%player1% y %player2% han intercambiado una carta'
 }
 
 const cardNames =
