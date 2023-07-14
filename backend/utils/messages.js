@@ -16,7 +16,8 @@ const msgValues =
 	interchangeDecks: 'interchangeDecks',
 	oneCard: 'oneCard',
 	inactive: 'inactive',
-	interchangeCards: 'interchangeCards'
+	interchangeCards: 'interchangeCards',
+	cardsForEveryone: 'cardsForEveryone'
 }
 
 const messages =
@@ -35,7 +36,8 @@ const messages =
 	interchangeDecks: '%username% intercambió mazos con %victim%',
 	oneCard: '¡A %username% SOLO LE QUEDA UNA CARTA!',
 	inactive: '%username% está inactivo',
-	interchangeCards: '%player1% y %player2% han intercambiado una carta'
+	interchangeCards: '%player1% y %player2% han intercambiado una carta',
+	cardsForEveryone: '¡+1 carta para todos!'
 }
 
 const cardNames =

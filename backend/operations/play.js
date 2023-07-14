@@ -669,6 +669,13 @@ function playPlusOneCard(dataObject, ws, room, messages)
 		cards.giveCardsToSomeone(roomID, room.order[i], 1);
 	}
 
+	messages.push(msg.getMessage(msg.msgValues.cardPlayed,
+	{
+		username,
+		cardname: msg.cardNames[play.card]
+	}));
+	messages.push(msg.getMessage(msg.msgValues.cardsForEveryone));
+	
 	game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
 	game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
 }
