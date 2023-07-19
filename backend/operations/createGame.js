@@ -94,11 +94,11 @@ module.exports = function(dataObject, ws)
 
 
 
-	ws.gameInfo =
+	ws.gameInfo.push(
 	{
 		username,
 		roomID
-	}
+	});
 
 
 

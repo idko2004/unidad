@@ -21,6 +21,7 @@ wss.on('connection', function(ws)
 	console.log('### ¡Cliente conectado! ###');
 
 	ws.isAlive = true;
+	ws.gameInfo = [];
 	wsClients.push(ws);
 	
 	ws.on('message', function(data)
@@ -57,25 +58,25 @@ function conectionClosed(ws, i)
 	console.log('### Una conexión cerrada ###');
 	if(ws.gameInfo !== undefined)
 	{
-		const roomID = ws.gameInfo.roomID;
-		const username = ws.gameInfo.username;
-		
-		console.log(`### ${roomID}, ${username} ###`);
-
-		const room = game.activeGames[roomID];
-		if(room === undefined) return;
-
-		const user = room.players[username];
-		if(user === undefined) return;
-
-		user.ws = null;
-
-		//Si es el turno de alguien desconectado pasar su turno
-		if(room.order[room.whoIsPlaying] === username)
+		for(let i = 0; i < ws.gameInfo.length; i++)
 		{
-			console.log('### Pasando turno');
-			game.utils.nextTurn(roomID);
-			game.utils.updatePlayers(roomID, [msg.getMessage(msg.msgValues.inactive, {username})]);
+			const roomID = ws.gameInfo[i].roomID;
+			const username = ws.gameInfo[i].username;
+			
+			console.log(`### ${roomID}, ${username} ###`);
+	
+			const room = game.activeGames[roomID];
+			if(room === undefined) return;
+	
+			game.activeGames[roomID].players[username].ws = null;
+	
+			//Si es el turno de alguien desconectado pasar su turno
+			if(room.order[room.whoIsPlaying] === username)
+			{
+				console.log('### Pasando turno');
+				game.utils.nextTurn(roomID);
+				game.utils.updatePlayers(roomID, [msg.getMessage(msg.msgValues.inactive, {username})]);
+			}
 		}
 	}
 

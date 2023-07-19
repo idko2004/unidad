@@ -50,7 +50,7 @@ module.exports = function(dataObject, ws)
 
 	//Encontrar la sala
 	roomID = roomID.trim();
-	const room = game.activeGames[roomID]
+	const room = game.activeGames[roomID];
 	if(room === undefined)
 	{
 		ws.send(JSON.stringify(
@@ -105,11 +105,11 @@ module.exports = function(dataObject, ws)
 
 
 
-	ws.gameInfo =
+	ws.gameInfo.push(
 	{
 		username,
 		roomID
-	}
+	});
 
 
 
@@ -120,8 +120,6 @@ module.exports = function(dataObject, ws)
 		roomID,
 		players
 	}));
-
-	console.log(game.activeGames);
 
 
 

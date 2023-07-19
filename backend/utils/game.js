@@ -231,10 +231,21 @@ function updatePlayers(roomID, messages) //Para enviar el estado de la partida a
 				currentCard: room.currentCard,
 				deck: player.deck
 			}));
+
+			//Borrar esta sala de su ws
+			let newGameInfo = [];
+			for(let j = 0; j < ws.gameInfo.length; j++)
+			{
+				if(ws.gameInfo[i].roomID !== roomID)
+				{
+					newGameInfo.push(ws.gameInfo[i]);
+				}
+			}
+			ws.gameInfo = newGameInfo;
 		}
 		clearTimeout(room.timeout);
 		delete activeGames[roomID];
-		console.log('Sala borrada', activeGames);
+		console.log('Sala borrada', Object.keys(activeGames));
 	}
 }
 
@@ -291,11 +302,44 @@ function updateTimeout(roomID)
 
 		room.players[username].inactive++;
 
-		if(room.players[username.inactive >= 3])
+		if(room.players[username].inactive >= 3)
 		{
 			//TODO: borrar el ws de alguien que lleva más de 3 turnos sin jugar
+			room.players[username].ws = null;
+		}
+
+		if(areAllPlayersInactive(roomID))
+		{
+			delete activeGames[roomID];
+			console.log('Sala borrada por inactividad', Object.keys(activeGames));
 		}
 	}, targetTimeoutTime);
+}
+
+
+
+function areAllPlayersInactive(roomID)
+{
+	const room = activeGames[roomID];
+	if(room === undefined)
+	{
+		console.log(colors.red('game.areAllPlayersInactive: roomID es undefined'));
+		return false;
+	}
+
+	const totalPlayers = room.order.length;
+	let inactivePlayers = 0;
+
+	for(let i = 0; i < totalPlayers; i++)
+	{
+		const playerName = room.order[i];
+		const player = room.players[playerName];
+		if(player.ws === null) inactivePlayers++;
+	}
+
+	console.log(`### jugadores inactivos en ${roomID}: ${inactivePlayers}/${totalPlayers}`);
+
+	return inactivePlayers >= totalPlayers;
 }
 
 
