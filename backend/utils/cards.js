@@ -32,7 +32,6 @@ const moreSpecialCards =
 	'+1r', '+1g', '+1b', '+1y',
 	'+6r', '+6g', '+6b', '+6y',
 	'BLANKr', 'BLANKg', 'BLANKb', 'BLANKy',
-	'INTERCHANGEr', 'INTERCHANGEg', 'INTERCHANGEb', 'INTERCHANGEy'
 ];
 
 const cardTypes =
@@ -57,10 +56,6 @@ const properties =
 	'BLANKg': { type: cardTypes.moreSpecial, color: 'g', value: 'BLANK' },
 	'BLANKb': { type: cardTypes.moreSpecial, color: 'b', value: 'BLANK' },
 	'BLANKy': { type: cardTypes.moreSpecial, color: 'y', value: 'BLANK' },
-	'INTERCHANGEr': { type: cardTypes.moreSpecial, color: 'r', value: 'INTERCHANGE' },
-	'INTERCHANGEg': { type: cardTypes.moreSpecial, color: 'g', value: 'INTERCHANGE' },
-	'INTERCHANGEb': { type: cardTypes.moreSpecial, color: 'b', value: 'INTERCHANGE' },
-	'INTERCHANGEy': { type: cardTypes.moreSpecial, color: 'y', value: 'INTERCHANGE' },
 	'+2r': { type: cardTypes.special, color: 'r', value: '+2' },
 	'+2g': { type: cardTypes.special, color: 'g', value: '+2' },
 	'+2b': { type: cardTypes.special, color: 'b', value: '+2' },
@@ -147,7 +142,6 @@ function newTable()
 		'+1r', '+1g', '+1b', '+1y',
 		'+6r', '+6g', '+6b', '+6y',
 		'BLANKr', 'BLANKg', 'BLANKb', 'BLANKy',
-		'INTERCHANGEr', 'INTERCHANGEg', 'INTERCHANGEb', 'INTERCHANGEy',
 		'COLORr', 'COLORg', 'COLORb', 'COLORy',
 	];
 
