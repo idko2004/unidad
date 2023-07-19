@@ -17,25 +17,5 @@ let canSkipDirectly = false;
 let canGrabACard = true;
 let defendTextActive = false;
 
-let messageLog = [];
-
 const remSize = parseFloat(getComputedStyle(document.body).fontSize);
 
-/*floatingWindow(
-{
-	title: 'ola',
-	text: 'patata',
-	buttons:
-	[
-		{
-			text: 'Cancelar',
-			primary: false,
-			callback: closeWindow
-		},
-		{
-			text: 'Aceptar',
-			primary: true,
-			callback: closeWindow
-		}
-	]
-});*/
