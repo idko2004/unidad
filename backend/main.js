@@ -1,5 +1,9 @@
+const env = require('./utils/env');
+
+const gamePort = env.GAME_PORT || 8765;
+
 console.log('Iniciando servidor');
-console.log(`\nDirección IP local: ${require('ip').address()}:8888\n`);
+console.log(`\nDirección IP local: ${require('ip').address()}:${gamePort}\n`);
 console.log(new Date().toString());
 console.log('\nPROHIBIDO MIRAR ESTA PANTALLA DURANTE UNA PARTIDA, ES TRAMPA\n');
 
@@ -13,7 +17,7 @@ let wsClients = [];
 
 const wss = new WebSocket.Server(
 {
-	port: 8888
+	port: gamePort
 });
 
 wss.on('connection', function(ws)
@@ -51,6 +55,15 @@ setInterval(function()
 		wsClients[i].isAlive = false;
 		wsClients[i].send('Ping!');
 	}
+
+	//Rehacer la array quitando los undefineds que dejó conetionClosed
+	let newClientsArray = [];
+	for(let i = 0; i < wsClients.length; i++)
+	{
+		if(wsClients[i] === undefined) continue;
+		newClientsArray.push(wsClients[i]);
+	}
+	wsClients = newClientsArray;
 }, 30_000);
 
 function conectionClosed(ws, i)
@@ -81,13 +94,5 @@ function conectionClosed(ws, i)
 	}
 
 	wsClients[i] = undefined;
-	let newClientsArray = [];
-	for(let i = 0; i < wsClients.length; i++)
-	{
-		if(wsClients[i] === undefined) continue;
-		newClientsArray.push(wsClients[i]);
-	}
-	wsClients = newClientsArray;
-
 	ws.terminate();
 }

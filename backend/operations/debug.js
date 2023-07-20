@@ -1,10 +1,17 @@
-const debugAllowed = true;
+const env = require('../utils/env');
+
+const debugAllowed = env.DEBUG || '0';
 
 const game = require('../utils/game');
 
 module.exports = function(dataObject, ws)
 {
-	if(!debugAllowed) return;
+	if(debugAllowed !== '1')
+	{
+		ws.send(JSON.stringify({operation: 'debug', debug: 'debug is not allowed'}));
+		console.log('Debug is not allowed', debugAllowed);
+		return;
+	}
 	/*
 	Requisitos:
 	{
@@ -15,6 +22,7 @@ module.exports = function(dataObject, ws)
 	switch(dataObject.debug)
 	{
 		default:
+			console.log('invalid debug type');
 			ws.send(JSON.stringify(
 			{
 				operation: 'debug',
@@ -23,6 +31,7 @@ module.exports = function(dataObject, ws)
 			break;
 
 		case 'activeGames':
+			console.log('sending active games');
 			ws.send(JSON.stringify(
 			{
 				operation: 'debug',
