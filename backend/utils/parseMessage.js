@@ -36,6 +36,7 @@ const play = require('../operations/play');
 const grabCard = require('../operations/grabCard');
 const skip = require('../operations/skip');
 const getCardProperties = require('../operations/getCardProperties');
+const debug = require('../operations/debug');
 
 function parseOperation(dataObject, ws)
 {
@@ -75,6 +76,10 @@ function parseOperation(dataObject, ws)
 
 		case 'getCardProperties':
 			getCardProperties(dataObject, ws);
+			break;
+
+		case 'debug':
+			debug(dataObject, ws);
 			break;
 	}
 }
