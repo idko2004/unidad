@@ -1,4 +1,4 @@
-const onlineUrl = 'ws://localhost:8888';
+const onlineUrl = 'ws://localhost:8765';
 let url;
 
 let connected = false;

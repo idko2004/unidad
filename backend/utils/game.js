@@ -274,7 +274,7 @@ function changeDirection(roomID)
 
 
 
-let targetTimeoutTime = 60_000;
+let targetTimeoutTime = 60000;
 function updateTimeout(roomID)
 {
 	if(roomID === undefined)
@@ -324,38 +324,12 @@ function updateTimeout(roomID)
 			room.maxPlayers--;
 		}
 
-		if(areAllPlayersInactive(roomID))
+		if(room.order.length <= 1)
 		{
 			delete activeGames[roomID];
 			console.log('### Sala borrada por inactividad', Object.keys(activeGames));
 		}
 	}, targetTimeoutTime);
-}
-
-
-
-function areAllPlayersInactive(roomID)
-{
-	const room = activeGames[roomID];
-	if(room === undefined)
-	{
-		console.log(colors.red('game.areAllPlayersInactive: roomID es undefined'));
-		return false;
-	}
-
-	const totalPlayers = room.order.length;
-	let inactivePlayers = 0;
-
-	for(let i = 0; i < totalPlayers; i++)
-	{
-		const playerName = room.order[i];
-		const player = room.players[playerName];
-		if(player.ws === null) inactivePlayers++;
-	}
-
-	console.log(`### jugadores inactivos en ${roomID}: ${inactivePlayers}/${totalPlayers}`);
-
-	return inactivePlayers >= totalPlayers;
 }
 
 

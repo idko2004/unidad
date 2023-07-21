@@ -44,7 +44,7 @@ setInterval(function()
 	console.log('### Llegó la hora de pinguear ###');
 	for(let i = 0; i < wsClients.length; i++)
 	{
-		console.log('### Está vivo:', wsClients[i].isAlive);
+		console.log('### Está vivo:', wsClients[i].isAlive, wsClients[i].gameInfo);
 
 		if(!wsClients[i].isAlive)
 		{
