@@ -304,14 +304,30 @@ function updateTimeout(roomID)
 
 		if(room.players[username].inactive >= 3)
 		{
-			//TODO: borrar el ws de alguien que lleva más de 3 turnos sin jugar
-			room.players[username].ws = null;
+			console.log(`### Jugador ${username} eliminado de la sala ${roomID}`);
+
+			//Eliminar el jugador del orden de turnos
+			room.order[whoIsPlaying] = undefined;
+			let newOrder = [];
+			for(let i = 0; i < room.order.length; i++)
+			{
+				if(room.order[i] !== undefined) newOrder.push(room.order[i]);
+			}
+			room.order = newOrder;
+
+			//Poner sus cartas en la mesa
+			room.table.push(...room.players[username].deck);
+
+			//Eliminar el perfil del jugador de esta sala
+			delete room.players[username];
+
+			room.maxPlayers--;
 		}
 
 		if(areAllPlayersInactive(roomID))
 		{
 			delete activeGames[roomID];
-			console.log('Sala borrada por inactividad', Object.keys(activeGames));
+			console.log('### Sala borrada por inactividad', Object.keys(activeGames));
 		}
 	}, targetTimeoutTime);
 }
