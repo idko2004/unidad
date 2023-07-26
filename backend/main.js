@@ -12,8 +12,8 @@ const WebSocket = require('ws');
 const parseMessage = require('./utils/parseMessage');
 const game = require('./utils/game');
 const msg = require('./utils/messages');
+const clients = require('./utils/wsClients');
 
-let wsClients = [];
 
 const wss = new WebSocket.Server(
 {
@@ -26,7 +26,7 @@ wss.on('connection', function(ws)
 
 	ws.isAlive = true;
 	ws.gameInfo = [];
-	wsClients.push(ws);
+	clients.wsClients.push(ws);
 	
 	ws.on('message', function(data)
 	{
@@ -42,28 +42,28 @@ wss.on('connection', function(ws)
 setInterval(function()
 {
 	console.log('### Llegó la hora de pinguear ###');
-	for(let i = 0; i < wsClients.length; i++)
+	for(let i = 0; i < clients.wsClients.length; i++)
 	{
-		console.log('### Está vivo:', wsClients[i].isAlive, wsClients[i].gameInfo);
+		console.log('### Está vivo:', clients.wsClients[i].isAlive, clients.wsClients[i].gameInfo);
 
-		if(!wsClients[i].isAlive)
+		if(!clients.wsClients[i].isAlive)
 		{
-			conectionClosed(wsClients[i], i);
+			conectionClosed(clients.wsClients[i], i);
 			continue;
 		}
 
-		wsClients[i].isAlive = false;
-		wsClients[i].send('Ping!');
+		clients.wsClients[i].isAlive = false;
+		clients.wsClients[i].send('Ping!');
 	}
 
 	//Rehacer la array quitando los undefineds que dejó conetionClosed
 	let newClientsArray = [];
-	for(let i = 0; i < wsClients.length; i++)
+	for(let i = 0; i < clients.wsClients.length; i++)
 	{
-		if(wsClients[i] === undefined) continue;
-		newClientsArray.push(wsClients[i]);
+		if(clients.wsClients[i] === undefined) continue;
+		newClientsArray.push(clients.wsClients[i]);
 	}
-	wsClients = newClientsArray;
+	clients.wsClients = newClientsArray;
 }, 30_000);
 
 function conectionClosed(ws, i)
@@ -93,6 +93,6 @@ function conectionClosed(ws, i)
 		}
 	}
 
-	wsClients[i] = undefined;
+	clients.wsClients[i] = undefined;
 	ws.terminate();
 }

@@ -3,6 +3,7 @@ const env = require('../utils/env');
 const debugAllowed = env.DEBUG || '0';
 
 const game = require('../utils/game');
+const clients = require('../utils/wsClients');
 
 module.exports = function(dataObject, ws)
 {
@@ -36,6 +37,15 @@ module.exports = function(dataObject, ws)
 			{
 				operation: 'debug',
 				debug: game.activeGames
+			}));
+			break;
+
+		case 'wsclients':
+			console.log('sending active clients');
+			ws.send(JSON.stringify(
+			{
+				operation: 'debug',
+				debug: clients.wsClients
 			}));
 			break;
 	}
