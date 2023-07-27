@@ -1,9 +1,12 @@
-const env = require('./utils/env');
+const vars = require('./utils/env');
 
-const gamePort = env.GAME_PORT || 8765;
+const gamePort = vars.env.GAME_PORT || 8765;
 
 console.log('Iniciando servidor');
-console.log(`\nDirección IP local: ${require('ip').address()}:${gamePort}\n`);
+
+vars.global.gameServer = `${require('ip').address()}:${gamePort}`;
+console.log(`\nServidor del juego: ${vars.global.gameServer}\n`);
+
 console.log(new Date().toString());
 console.log('\nPROHIBIDO MIRAR ESTA PANTALLA DURANTE UNA PARTIDA, ES TRAMPA\n');
 
@@ -96,3 +99,11 @@ function conectionClosed(ws, i)
 	clients.wsClients[i] = undefined;
 	ws.terminate();
 }
+
+
+
+const httpServer = require('./http/server');
+
+const filesServer = vars.env.FILES_SERVER || "1";
+
+if(filesServer === "1") httpServer.startServer();

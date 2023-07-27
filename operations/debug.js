@@ -1,6 +1,6 @@
-const env = require('../utils/env');
+const vars = require('../utils/env');
 
-const debugAllowed = env.DEBUG || '0';
+const debugAllowed = vars.env.DEBUG || '0';
 
 const game = require('../utils/game');
 const clients = require('../utils/wsClients');
