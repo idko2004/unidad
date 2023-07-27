@@ -38,6 +38,8 @@ node main.js
 ```
 **En la terminal deberán salir instrucciones sobre como conectarse con el navegador.**
 
+**Es necesario que todos estén en la misma red wifi para jugar.**
+
 ## Variables de entorno
 Se puede crear un archivo `.env` para definir variables de entorno.
 
