@@ -1,6 +1,18 @@
 let ws;
 
-changeMenus('server');
+autoconnect();
+
+function autoconnect()
+{
+	const gameserver = document.body.getAttribute('gameserver');
+	if(gameserver === null) changeMenus('server');
+	else
+	{
+		url = `ws://${gameserver}`;
+		connectToServer();
+	}
+}
+
 
 function connectToServer()
 {
@@ -49,7 +61,7 @@ function connectToServer()
 				callback: async function()
 				{
 					await closeWindow();
-					location.reload();
+					changeMenus('server');
 				}
 			}
 		});
