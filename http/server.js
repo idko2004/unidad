@@ -88,6 +88,17 @@ function startServer()
 	}).listen(httpPort);
 
 	console.log(colors.yellow(`Servidor http: ${vars.global.filesServer}\n`));
+
+	const help = colors.green('CÓMO CONECTARSE:\n================\n')
+		+ '\nMÉTODO 1:\n=========\n'
+		+ `- En la barra de direcciones de tu navegador escribe: ${vars.global.filesServer}\n`
+		+ '\nMÉTODO 2:\n=========\n'
+		+ '- Ve al sitio web "idko.infinityfreeapp.com/unidad"\n'
+		+ '- En el menú "Elegir tipo de servidor" elige "Servidor local"\n'
+		+ `- Escribe en el campo de texto: ${vars.global.gameServer}\n`
+		+ colors.green('================');
+
+	console.log(help);
 }
 
 
@@ -111,7 +122,7 @@ function getFilePath(reqpath)
 	if(reqpath === '/') reqpath = '/index.html';
 
 	const fullPath = STATIC_PATH + reqpath;
-	console.log('fullPath', fullPath);
+	//console.log('fullPath', fullPath);
 
 	return fullPath;
 }
