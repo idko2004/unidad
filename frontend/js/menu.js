@@ -54,6 +54,7 @@ document.getElementById('onlineServerButton').addEventListener('click', function
 	url = onlineUrl;
 	changeMenus('loading');
 	connectToServer();
+	updateServerLabel(null);
 });
 
 document.getElementById('localServerButton').addEventListener('click', function()
@@ -63,13 +64,14 @@ document.getElementById('localServerButton').addEventListener('click', function(
 
 document.getElementById('connectCustomServerButton').addEventListener('click', function()
 {
-	const input = document.getElementById('customUrlField').value;
+	const input = document.getElementById('customUrlField').value.trim();
 
 	changeMenus('loading');
 
 	url = `ws://${input}`;
 
 	connectToServer();
+	updateServerLabel(input);
 });
 
 document.getElementById('customServerBackButton').addEventListener('click', function()
@@ -104,7 +106,17 @@ document.getElementById('createGameBack').addEventListener('click', function()
 document.getElementById('searchGameBack').addEventListener('click', function()
 {
 	changeMenus('main');
-})
+});
+
+function updateServerLabel(server)
+{
+	if(server === null) document.getElementById('serverLabelContainer').hidden = true;
+	else
+	{
+		document.getElementById('serverLabelContainer').hidden = false;
+		document.getElementById('serverLabel').innerText = `Conectado al servidor ${server}`;
+	}
+}
 
 //
 //	SEARCH FOR GAME

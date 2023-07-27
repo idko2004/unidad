@@ -10,6 +10,7 @@ function autoconnect()
 	{
 		url = `ws://${gameserver}`;
 		connectToServer();
+		updateServerLabel(gameserver);
 	}
 }
 
