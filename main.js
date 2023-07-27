@@ -1,14 +1,15 @@
 const vars = require('./utils/env');
+const colors = require('colors');
 
 const gamePort = vars.env.GAME_PORT || 8765;
 
 console.log('Iniciando servidor');
 
 vars.global.gameServer = `${require('ip').address()}:${gamePort}`;
-console.log(`\nServidor del juego: ${vars.global.gameServer}\n`);
+console.log(colors.yellow(`\nServidor del juego: ${vars.global.gameServer}\n`));
 
 console.log(new Date().toString());
-console.log('\nPROHIBIDO MIRAR ESTA PANTALLA DURANTE UNA PARTIDA, ES TRAMPA\n');
+console.log(colors.red('\nPROHIBIDO MIRAR ESTA PANTALLA DURANTE UNA PARTIDA, ES TRAMPA\n'));
 
 const WebSocket = require('ws');
 

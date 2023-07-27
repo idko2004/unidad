@@ -2,6 +2,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const colors = require('colors');
 
 const vars = require('../utils/env');
 
@@ -86,7 +87,7 @@ function startServer()
 
 	}).listen(httpPort);
 
-	console.log(`Servidor del juego: ${vars.global.filesServer}\n`);
+	console.log(colors.yellow(`Servidor del juego: ${vars.global.filesServer}\n`));
 }
 
 
