@@ -1,5 +1,5 @@
 # Unidad
-Unidad es un juego parecido al UNO, pero con otras regas, de hecho, es posible que algunas ya te las conozcas, porque nadie juega al UNO con las reglas oficiales.
+Unidad es un juego parecido al UNO, pero con otras reglas, de hecho, es posible que algunas ya te las conozcas, porque nadie juega al UNO con las reglas oficiales.
 
 Puedes jugar a Unidad directamente en el sitio web [idko.infinityfreeapp.com/unidad](http://idko.infinityfreeapp.com/unidad/index.html) o puedes correr tu propia instancia.
 
@@ -9,7 +9,7 @@ Es necesario tener instaladas las siguientes dependencias:
 - npm
 - [git (opcional)](https://git-scm.com/)
 
-Para instalar node.js y npm, es recomendable utilizar [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) en linux, o [nvs](https://github.com/jasongin/nvs#setup) en Windows.
+Para instalar node.js y npm, es recomendable utilizar [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) en Linux, o [nvs](https://github.com/jasongin/nvs#setup) en Windows.
 ### 1. Clonar el repositorio
 Puedes clonar el repositorio usando git
 ```
@@ -18,14 +18,16 @@ git clone https://github.com/idko2004/unidad.git
 O puedes descargar un zip con el botón verde de arriba que dice "code".
 
 ### 2. Instalar dependencias
-Abre una terminal o consola en la carpeta del repositorio. (En windows, es posible abrir una consola escribiendo cmd en la barra de direcciones)
+Abre una terminal o consola en la carpeta del repositorio. 
+
+> _(En windows, es posible abrir una consola escribiendo `cmd` en la barra de direcciones)_
 
 Ejecuta el comando:
 ```
 npm install
 ```
 
-### 3. Ejecutar el servidor
+## Ejecutar el servidor
 Para ejecutar el servidor, abre una terminal y ejecuta:
 ```
 npm start
@@ -34,7 +36,7 @@ o
 ```
 node main.js
 ```
-En la terminal deberán salir instrucciones sobre como conectarse con el navegador.
+**En la terminal deberán salir instrucciones sobre como conectarse con el navegador.**
 
 ## Variables de entorno
 Se puede crear un archivo `.env` para definir variables de entorno.
