@@ -6,7 +6,7 @@ const colors = require('colors');
 
 const vars = require('../utils/env');
 
-const httpPort = vars.env.FILES_PORT || 8910;
+const httpPort = vars.env.HTTP_PORT || 8910;
 vars.global.filesServer = `${require('ip').address()}:${httpPort}`;
 
 const MIME_TYPES =
@@ -87,7 +87,7 @@ function startServer()
 
 	}).listen(httpPort);
 
-	console.log(colors.yellow(`Servidor del juego: ${vars.global.filesServer}\n`));
+	console.log(colors.yellow(`Servidor http: ${vars.global.filesServer}\n`));
 }
 
 

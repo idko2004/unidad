@@ -6,7 +6,7 @@ const gamePort = vars.env.GAME_PORT || 8765;
 console.log('Iniciando servidor');
 
 vars.global.gameServer = `${require('ip').address()}:${gamePort}`;
-console.log(colors.yellow(`\nServidor del juego: ${vars.global.gameServer}\n`));
+console.log(colors.yellow(`\nServidor ws: ${vars.global.gameServer}\n`));
 
 console.log(new Date().toString());
 console.log(colors.red('\nPROHIBIDO MIRAR ESTA PANTALLA DURANTE UNA PARTIDA, ES TRAMPA\n'));
@@ -26,7 +26,7 @@ const wss = new WebSocket.Server(
 
 wss.on('connection', function(ws)
 {
-	console.log('### ¡Cliente conectado! ###');
+	console.log('### ¡Cliente conectado!');
 
 	ws.isAlive = true;
 	ws.gameInfo = [];
@@ -45,10 +45,10 @@ wss.on('connection', function(ws)
 //Ping
 setInterval(function()
 {
-	console.log('### Llegó la hora de pinguear ###');
+	//console.log('### Llegó la hora de pinguear ###');
 	for(let i = 0; i < clients.wsClients.length; i++)
 	{
-		console.log('### Está vivo:', clients.wsClients[i].isAlive, clients.wsClients[i].gameInfo);
+		//console.log('### Está vivo:', clients.wsClients[i].isAlive, clients.wsClients[i].gameInfo);
 
 		if(!clients.wsClients[i].isAlive)
 		{
@@ -70,9 +70,9 @@ setInterval(function()
 	clients.wsClients = newClientsArray;
 }, 30_000);
 
-function conectionClosed(ws, i)
+function conectionClosed(ws, j)
 {
-	console.log('### Una conexión cerrada ###');
+	console.log('### Conexión cerrada', ws.gameInfo);
 	if(ws.gameInfo !== undefined)
 	{
 		for(let i = 0; i < ws.gameInfo.length; i++)
@@ -97,7 +97,7 @@ function conectionClosed(ws, i)
 		}
 	}
 
-	clients.wsClients[i] = undefined;
+	clients.wsClients[j] = undefined;
 	ws.terminate();
 }
 
@@ -105,6 +105,6 @@ function conectionClosed(ws, i)
 
 const httpServer = require('./http/server');
 
-const filesServer = vars.env.FILES_SERVER || "1";
+const filesServer = vars.env.HTTP_SERVER || "1";
 
 if(filesServer === "1") httpServer.startServer();
