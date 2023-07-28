@@ -234,14 +234,14 @@ function updatePlayers(roomID, messages) //Para enviar el estado de la partida a
 
 			//Borrar esta sala de su ws
 			let newGameInfo = [];
-			for(let j = 0; j < ws.gameInfo.length; j++)
+			for(let j = 0; j < player.ws.gameInfo.length; j++)
 			{
-				if(ws.gameInfo[i].roomID !== roomID)
+				if(player.ws.gameInfo[j].roomID !== roomID)
 				{
-					newGameInfo.push(ws.gameInfo[i]);
+					newGameInfo.push(player.ws.gameInfo[j]);
 				}
 			}
-			ws.gameInfo = newGameInfo;
+			player.ws.gameInfo = newGameInfo;
 		}
 		clearTimeout(room.timeout);
 		delete activeGames[roomID];
