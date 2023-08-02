@@ -16,6 +16,8 @@ function createCardsInDeck(deck)
 		div.classList.add('card-spawn');
 
 		div.setAttribute('card', deck[i]);
+		div.setAttribute('title', "Click derecho para ver información sobre la carta");
+
 		div.addEventListener('click', function(e)
 		{
 			clickACardInDeck(e);
@@ -25,6 +27,12 @@ function createCardsInDeck(deck)
 		{
 			cardAnimationEnd(e);
 		});
+
+		div.addEventListener('contextmenu', function(e)
+		{
+			e.preventDefault();
+			showCardDexInfo(e.target);
+		})
 
 		deckDiv.appendChild(div);
 	}
