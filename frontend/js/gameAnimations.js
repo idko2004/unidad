@@ -25,7 +25,7 @@ currentCardDiv.addEventListener('animationend', function(e)
 {
 	switch(e.animationName)
 	{
-		case 'cardDeleteAnim':
+		case 'currentCardOutAnim':
 			currentCardDiv.classList.remove('currentCard-out');
 			currentCardSprite.className = `cardsprite ${spriteClass[currentCard]}`;
 			currentCardDiv.classList.add('currentCard-in');

@@ -70,7 +70,7 @@
 
 .card-spawn
 {
-	animation: cardSpawnAnim 400ms ease-out 1;
+	animation: cardSpawnAnim 450ms cubic-bezier(.68,-0.55,.27,1.55) 1;
 }
 
 @keyframes cardSpawnAnim
@@ -78,25 +78,25 @@
 	0%
 	{
 		opacity: 0;
-		transform: rotate(-90deg);
+		transform: rotate(90deg) scale(0);
 	}
-
+	/*
 	60%
 	{
 		transform: rotate(10deg);
 	}
-
+	*/
 	100%
 	{
 		opacity: 1;
-		transform: rotate(0deg);
+		transform: rotate(0deg) scale(1);
 	}
 }
 
 
 .card-delete
 {
-	animation: cardDeleteAnim 250ms ease-out 1;
+	animation: cardDeleteAnim 200ms ease-out 1;
 }
 
 @keyframes cardDeleteAnim
@@ -110,12 +110,12 @@
 
 .currentCard-out
 {
-	animation: cardDeleteAnim 250ms ease-out 1;
+	animation: currentCardOutAnim 350ms cubic-bezier(.68,-0.55,.27,1.55) 1;
 }
 
 .currentCard-in
 {
-	animation: currentCardInAnim 250ms ease-out 1;
+	animation: currentCardInAnim 450ms cubic-bezier(.68,-0.55,.27,1.55) 1;
 }
 
 @keyframes currentCardInAnim
@@ -123,23 +123,32 @@
 	0%
 	{
 		opacity: 0;
-		transform: scale(0);
+		transform: scale(0) translateX(10rem) rotateZ(90deg);
 	}
-	60%
+	/*60%
 	{
 		opacity: 1;
-		transform: scale(1.2);
-	}
+		transform: scale(1.2) translateX(0);
+	}*/
 	100%
 	{
 		opacity: 1;
-		transform: scale(1);
+		transform: scale(1) translateX(0) rotateZ(0deg);
 	}
 }
 
-img
+@keyframes currentCardOutAnim
 {
-	image-rendering: pixelated;
+	0%
+	{
+		opacity: 1;
+		transform: scale(1) translateX(0) rotateZ(0deg);
+	}
+	100%
+	{
+		opacity: 0;
+		transform: scale(0) translateX(-10rem) rotateZ(-90deg);
+	}
 }
 
 .body-yourTurn
@@ -182,6 +191,7 @@ img
 	top: 0;
 	width: 100%;
 	pointer-events: none;
+	z-index: 1;
 }
 
 #defendContainer div
@@ -195,34 +205,38 @@ img
 
 .defendOn
 {
-	animation: defendAnimEnter 700ms cubic-bezier(.68,-0.55,.27,1.55) 1;
+	animation: defendAnimEnter 350ms ease-in-out 1;
 }
 
 @keyframes defendAnimEnter
 {
 	0%
 	{
-		transform: translateY(-15vh);
+		transform: scaleX(0);
+	}
+	70%
+	{
+		transform: scaleX(1.4);
 	}
 	100%
 	{
-		transform: translateY(0);
+		transform: scaleX(1);
 	}
 }
 
 .defendOff
 {
-	animation: defendAnimExit 700ms cubic-bezier(.68,-0.55,.27,1.55) 1;
+	animation: defendAnimExit 200ms ease-out 1;
 }
 
 @keyframes defendAnimExit
 {
 	0%
 	{
-		transform: translateY(0);
+		transform: scaleX(1);
 	}
 	100%
 	{
-		transform: translateY(-15vh);
+		transform: scaleX(0);
 	}
 }
