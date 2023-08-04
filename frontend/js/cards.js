@@ -102,7 +102,7 @@ const cardDex =
 	'0r':
 	{
 		name: "0 rojo",
-		text: "A pesar de su apariencia, esta carta es muy poderosa. Jugando esta carta puedes cambiar tu mazo con otro jugador. Es recomendable no cambiar tu mazo con nadie cuando vas a ganar."
+		text: "A pesar de su apariencia, esta carta es muy poderosa.\n\nJugando esta carta puedes cambiar tu mazo con otro jugador.\n\nEs recomendable no cambiar tu mazo con nadie cuando vas a ganar."
 	},
 	'1g':
 	{
@@ -152,7 +152,7 @@ const cardDex =
 	'0g':
 	{
 		name: "0 verde",
-		text: "A pesar de su apariencia, esta carta es muy poderosa. Jugando esta carta puedes cambiar tu mazo con otro jugador. Es recomendable no cambiar tu mazo con nadie cuando vas a ganar."
+		text: "A pesar de su apariencia, esta carta es muy poderosa.\n\nJugando esta carta puedes cambiar tu mazo con otro jugador.\n\nEs recomendable no cambiar tu mazo con nadie cuando vas a ganar."
 	},
 	'1b':
 	{
@@ -202,7 +202,7 @@ const cardDex =
 	'0b':
 	{
 		name: "0 azul",
-		text: "A pesar de su apariencia, esta carta es muy poderosa. Jugando esta carta puedes cambiar tu mazo con otro jugador. Es recomendable no cambiar tu mazo con nadie cuando vas a ganar."
+		text: "A pesar de su apariencia, esta carta es muy poderosa.\n\nJugando esta carta puedes cambiar tu mazo con otro jugador.\n\nEs recomendable no cambiar tu mazo con nadie cuando vas a ganar."
 	},
 	'1y':
 	{
@@ -252,157 +252,157 @@ const cardDex =
 	'0y':
 	{
 		name: "0 amarillo",
-		text: "A pesar de su apariencia, esta carta es muy poderosa. Jugando esta carta puedes cambiar tu mazo con otro jugador. Es recomendable no cambiar tu mazo con nadie cuando vas a ganar."
+		text: "A pesar de su apariencia,esta carta es muy poderosa.\n\nJugando esta carta puedes cambiar tu mazo con otro jugador.\n\nEs recomendable no cambiar tu mazo con nadie cuando vas a ganar."
 	},
 	'+2r':
 	{
 		name: "+2 rojo",
-		text: "Esta es una carta especial. Cuando se juega, añade 2 cartas al mazo del siguiente jugador. Puede evitarse jugando otro +2, un +4 o +6 del mismo color, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\nTambién puede usarse una carta bloqueo del mismo color para evitar completamente las cartas, o una carta reversa, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
+		text: "Esta es una carta especial.\n\nCuando se juega, añade 2 cartas al mazo del siguiente jugador.\n\nPuede evitarse jugando otro +2, un +4 o +6 del mismo color, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\n\nTambién puede usarse una carta bloqueo del mismo color para evitar completamente las cartas, o una carta reversa, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
 	},
 	'+2g':
 	{
 		name: "+2 verde",
-		text: "Esta es una carta especial. Cuando se juega, añade 2 cartas al mazo del siguiente jugador. Puede evitarse jugando otro +2, un +4 o +6 del mismo color, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\nTambién puede usarse una carta bloqueo del mismo color para evitar completamente las cartas, o una carta reversa, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
+		text: "Esta es una carta especial.\n\nCuando se juega, añade 2 cartas al mazo del siguiente jugador.\n\nPuede evitarse jugando otro +2, un +4 o +6 del mismo color, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\n\nTambién puede usarse una carta bloqueo del mismo color para evitar completamente las cartas, o una carta reversa, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
 	},
 	'+2b':
 	{
 		name: "+2 azul",
-		text: "Esta es una carta especial. Cuando se juega, añade 2 cartas al mazo del siguiente jugador. Puede evitarse jugando otro +2, un +4 o +6 del mismo color, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\nTambién puede usarse una carta bloqueo del mismo color para evitar completamente las cartas, o una carta reversa, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
+		text: "Esta es una carta especial.\n\nCuando se juega, añade 2 cartas al mazo del siguiente jugador.\n\nPuede evitarse jugando otro +2, un +4 o +6 del mismo color, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\n\nTambién puede usarse una carta bloqueo del mismo color para evitar completamente las cartas, o una carta reversa, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
 	},
 	'+2y':
 	{
 		name: "+2 amarillo",
-		text: "Esta es una carta especial. Cuando se juega, añade 2 cartas al mazo del siguiente jugador. Puede evitarse jugando otro +2, un +4 o +6 del mismo color, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\nTambién puede usarse una carta bloqueo del mismo color para evitar completamente las cartas, o una carta reversa del mismo color, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
+		text: "Esta es una carta especial.\n\nCuando se juega, añade 2 cartas al mazo del siguiente jugador.\n\nPuede evitarse jugando otro +2, un +4 o +6 del mismo color, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\n\nTambién puede usarse una carta bloqueo del mismo color para evitar completamente las cartas, o una carta reversa del mismo color, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
 	},
 	'+4':
 	{
 		name: "+4",
-		text: "Esta es una carta especial. Cuando se juega, añade 4 cartas al mazo del siguiente jugador. Puede evitarse jugando otro +4, un +2 o +6, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\nTambién puede usarse una carta bloqueo para evitar completamente las cartas, o una carta reversa, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
+		text: "Esta es una carta especial.\n\nCuando se juega, añade 4 cartas al mazo del siguiente jugador.\n\nPuede evitarse jugando otro +4, un +2 o +6, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\n\nTambién puede usarse una carta bloqueo para evitar completamente las cartas, o una carta reversa, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
 	},
 	'+6r':
 	{
 		name: "+6 rojo",
-		text: "Esta es una carta muy especial. Cuando se juega, añade 6 cartas al mazo del siguiente jugador. Puede evitarse jugando otro +6, un +2 del mismo color o un +4, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\nTambién puede usarse una carta bloqueo del mismo color para evitar completamente las cartas, o una carta reversa del mismo color, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
+		text: "Esta es una carta muy especial.\n\nCuando se juega, añade 6 cartas al mazo del siguiente jugador.\n\nPuede evitarse jugando otro +6, un +2 del mismo color o un +4, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\n\nTambién puede usarse una carta bloqueo del mismo color para evitar completamente las cartas, o una carta reversa del mismo color, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
 	},
 	'+6g':
 	{
 		name: "+6 verde",
-		text: "Esta es una carta muy especial. Cuando se juega, añade 6 cartas al mazo del siguiente jugador. Puede evitarse jugando otro +6, un +2 del mismo color o un +4, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\nTambién puede usarse una carta bloqueo del mismo color para evitar completamente las cartas, o una carta reversa del mismo color, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
+		text: "Esta es una carta muy especial.\n\nCuando se juega, añade 6 cartas al mazo del siguiente jugador.\n\nPuede evitarse jugando otro +6, un +2 del mismo color o un +4, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\n\nTambién puede usarse una carta bloqueo del mismo color para evitar completamente las cartas, o una carta reversa del mismo color, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
 	},
 	'+6b':
 	{
 		name: "+6 azul",
-		text: "Esta es una carta muy especial. Cuando se juega, añade 6 cartas al mazo del siguiente jugador. Puede evitarse jugando otro +6, un +2 del mismo color o un +4, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\nTambién puede usarse una carta bloqueo del mismo color para evitar completamente las cartas, o una carta reversa del mismo color, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
+		text: "Esta es una carta muy especial.\n\nCuando se juega, añade 6 cartas al mazo del siguiente jugador.\n\nPuede evitarse jugando otro +6, un +2 del mismo color o un +4, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\n\nTambién puede usarse una carta bloqueo del mismo color para evitar completamente las cartas, o una carta reversa del mismo color, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
 	},
 	'+6y':
 	{
 		name: "+6 amarillo",
-		text: "Esta es una carta muy especial. Cuando se juega, añade 6 cartas al mazo del siguiente jugador. Puede evitarse jugando otro +6, un +2 del mismo color o un +4, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\nTambién puede usarse una carta bloqueo del mismo color para evitar completamente las cartas, o una carta reversa del mismo color, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
+		text: "Esta es una carta muy especial.\n\nCuando se juega, añade 6 cartas al mazo del siguiente jugador.\n\nPuede evitarse jugando otro +6, un +2 del mismo color o un +4, en cuyo caso se sumarán al número de cartas que el próximo jugador debe recibir.\n\nTambién puede usarse una carta bloqueo del mismo color para evitar completamente las cartas, o una carta reversa del mismo color, haciendo que el jugador anterior reciba todas las cartas sin posibilidad de defenderse."
 	},
 	'BLOCKr':
 	{
 		name: "Bloqueo rojo",
-		text: "Esta es una carta especial. Cuando se juega, salta el turno del siguiente jugador, haciendo que juegue el que viene después de este. A no ser que quien juegue la carta esté a punto de recibir cartas a causa de un +2, +4 o +6, en cuyo caso no se salta el turno de nadie y, en su lugar, el efecto de las cartas +2, +4 o +6 se cancela."
+		text: "Esta es una carta especial.\n\nCuando se juega, salta el turno del siguiente jugador, haciendo que juegue el que viene después de este.\n\nSi quien juega la carta está a punto de recibir cartas a causa de un +2, +4 o +6, no se salta el turno de nadie y, en su lugar, el efecto de las cartas +2, +4 o +6 se cancela."
 	},
 	'BLOCKg':
 	{
 		name: "Bloqueo verde",
-		text: "Esta es una carta especial. Cuando se juega, salta el turno del siguiente jugador, haciendo que juegue el que viene después de este. A no ser que quien juegue la carta esté a punto de recibir cartas a causa de un +2, +4 o +6, en cuyo caso no se salta el turno de nadie y, en su lugar, el efecto de las cartas +2, +4 o +6 se cancela."
+		text: "Esta es una carta especial.\n\nCuando se juega, salta el turno del siguiente jugador, haciendo que juegue el que viene después de este.\n\nSi quien juega la carta está a punto de recibir cartas a causa de un +2, +4 o +6, no se salta el turno de nadie y, en su lugar, el efecto de las cartas +2, +4 o +6 se cancela."
 	},
 	'BLOCKb':
 	{
 		name: "Bloqueo azul",
-		text: "Esta es una carta especial. Cuando se juega, salta el turno del siguiente jugador, haciendo que juegue el que viene después de este. A no ser que quien juegue la carta esté a punto de recibir cartas a causa de un +2, +4 o +6, en cuyo caso no se salta el turno de nadie y, en su lugar, el efecto de las cartas +2, +4 o +6 se cancela."
+		text: "Esta es una carta especial.\n\nCuando se juega, salta el turno del siguiente jugador, haciendo que juegue el que viene después de este.\n\nSi quien juega la carta está a punto de recibir cartas a causa de un +2, +4 o +6, no se salta el turno de nadie y, en su lugar, el efecto de las cartas +2, +4 o +6 se cancela."
 	},
 	'BLOCKy':
 	{
 		name: "Bloqueo amarillo",
-		text: "Esta es una carta especial. Cuando se juega, salta el turno del siguiente jugador, haciendo que juegue el que viene después de este. A no ser que quien juegue la carta esté a punto de recibir cartas a causa de un +2, +4 o +6, en cuyo caso no se salta el turno de nadie y, en su lugar, el efecto de las cartas +2, +4 o +6 se cancela."
+		text: "Esta es una carta especial.\n\nCuando se juega, salta el turno del siguiente jugador, haciendo que juegue el que viene después de este.\n\nSi quien juega la carta está a punto de recibir cartas a causa de un +2, +4 o +6, no se salta el turno de nadie y, en su lugar, el efecto de las cartas +2, +4 o +6 se cancela."
 	},
 	'REVERSEr':
 	{
 		name: "Reversa rojo",
-		text: "Esta es una carta especial. Cuando se juega, cambia la dirección de los turnos, haciendo que vayan en sentido contrario. A no ser que quien juegue la carta esté a punto de recibir cartas a causa de un +2, +4 o +6, en cuyo caso no se cambia la dirección de los turnos y, en su lugar, el efecto de las cartas +2, +4 o +6 se aplican al jugador del turno anterior."
+		text: "Esta es una carta especial.\n\nCuando se juega, cambia la dirección de los turnos, haciendo que vayan en sentido contrario.\n\nSi quien juega la carta está a punto de recibir cartas a causa de un +2, +4 o +6, no se cambia la dirección de los turnos y, en su lugar, el efecto de las cartas +2, +4 o +6 se aplican al jugador del turno anterior."
 	},
 	'REVERSEg':
 	{
 		name: "Reversa verde",
-		text: "Esta es una carta especial. Cuando se juega, cambia la dirección de los turnos, haciendo que vayan en sentido contrario. A no ser que quien juegue la carta esté a punto de recibir cartas a causa de un +2, +4 o +6, en cuyo caso no se cambia la dirección de los turnos y, en su lugar, el efecto de las cartas +2, +4 o +6 se aplican al jugador del turno anterior."
+		text: "Esta es una carta especial.\n\nCuando se juega, cambia la dirección de los turnos, haciendo que vayan en sentido contrario.\n\nSi quien juega la carta está a punto de recibir cartas a causa de un +2, +4 o +6, no se cambia la dirección de los turnos y, en su lugar, el efecto de las cartas +2, +4 o +6 se aplican al jugador del turno anterior."
 	},
 	'REVERSEb':
 	{
 		name: "Reversa azul",
-		text: "Esta es una carta especial. Cuando se juega, cambia la dirección de los turnos, haciendo que vayan en sentido contrario. A no ser que quien juegue la carta esté a punto de recibir cartas a causa de un +2, +4 o +6, en cuyo caso no se cambia la dirección de los turnos y, en su lugar, el efecto de las cartas +2, +4 o +6 se aplican al jugador del turno anterior."
+		text: "Esta es una carta especial.\n\nCuando se juega, cambia la dirección de los turnos, haciendo que vayan en sentido contrario.\n\nSi quien juega la carta está a punto de recibir cartas a causa de un +2, +4 o +6, no se cambia la dirección de los turnos y, en su lugar, el efecto de las cartas +2, +4 o +6 se aplican al jugador del turno anterior."
 	},
 	'REVERSEy':
 	{
 		name: "Reversa amarillo",
-		text: "Esta es una carta especial. Cuando se juega, cambia la dirección de los turnos, haciendo que vayan en sentido contrario. A no ser que quien juegue la carta esté a punto de recibir cartas a causa de un +2, +4 o +6, en cuyo caso no se cambia la dirección de los turnos y, en su lugar, el efecto de las cartas +2, +4 o +6 se aplican al jugador del turno anterior."
+		text: "Esta es una carta especial.\n\nCuando se juega, cambia la dirección de los turnos, haciendo que vayan en sentido contrario.\n\nSi quien juega la carta está a punto de recibir cartas a causa de un +2, +4 o +6, no se cambia la dirección de los turnos y, en su lugar, el efecto de las cartas +2, +4 o +6 se aplican al jugador del turno anterior."
 	},
 	'COLOR':
 	{
 		name: "Cambiacolor",
-		text: "Esta es una carta especial. Permite elegir una carta de color para que el siguiente jugador tenga que jugar una carta de ese color o una carta blanca. Cuando se juega se cambia por un cambiacolor del color que hayas escogido."
+		text: "Esta es una carta especial.\n\nPermite elegir una carta de color para que el siguiente jugador tenga que jugar una carta de ese color o una carta blanca.\n\nCuando se juega se cambia por un cambiacolor del color que hayas escogido."
 	},
 	'COLORr':
 	{
 		name: "Cambiacolor rojo",
-		text: "Esta es una carta especial. Si se juega esta carta, el siguiente jugador tendrá que jugar una carta de color rojo o blanco."
+		text: "Esta es una carta especial.\n\nSi se juega esta carta, el siguiente jugador tendrá que jugar una carta de color rojo o blanco."
 	},
 	'COLORg':
 	{
 		name: "Cambiacolor verde",
-		text: "Esta es una carta especial. Si se juega esta carta, el siguiente jugador tendrá que jugar una carta de color verde o blanco."
+		text: "Esta es una carta especial.\n\nSi se juega esta carta, el siguiente jugador tendrá que jugar una carta de color verde o blanco."
 	},
 	'COLORb':
 	{
 		name: "Cambiacolor azul",
-		text: "Esta es una carta especial. Si se juega esta carta, el siguiente jugador tendrá que jugar una carta de color azul o blanco."
+		text: "Esta es una carta especial.\n\nSi se juega esta carta, el siguiente jugador tendrá que jugar una carta de color azul o blanco."
 	},
 	'COLORy':
 	{
 		name: "Cambiacolor amarillo",
-		text: "Esta es una carta especial. Si se juega esta carta, el siguiente jugador tendrá que jugar una carta de color amarillo o blanco."
+		text: "Esta es una carta especial.\n\nSi se juega esta carta, el siguiente jugador tendrá que jugar una carta de color amarillo o blanco."
 	},
 	'+1r':
 	{
 		name: "+1 rojo para todos",
-		text: "Esta es una carta muy especial. Cuando se juega, añade una carta al mazo de todos los demás jugadores sin posibilidad de defenderse."
+		text: "Esta es una carta muy especial.\n\nCuando se juega, añade una carta al mazo de todos los demás jugadores sin posibilidad de defenderse."
 	},
 	'+1g':
 	{
 		name: "+1 verde para todos",
-		text: "Esta es una carta muy especial. Cuando se juega, añade una carta al mazo de todos los demás jugadores sin posibilidad de defenderse."
+		text: "Esta es una carta muy especial.\n\nCuando se juega, añade una carta al mazo de todos los demás jugadores sin posibilidad de defenderse."
 	},
 	'+1b':
 	{
 		name: "+1 azul para todos",
-		text: "Esta es una carta muy especial. Cuando se juega, añade una carta al mazo de todos los demás jugadores sin posibilidad de defenderse."
+		text: "Esta es una carta muy especial.\n\nCuando se juega, añade una carta al mazo de todos los demás jugadores sin posibilidad de defenderse."
 	},
 	'+1y':
 	{
 		name: "+1 amarillo para todos",
-		text: "Esta es una carta muy especial. Cuando se juega, añade una carta al mazo de todos los demás jugadores sin posibilidad de defenderse."
+		text: "Esta es una carta muy especial.\n\nCuando se juega, añade una carta al mazo de todos los demás jugadores sin posibilidad de defenderse."
 	},
 	'BLANKr':
 	{
 		name: "Nada rojo",
-		text: "Esta es una carta muy especial, aunque... en realidad, no hace nada. Solo puede jugarse cuando la carta en la mesa es de color rojo."
+		text: "Esta es una carta muy especial, aunque... en realidad, no hace nada.\n\nSolo puede jugarse cuando la carta en la mesa es de color rojo."
 	},
 	'BLANKg':
 	{
 		name: "Nada verde",
-		text: "Esta es una carta muy especial, aunque... en realidad, no hace nada. Solo puede jugarse cuando la carta en la mesa es de color verde."
+		text: "Esta es una carta muy especial, aunque... en realidad, no hace nada.\n\nSolo puede jugarse cuando la carta en la mesa es de color verde."
 	},
 	'BLANKb':
 	{
 		name: "Nada azul",
-		text: "Esta es una carta muy especial, aunque... en realidad, no hace nada. Solo puede jugarse cuando la carta en la mesa es de color azul."
+		text: "Esta es una carta muy especial, aunque... en realidad, no hace nada.\n\nSolo puede jugarse cuando la carta en la mesa es de color azul."
 	},
 	'BLANKy':
 	{
 		name: "Nada amarillo",
-		text: "Esta es una carta muy especial, aunque... en realidad, no hace nada. Solo puede jugarse cuando la carta en la mesa es de color amarillo."
+		text: "Esta es una carta muy especial, aunque... en realidad, no hace nada.\n\nSolo puede jugarse cuando la carta en la mesa es de color amarillo."
 	}
 }
 
