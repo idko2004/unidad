@@ -49,6 +49,7 @@ Variables de entorno utilizadas:
 - `HTTP_SERVER`: Decide si activar o no el servidor HTTP encargado de enviar los archivos al navegador. Por defecto es 1.
 - `HTTP_PORT`: Puerto en el que se ejecuta el servidor HTTP. Por defecto es 8910.
 - `DEBUG`: Decide si está permitido enviar información debug a los clientes que la soliciten. Por defecto es 0.
+- `PING_RATE`: El tiempo en milisegundos entre pings a los clientes. Por defecto es 15000.
 
 ### Debug
 Los clientes pueden preguntar por información debug al servidor WebSocket si la variable de entorno está activada.

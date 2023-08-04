@@ -43,6 +43,7 @@ wss.on('connection', function(ws)
 });
 
 //Ping
+const pingRate = vars.env.PING_RATE || "15_000";
 setInterval(function()
 {
 	//console.log('### Llegó la hora de pinguear ###');
@@ -68,7 +69,7 @@ setInterval(function()
 		newClientsArray.push(clients.wsClients[i]);
 	}
 	clients.wsClients = newClientsArray;
-}, 30_000);
+}, parseInt(pingRate));
 
 function conectionClosed(ws, j)
 {

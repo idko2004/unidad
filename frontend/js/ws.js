@@ -151,5 +151,9 @@ function parseOperations(response)
 		case 'gameEnd':
 			gameEnd(response);
 			break;
+
+		case 'rejoined':
+			rejoined(response);
+			break;
 	}
 }

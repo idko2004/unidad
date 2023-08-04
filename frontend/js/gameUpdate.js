@@ -120,3 +120,16 @@ function errorPlaying(response)
 			break;
 	}
 }
+
+
+
+//Cuando sales de la partida y te vuelves a unir
+function rejoined(response)
+{
+	askForCardProperties();
+
+	roomID = response.roomID;
+	players = response.players;
+
+	startGame(response);
+}

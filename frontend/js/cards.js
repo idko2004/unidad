@@ -15,6 +15,21 @@ function receiveCardProperties(response)
 
 function validCard(card, currentCard)
 {
+	if(cardsProperties === undefined)
+	{
+		floatingWindow(
+		{
+			title: 'Espera un momento',
+			text: 'La parte encargada de las propiedades de las cartas está tardando un poco en llegar, seguro que todavía ni salió de su casa.',
+			button:
+			{
+				text: 'Vaya...',
+				callback: closeWindow
+			}
+		});
+		return;
+	}
+
 	const cardProps = cardsProperties[card];
 	const currentCardProps = cardsProperties[currentCard];
 

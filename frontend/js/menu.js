@@ -253,7 +253,7 @@ function joinedToGame(response)
 				floatingWindow(
 				{
 					title: 'Parece que llegas tarde',
-					text: 'La partida ya ha comenzado',
+					text: 'La partida ya ha comenzado\n\nSi ya estabas antes y te saliste, espera un momento y vuelve a intentarlo',
 					button:
 					{
 						text: ':(',
