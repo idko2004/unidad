@@ -133,6 +133,7 @@ module.exports = function(dataObject, ws)
 	room.players[username] =
 	{
 		deck: cards.generateDeck(roomID),
+		luck: 0.5,
 		ws
 	}
 

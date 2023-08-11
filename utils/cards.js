@@ -154,7 +154,16 @@ function newTable()
 	return table;
 }
 
-function getCard(roomID)
+function getCard(roomID, playerName)
+{
+	let card = getLuckyCard(roomID, playerName);
+	if(card === null) getTableCard(roomID);
+	return card;
+}
+
+
+
+function getTableCard(roomID)
 {
 	if(roomID === undefined)
 	{
@@ -196,6 +205,96 @@ function getCard(roomID)
 
 	return card;
 }
+
+
+
+function getLuckyCard(roomID, playerName) //Si no se va a obtener lucky card, devolver falso para obtener carta a través de getCard()
+{
+	if([roomID, playerName])
+	{
+		console.log(colors.red('cards.getLuckyCard: roomID o playerName es undefined'));
+		return null;
+	}
+
+	const room = game.activeGames[roomID];
+	if(room === undefined)
+	{
+		console.log(colors.red(`cards.getLuckyCard: ${roomID} is not a valid room`));
+		return null;
+	}
+
+	const player = room.players[playerName];
+	if(player === undefined)
+	{
+		console.log(colors.red(`cards.getLuckyCard: ${playerName} is not a valid player`));
+		return null;
+	}
+
+	const r = Math.random();
+	if(player.luck < r) return null; //No hubo suerte
+
+	const table = room.table;
+	if(table === undefined || !Array.isArray(table))
+	{
+		console.log(colors.red(`cards.getLuckyCard: ${roomID} doesn't have a valid table`));
+		return null;
+	}
+
+	const luckyThing = random.range(0, 3);
+	let card;
+	switch(luckyThing)
+	{
+		case 0: //Mismo color
+			const currentColor = properties[room.currentCard].color;
+			for(let i = 0; i < table.length; i++)
+			{
+				if(currentColor === properties[table[i]].value)
+				{
+					card = table[i];
+					break;
+				}
+			}
+			break;
+
+		case 1: //Mismo valor
+			const currentValue = properties[room.currentCard].value;
+			for(let i = 0; i < table.length; i++)
+			{
+				if(currentValue === properties[table[i]].value)
+				{
+					card = table[i];
+					break;
+				}
+			}
+			break;
+
+		case 2: //Carta especial o más especial
+			for(let i = 9; i < table.length; i++)
+			{
+				if([cardTypes.special, cardTypes.moreSpecial].includes(properties[table[i]].type))
+				{
+					card = table[i];
+					break;
+				}
+			}
+			break;
+	}
+
+	if(card === undefined) return null;
+	
+	let tableUpdate = deleteFromDeck(card, table);
+	if(tableUpdate.length < 3)
+	{
+		tableUpdate = newTable();
+		console.log('Mesa recargada');
+	}
+	room.table = tableUpdate;
+
+	game.utils.luck(roomID, playerName, false);
+	return card;
+}
+
+
 
 function getNormalCard()
 {

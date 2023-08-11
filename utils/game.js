@@ -30,12 +30,14 @@ const gamesExample =
 					'REVERSEg', //La carta de reversa verde
 					'COLOR', //Cambiacolor
 				],
+				luck: 0.5,
 				ws: null, //Aquí debería de ir el WebSocket de este usuario para poder enviarle información luego
 				inactive: 0 //Indica cuantos turnos ha pasado por inactividad
 			},
 			'fulanito':
 			{
 				deck: ['7g'],
+				luck: 0.5,
 				ws: null,
 				inactive: 0
 			}
@@ -274,6 +276,45 @@ function changeDirection(roomID)
 
 
 
+function luck(roomID, playerName, add)
+{
+	if([roomID, playerName].includes(undefined))
+	{
+		console.log(colors.red(`game.utils.luck: roomID o playerName es undefined`));
+		return;
+	}
+
+	if(typeof add !== 'boolean')
+	{
+		console.log(colors.red(`game.utils.luck: se espera que add sea un boolean, no un ${typeof add}`));
+		return;
+	}
+
+	const room = activeGames[roomID];
+	if(room === undefined)
+	{
+		console.log(colors.red(`game.utils.luck: ${roomID} no es una sala válida`));
+		return;
+	}
+
+	const player = room.players[playerName];
+	if(player === undefined)
+	{
+		console.log(colors.red(`game.utils.luck: ${playerName} no es un usuario válido`));
+		return;
+	}
+
+	const r = Math.random() * Math.random();
+
+	if(!add) r *= -1;
+
+	player.luck += r;
+
+	console.log(`Suerte de ${playerName}: ${player.luck} (+${r})`);
+}
+
+
+
 let targetTimeoutTime = 60000;
 function updateTimeout(roomID)
 {
@@ -343,6 +384,7 @@ module.exports =
 		nextTurn,
 		whosNext,
 		whoWasBefore,
-		changeDirection
+		changeDirection,
+		luck
 	}
 };
