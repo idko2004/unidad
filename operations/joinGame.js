@@ -69,14 +69,6 @@ module.exports = function(dataObject, ws)
 
 
 	//Si un jugador se ha desconectado de la partida y vuelve a conectarse antes de que su usuario de la mesa se borre.
-	try
-	{
-		console.log(room.players[username].ws);
-	}
-	catch
-	{
-		console.log('No se pudo loguear el ws del jugador');
-	}
 	if(room.players[username] !== undefined && room.players[username].ws === null)
 	{
 		console.log('Un jugador con el mismo nombre existe en la sala y no tiene ws, se va a asumir que es el mismo jugador e intentar reconectarlo');
@@ -101,6 +93,20 @@ module.exports = function(dataObject, ws)
 		}));
 		return;
 	}
+
+
+
+	//Ver si un jugador con el mismo nombre ya existe
+	if(players.includes(username))
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'joinedToGame',
+			error: 'invalidName'
+		}));
+		return;
+	}
+
 
 
 	// Ver si se puede entrar a la sala

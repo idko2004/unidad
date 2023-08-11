@@ -283,6 +283,23 @@ function joinedToGame(response)
 				});
 				break;
 
+			case 'invalidName':
+				floatingWindow(
+				{
+					title: 'Prueba con otro nombre',
+					text: 'Parece que hay un problema con tu nombre de usuario, o es posible que otro jugador ya lo haya utilizado.',
+					button:
+					{
+						text: 'Vaya...',
+						callback: async function()
+						{
+							await closeWindow();
+							changeMenus('findGame');
+						}
+					}
+				});
+				break;
+
 			default:
 				floatingWindow(
 				{
