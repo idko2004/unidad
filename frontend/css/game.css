@@ -13,6 +13,12 @@
 	float: right;
 }
 
+.spanButton:hover
+{
+	cursor: pointer;
+	background-color: var(--dark-red);
+}
+
 .mainCardContainer
 {
 	text-align: center;

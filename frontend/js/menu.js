@@ -366,3 +366,44 @@ document.getElementById('waitStartButton').addEventListener('click', function(e)
 		username
 	}));
 });
+
+///
+/// IN-GAME MENU
+///
+
+document.getElementById('gameMenu').addEventListener('click', function()
+{
+	floatingWindow(
+	{
+		title: 'Menú',
+		list:
+		[
+			{
+				text: 'Salir del juego',
+				callback: function()
+				{
+
+				}
+			},
+			{
+				text: 'Mi mazo se ha roto',
+				callback: function()
+				{
+
+				}
+			},
+			{
+				text: 'Acerca de Unidad',
+				callback: function()
+				{
+					
+				}
+			}
+		],
+		button:
+		{
+			text: 'Cerrar',
+			callback: closeWindow
+		}
+	});
+});
