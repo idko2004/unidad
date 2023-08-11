@@ -88,7 +88,7 @@ module.exports = function(dataObject, ws)
 	}
 
 	//Crear el deck del jugador, se crea a parte porque es necesario que el juego esté creado para poder obtener cartas
-	game.activeGames[roomID].players[username].deck = cards.generateDeck(roomID);
+	game.activeGames[roomID].players[username].deck = cards.generateDeck(roomID, username);
 	
 	console.log('Estado de los juegos', game.activeGames);
 	//console.log('Estado del usuario', game.activeGames[roomID].players[username]);

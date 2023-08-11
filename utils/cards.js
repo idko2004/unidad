@@ -352,12 +352,12 @@ function getCard(type)
 }
 */
 
-function generateDeck(roomID)
+function generateDeck(roomID, playerName)
 {
 	let deck = [];
 	for(let i = 0; i < 7; i++)
 	{
-		deck.push(getCard(roomID));
+		deck.push(getCard(roomID, playerName));
 	}
 	console.log('cards.generateDeck: deck generado', deck);
 	return deck;
@@ -456,13 +456,14 @@ function giveCardsToVictim(roomID, victim)
 	const cardsToVictim = game.activeGames[roomID].cardsToVictim;
 	for(let i = 0; i < cardsToVictim; i++)
 	{
-		newCards.push(getCard(roomID));
+		newCards.push(getCard(roomID, victim));
 	}
 	console.log('Cartas para la víctima', newCards);
 
 	game.activeGames[roomID].players[victim].deck.push(...newCards); //Añadir las cartas al mazo de la víctima
 	console.log('Mazo de la víctima', game.activeGames[roomID].players[victim].deck);
 	game.activeGames[roomID].cardsToVictim = 0; //Reiniciar el número de cartas para la siguiente víctima
+	game.utils.luck(roomID, victim, true);
 }
 
 
@@ -483,10 +484,11 @@ function giveCardsToSomeone(roomID, someone, howMany)
 	const newCards = [];
 	for(let i = 0; i < howMany; i++)
 	{
-		newCards.push(getCard(roomID));
+		newCards.push(getCard(roomID, someone));
 	}
 
 	game.activeGames[roomID].players[someone].deck.push(...newCards);
+	game.utils.luck(roomID, someone, true);
 }
 
 module.exports =
