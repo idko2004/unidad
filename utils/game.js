@@ -304,7 +304,7 @@ function luck(roomID, playerName, add)
 		return;
 	}
 
-	const r = Math.random() * Math.random();
+	let r = Math.random() * Math.random();
 
 	if(!add) r *= -1;
 

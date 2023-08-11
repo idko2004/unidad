@@ -157,7 +157,7 @@ function newTable()
 function getCard(roomID, playerName)
 {
 	let card = getLuckyCard(roomID, playerName);
-	if(card === null) getTableCard(roomID);
+	if(card === null) card = getTableCard(roomID);
 	return card;
 }
 
@@ -210,9 +210,9 @@ function getTableCard(roomID)
 
 function getLuckyCard(roomID, playerName) //Si no se va a obtener lucky card, devolver falso para obtener carta a través de getCard()
 {
-	if([roomID, playerName])
+	if([roomID, playerName].includes(undefined))
 	{
-		console.log(colors.red('cards.getLuckyCard: roomID o playerName es undefined'));
+		console.log(colors.yellow('cards.getLuckyCard: roomID o playerName es undefined'));
 		return null;
 	}
 
@@ -281,6 +281,7 @@ function getLuckyCard(roomID, playerName) //Si no se va a obtener lucky card, de
 	}
 
 	if(card === undefined) return null;
+	console.log('lucky');
 	
 	let tableUpdate = deleteFromDeck(card, table);
 	if(tableUpdate.length < 3)
@@ -290,7 +291,7 @@ function getLuckyCard(roomID, playerName) //Si no se va a obtener lucky card, de
 	}
 	room.table = tableUpdate;
 
-	game.utils.luck(roomID, playerName, false);
+	//game.utils.luck(roomID, playerName, false);
 	return card;
 }
 
@@ -463,7 +464,6 @@ function giveCardsToVictim(roomID, victim)
 	game.activeGames[roomID].players[victim].deck.push(...newCards); //Añadir las cartas al mazo de la víctima
 	console.log('Mazo de la víctima', game.activeGames[roomID].players[victim].deck);
 	game.activeGames[roomID].cardsToVictim = 0; //Reiniciar el número de cartas para la siguiente víctima
-	game.utils.luck(roomID, victim, true);
 }
 
 
@@ -488,7 +488,6 @@ function giveCardsToSomeone(roomID, someone, howMany)
 	}
 
 	game.activeGames[roomID].players[someone].deck.push(...newCards);
-	game.utils.luck(roomID, someone, true);
 }
 
 module.exports =
