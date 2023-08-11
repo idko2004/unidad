@@ -4,6 +4,7 @@ let url;
 let connected = false;
 
 let gameMaster = false;
+let masterKey;
 let players = [];
 let maxPlayers;
 

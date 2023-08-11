@@ -323,6 +323,7 @@ function joinedToGame(response)
 	roomID = response.roomID;
 	players = response.players;
 	document.getElementById('waitRoomID').innerText = response.roomID;
+	if(response.masterKey !== undefined) masterKey = response.masterKey;
 
 	for(let i = 0; i < response.players.length; i++)
 	{
