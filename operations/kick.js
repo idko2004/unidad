@@ -115,6 +115,22 @@ module.exports = function(dataObject, ws)
 
 
 
+	//Si no queda nadie en la sala simplemente borrarla
+	if(remainingPlayers.length === 0)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'playerKicked',
+			remainingPlayers: [],
+			nowYoureMaster: false
+		}));
+		delete game.activeGames[roomID];
+		console.log('Sala borrada porque todos fueron expulsados');
+		return;
+	}
+
+
+
 	//Si quien ha sido expulsado es gameMaster, asignar otro
 	if(whoToKick === room.master) room.master = remainingPlayers[0];
 
