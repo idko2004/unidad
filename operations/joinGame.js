@@ -2,6 +2,8 @@
 const game = require('../utils/game');
 const cards = require('../utils/cards');
 
+const rand = require('generate-key');
+
 module.exports = function(dataObject, ws)
 {
 	/*
@@ -81,10 +83,27 @@ module.exports = function(dataObject, ws)
 
 		room.players[username].ws = ws;
 
+		//Reasignar la clave
+		const keysKeys = Object.keys(room.keys);
+		const keysValues = Object.values(room.values);
+		let userKey;
+		
+		for(let i = 0; i < keysValues.length; i++)
+		{
+			if(keysValues[i] === username)
+			{
+				previousKey = keysKeys[i];
+				break;
+			}
+		}
+
+		if(userKey === undefined) userKey = rand.generateKey(7); //No debería de ocurrir, pero por si acaso
+
 		ws.send(JSON.stringify(
 		{
 			operation: 'rejoined',
 			roomID,
+			key: userKey,
 			players: room.order,
 			deck: room.players[username].deck,
 			currentCard: room.currentCard,
@@ -147,6 +166,12 @@ module.exports = function(dataObject, ws)
 
 
 
+	//Darle una clave al usuario
+	const key = rand.generateKey(7);
+	room.keys[key] = username;
+
+
+
 	ws.gameInfo.push(
 	{
 		username,
@@ -160,6 +185,7 @@ module.exports = function(dataObject, ws)
 	{
 		operation: 'joinedToGame',
 		roomID,
+		key,
 		players
 	}));
 
@@ -168,10 +194,10 @@ module.exports = function(dataObject, ws)
 	// Avisar a los demás jugadores que se ha unido alguien
 	for(let i = 0; i < players.length; i++)
 	{
-		const key = players[i];
-		if(key === username) continue;
+		const player = players[i];
+		if(player === username) continue;
 
-		const connection = room.players[key].ws;
+		const connection = room.players[player].ws;
 
 		connection.send(JSON.stringify(
 		{

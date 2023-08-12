@@ -8,7 +8,7 @@ module.exports = function(dataObject, ws)
 	{
 		operation: 'startGame',
 		roomID,
-		username
+		key
 	}
 	Enviar a todos:
 	{
@@ -20,15 +20,16 @@ module.exports = function(dataObject, ws)
 	*/
 
 	const roomID = dataObject.roomID;
-	const username = dataObject.username;
+	const key = dataObject.key;
 
-	if([roomID, username].includes(undefined))
+	if([roomID, key].includes(undefined))
 	{
 		ws.send(JSON.stringify(
 		{
 			operation: 'startGame',
 			error: 'badRequest'
 		}));
+		console.log('startGame: badRequest: no roomID or key');
 		return;
 	}
 
@@ -43,6 +44,21 @@ module.exports = function(dataObject, ws)
 			operation: 'startGame',
 			error: 'badRequest'
 		}));
+		return;
+	}
+
+
+
+	// Obtener el nombre de usuario y comprobar si está en la sala
+	const username = room.keys[key];
+	if(username === undefined)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'errorPlaying',
+			error: 'invalidRoom'
+		}));
+		console.log('errorPlaying: invalidRoom: el usuario no pertenece a la sala');
 		return;
 	}
 

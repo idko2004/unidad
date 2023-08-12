@@ -62,12 +62,11 @@ module.exports = function(dataObject, ws)
 
 	// Crear una partida
 	const table = cards.newTable();
-	const masterKey = rand.generateKey(7);
+	const key = rand.generateKey(7);
 
 	game.activeGames[roomID] =
 	{
 		master: username,
-		masterKey,
 		maxPlayers,
 		currentCard: cards.getNormalCard(),
 		letMorePlayersIn: true,
@@ -77,6 +76,10 @@ module.exports = function(dataObject, ws)
 		cardsToVictim: 0,
 		order: [],
 		table,
+		keys:
+		{
+			[key]: username
+		},
 		players:
 		{
 			[username]:
@@ -109,7 +112,7 @@ module.exports = function(dataObject, ws)
 	{
 		operation: 'obtainRoomID',
 		roomID,
-		masterKey,
+		key,
 		players:
 		[
 			username

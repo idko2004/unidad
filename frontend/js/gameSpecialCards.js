@@ -78,7 +78,7 @@ async function playColorCard(color)
 	{
 		operation: 'play',
 		roomID,
-		username,
+		key,
 		play:
 		{
 			card: 'COLOR',
@@ -132,7 +132,7 @@ function playZeroCard(change, card)
 	{
 		operation: 'play',
 		roomID,
-		username,
+		key,
 		play:
 		{
 			card,

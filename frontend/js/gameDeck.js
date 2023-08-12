@@ -74,7 +74,7 @@ function clickACardInDeck(e)
 				{
 					operation: 'play',
 					roomID,
-					username,
+					key,
 					play:
 					{
 						card

@@ -4,12 +4,12 @@ let url;
 let connected = false;
 
 let gameMaster = false;
-let masterKey;
 let players = [];
 let maxPlayers;
 
 let username;
 let roomID;
+let key;
 let currentCard;
 //let playerDeck = [];
 let canPlay = false;

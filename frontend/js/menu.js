@@ -321,9 +321,9 @@ function joinedToGame(response)
 	}
 
 	roomID = response.roomID;
+	key = response.key;
 	players = response.players;
 	document.getElementById('waitRoomID').innerText = response.roomID;
-	if(response.masterKey !== undefined) masterKey = response.masterKey;
 
 	for(let i = 0; i < response.players.length; i++)
 	{
@@ -381,7 +381,7 @@ document.getElementById('waitStartButton').addEventListener('click', function(e)
 	{
 		operation: 'startGame',
 		roomID,
-		username
+		key
 	}));
 });
 

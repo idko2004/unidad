@@ -9,7 +9,7 @@ module.exports = function(dataObject, ws)
 	Requisitos:
 	{
 		operation: 'grabCard',
-		username,
+		key,
 		roomID
 	}
 	Enviar a todos:
@@ -25,8 +25,8 @@ module.exports = function(dataObject, ws)
 
 	//Comprobar si tenemos todos los datos
 	const roomID = dataObject.roomID;
-	const username = dataObject.username;
-	if([roomID, username].includes(undefined))
+	const key = dataObject.key;
+	if([roomID, key].includes(undefined))
 	{
 		ws.send(JSON.stringify(
 		{
@@ -81,6 +81,22 @@ module.exports = function(dataObject, ws)
 
 
 
+	// Obtener el nombre de usuario y comprobar si está en la sala
+	const username = room.keys[key];
+	if(username === undefined)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'errorPlaying',
+			error: 'invalidRoom'
+		}));
+		console.log('errorPlaying: invalidRoom: el usuario no pertenece a la sala');
+		return;
+	}
+
+
+
+	/*
 	// Comprobar si el usuario es parte de la sala
 	if(!room.order.includes(username))
 	{
@@ -92,6 +108,7 @@ module.exports = function(dataObject, ws)
 		console.log('errorPlaying: invalidRoom: el usuario no pertenece a la sala');
 		return;
 	}
+	*/
 
 
 

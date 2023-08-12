@@ -5,7 +5,6 @@ const gamesExample =
 	'a1b2c3': //roomID
 	{
 		master: 'alguien', //Persona que creó la sala y controla el juego,
-		masterKey: 'VLV0CG8', //Código que se envía al master para que poder comprobar su autoridad al realizar ciertas operaciones, como eliminar jugadores de una sala.
 		maxPlayers: 4, //Cantidad de jugadores necesarios para iniciar una partida,
 		currentCard: '6b',
 		letMorePlayersIn: false,
@@ -15,11 +14,15 @@ const gamesExample =
 		cardsToVictim: 0, //Número de cartas que un jugador recibirá cuando no pueda defenderse de un +2 o +4
 		order: [ 'alguien', 'fulanito' ], //El orden en el que van a ir los turnos,
 		table: [ '7y' ], //Todas las cartas que hay en la mesa
+		keys: //Claves que los usuarios utilizan para autenticarse, se entrega una clave a cada uno al unirse a una partida o crear una
+		{
+			'VLV0CG8': 'alguien',
+			'yA3AiMd': 'fulanito'
+		},
 		players:
 		{
 			'alguien': //Nombre del jugador
 			{
-				key: 'yA3AiMf', //Clave que el jugador usa para enviar sus comandos
 				deck: //Cartas del jugador
 				[
 					'1r', //Uno rojo
@@ -38,7 +41,6 @@ const gamesExample =
 			},
 			'fulanito':
 			{
-				key: 'yA3AiMd',
 				deck: ['7g'],
 				luck: 0.5,
 				ws: null,

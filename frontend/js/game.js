@@ -48,7 +48,7 @@ document.getElementById('addCard').addEventListener('click', function()
 		{
 			operation: 'skip',
 			roomID,
-			username
+			key
 		}));
 		window.scroll({top: 0, behavior: 'smooth'});
 	}
@@ -58,7 +58,7 @@ document.getElementById('addCard').addEventListener('click', function()
 		{
 			operation: 'grabCard',
 			roomID,
-			username
+			key
 		}));
 	}
 });

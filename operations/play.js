@@ -11,7 +11,7 @@ module.exports = function(dataObject, ws)
 	Requisitos:
 	{
 		operation: 'play',
-		username,
+		key,
 		roomID,
 		play:
 		{
@@ -34,16 +34,16 @@ module.exports = function(dataObject, ws)
 
 	//Comprobar si tenemos todos los datos
 	const roomID = dataObject.roomID;
-	const username = dataObject.username;
+	const key = dataObject.key;
 	const play = dataObject.play;
-	if([roomID, username, play].includes(undefined))
+	if([roomID, key, play].includes(undefined))
 	{
 		ws.send(JSON.stringify(
 		{
 			operation: 'errorPlaying',
 			error: 'badRequest'
 		}));
-		console.log('errorPlaying: badRequest:', roomID, username, play);
+		console.log('errorPlaying: badRequest:', roomID, key, play);
 		return;
 	}
 
@@ -64,6 +64,23 @@ module.exports = function(dataObject, ws)
 
 
 
+	// Obtener nombre de usuario y comprobar si está en la sala
+	const username = room.keys[key];
+	if(username === undefined)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'errorPlaying',
+			error: 'invalidRoom'
+		}));
+		console.log('errorPlaying: invalidRoom: el usuario no pertenece a la sala');
+		return;
+	}
+	dataObject.username = username; //Para que otras funciones puedan acceder al nombre de usuario, antes el nombre de usuario estaba incluido en el dataObject directamente y algunas funciones esperan que esté ahí
+
+
+
+	/*
 	// Comprobar si el usuario es parte de la sala
 	if(!room.order.includes(username))
 	{
@@ -75,6 +92,7 @@ module.exports = function(dataObject, ws)
 		console.log('errorPlaying: invalidRoom: el usuario no pertenece a la sala');
 		return;
 	}
+	*/
 
 
 
