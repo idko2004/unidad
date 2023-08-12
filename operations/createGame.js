@@ -85,7 +85,7 @@ module.exports = function(dataObject, ws)
 			[username]:
 			{
 				deck: [],
-				luck: 0.5,
+				luck: 0.15,
 				ws
 			}
 		},
