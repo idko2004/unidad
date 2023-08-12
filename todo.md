@@ -2,4 +2,5 @@
 - [ ] Poder hechar a los jugadores de la sala
 - [x] Si dos jugadores con el mismo nombre entran a una sala se buguea
 - [x] Sistema de suerte
-- [ ] Que las acciones se realicen con claves en vez de nombres de usuario, cuando un jugador se une a la partida, se le entrega un código, y cada acción que quiera realizar debe estar acompañada de ese código en vez de su nombre de usuario.
+- [x] Que las acciones se realicen con claves en vez de nombres de usuario, cuando un jugador se une a la partida, se le entrega un código, y cada acción que quiera realizar debe estar acompañada de ese código en vez de su nombre de usuario.
+- [ ] Soplar.
