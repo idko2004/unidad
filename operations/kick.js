@@ -87,7 +87,8 @@ module.exports = function(dataObject, ws)
 
 
 	//Comprobar si a quién se quiere eliminar está en la sala
-	if(!room.order.includes(whoToKick))
+	let playersList = Object.keys(room.players);
+	if(!playersList.includes(whoToKick))
 	{
 		ws.send(JSON.stringify(
 		{
@@ -105,36 +106,37 @@ module.exports = function(dataObject, ws)
 
 
 
-	//Eliminar el perfil del jugador
-	delete game.activeGames[roomID].players[whoToKick];
-
-
-
-	//Eliminar el jugador de room.order
-	let newOrder = [];
-	for(let i = 0; i < room.order.length; i++)
+	//Rearmar la lista de jugadores que quedan
+	let remainingPlayers = [];
+	for(let i = 0; i < playersList.length; i++)
 	{
-		if(room.order[i] !== whoToKick) newOrder.push(room.order[i]);
+		if(playersList[i] !== whoToKick) remainingPlayers.push(playersList[i]);
 	}
-	room.order = newOrder;
 
 
 
 	//Si quien ha sido expulsado es gameMaster, asignar otro
-	if(whoToKick === room.master) room.master = room.order[0];
+	if(whoToKick === room.master) room.master = remainingPlayers[0];
 
 
 
 	//Responder a todos
-	for(let i = 0; i < room.order.length; i++)
+	for(let i = 0; i < playersList.length; i++)
 	{
-		room.players[room.order[i]].ws.send(JSON.stringify(
+		room.players[playersList[i]].ws.send(JSON.stringify(
 		{
 			operation: 'playerKicked',
-			remainingPlayers: room.order,
-			nowYoureMaster: room.order[i] === master
+			remainingPlayers,
+			nowYoureMaster: playersList[i] === room.master
 		}));
 	}
+
+
+
+	//Eliminar el perfil del jugador
+	delete game.activeGames[roomID].players[whoToKick];
+
+
 
 	console.log('Player kicked');
 }

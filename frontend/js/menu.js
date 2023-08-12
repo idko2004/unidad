@@ -1,3 +1,5 @@
+let currentMenu;
+
 function changeMenus(menu)
 {
 	document.getElementById('mainMenu').hidden = true;
@@ -8,6 +10,8 @@ function changeMenus(menu)
 	document.getElementById('serverMenu').hidden = true;
 	document.getElementById('localServerMenu').hidden = true;
 	document.getElementById('loadingScreen').hidden = true;
+
+	currentMenu = menu;
 
 	switch(menu)
 	{
@@ -345,6 +349,11 @@ function playerJoined(response)
 		document.getElementById('waitingPlayersText').hidden = true;
 		document.getElementById('waitStartButton').hidden = false;
 	}
+	else
+	{
+		document.getElementById('waitingPlayersText').hidden = false;
+		document.getElementById('waitStartButton').hidden = true;
+	}
 }
 
 function addPlayerToWaitingList(playerName)
@@ -363,10 +372,85 @@ function addPlayerToWaitingList(playerName)
 		const btnFloatRight = document.createElement('button');
 		btnFloatRight.classList.add('btnFloatRight');
 		btnFloatRight.innerText = '(X)';
+		btnFloatRight.setAttribute('kick', playerName);
+		
+		btnFloatRight.addEventListener('click', function(e)
+		{
+			e.target.innerText = '...';
+			const kick = e.target.getAttribute('kick');
+			if(kick === null)
+			{
+				floatingWindow(
+				{
+					title: 'Algo salió mal',
+					text: 'No se pudo expulsar a este jugador'
+				});
+				return;
+			}
+			else kickPlayer(kick);
+		});
+
 		playerInTheList.appendChild(btnFloatRight);
 	}
 
 	playersList.appendChild(playerInTheList);
+}
+
+let autoExpulsion = false; //Se vuelve true cuando te expulsas de la partida
+
+function kickPlayer(playerName)
+{
+	ws.send(JSON.stringify(
+	{
+		operation: 'kickPlayer',
+		key,
+		roomID,
+		kick: playerName
+	}));
+}
+
+function playerKicked(response)
+{
+	//players = response.remainingPlayers;
+	players = [];
+	gameMaster = response.nowYoureMaster;
+
+	if(!response.remainingPlayers.includes(username))
+	{
+		if(!autoExpulsion)
+		{
+			floatingWindow(
+			{
+				title: 'Te han expulsado',
+				text: 'El administrador te ha expulsado de la sala.',
+				button:
+				{
+					text: ':(',
+					callback: async function()
+					{
+						await closeWindow();
+						location.reload();
+					}
+				}
+			});
+			return;
+		}
+		else
+		{
+			location.reload();
+			return;
+		}
+	}
+
+	document.getElementById('playersList').innerHTML = '';
+
+	for(let i = 0; i < response.remainingPlayers.length; i++)
+	{
+		playerJoined(
+		{
+			username: response.remainingPlayers[i]
+		});
+	}
 }
 
 document.getElementById('waitStartButton').addEventListener('click', function(e)
@@ -383,6 +467,13 @@ document.getElementById('waitStartButton').addEventListener('click', function(e)
 		roomID,
 		key
 	}));
+});
+
+document.getElementById('waitExitButton').addEventListener('click', function()
+{
+	changeMenus('loading');
+	autoExpulsion = true;
+	kickPlayer(username);
 });
 
 ///

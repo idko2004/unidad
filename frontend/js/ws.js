@@ -155,5 +155,9 @@ function parseOperations(response)
 		case 'rejoined':
 			rejoined(response);
 			break;
+
+		case 'playerKicked':
+			playerKicked(response);
+			break;
 	}
 }
