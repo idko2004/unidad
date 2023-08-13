@@ -112,6 +112,7 @@ module.exports = function(dataObject, ws)
 	{
 		if(playersList[i] !== whoToKick) remainingPlayers.push(playersList[i]);
 	}
+	room.order = remainingPlayers;
 
 
 
@@ -145,6 +146,21 @@ module.exports = function(dataObject, ws)
 			remainingPlayers,
 			nowYoureMaster: playersList[i] === room.master
 		}));
+	}
+
+
+
+	//Limpiar gameInfo del ws
+	let gameInfoList = room.players[whoToKick].ws.gameInfo;
+	let newGameInfoList = [];
+	for(let i = 0; i < gameInfoList.length; i++)
+	{
+		if(gameInfoList[i].roomID !== roomID) newGameInfoList.push(gameInfoList[i]);
+	}
+
+	if(newGameInfoList.length !== gameInfoList.length)
+	{
+		room.players[whoToKick].ws.gameInfo = newGameInfoList;
 	}
 
 
