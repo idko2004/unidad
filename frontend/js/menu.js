@@ -482,33 +482,76 @@ document.getElementById('waitExitButton').addEventListener('click', function()
 
 document.getElementById('gameMenu').addEventListener('click', function()
 {
+	const list = [];
+	list.push(
+	{
+			text: 'Salir del juego',
+			callback: async function()
+			{
+				await closeWindow();
+				changeMenus('loading');
+				autoExpulsion = true;
+				kickPlayer(username);
+			}
+	});
+
+	if(gameMaster) list.push(
+	{
+		text: 'Expulsar a alguien',
+		callback: async function()
+		{
+			await closeWindow();
+
+			const expulsionList = [];
+
+			for(let i = 0; i < players.length; i++)
+			{
+				expulsionList.push(
+				{
+					text: players[i],
+					callback: async function()
+					{
+						await closeWindow();
+						kickPlayer(players[i]);
+					}
+				});
+			}
+
+			floatingWindow(
+			{
+				title: 'Expulsar a alguien',
+				list: expulsionList,
+				button:
+				{
+					text: 'Cancelar',
+					callback: closeWindow
+				}
+			});
+		}
+	});
+
+	list.push(
+	{
+			text: 'Mi mazo se ha roto',
+			callback: async function()
+			{
+				await closeWindow();
+			}
+	});
+
+	list.push(
+	{
+		text: 'Acerca de Unidad',
+		callback: async function()
+		{
+			await closeWindow();
+		}
+	});
+
 	floatingWindow(
 	{
 		title: 'Menú',
-		list:
-		[
-			{
-				text: 'Salir del juego',
-				callback: function()
-				{
-
-				}
-			},
-			{
-				text: 'Mi mazo se ha roto',
-				callback: function()
-				{
-
-				}
-			},
-			{
-				text: 'Acerca de Unidad',
-				callback: function()
-				{
-					
-				}
-			}
-		],
+		list,
 		button:
 		{
 			text: 'Cerrar',
