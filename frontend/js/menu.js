@@ -419,21 +419,42 @@ function playerKicked(response)
 	{
 		if(!autoExpulsion)
 		{
-			floatingWindow(
+			if(response.remainingPlayers.length === 0)
 			{
-				title: 'Te han expulsado',
-				text: 'El administrador te ha expulsado de la sala.',
-				button:
+				floatingWindow(
 				{
-					text: ':(',
-					callback: async function()
+					title: 'La sala ha cerrado',
+					text: 'Todos han salido de la sala o han sido expulsados.',
+					button:
 					{
-						await closeWindow();
-						location.reload();
+						text: 'Aceptar',
+						callback: async function()
+						{
+							await closeWindow();
+							location.reload();
+						}
 					}
-				}
-			});
-			return;
+				});
+				return;
+			}
+			else 
+			{
+				floatingWindow(
+				{
+					title: 'Te han expulsado',
+					text: 'El administrador te ha expulsado de la sala.',
+					button:
+					{
+						text: ':(',
+						callback: async function()
+						{
+							await closeWindow();
+							location.reload();
+						}
+					}
+				});
+				return;
+			}
 		}
 		else
 		{
@@ -450,6 +471,17 @@ function playerKicked(response)
 		{
 			username: response.remainingPlayers[i]
 		});
+	}
+
+	if(currentMenu === 'game')
+	{
+		canPlay = response.nowIsYourTurn;
+		updateBackgroundColor(response.nowIsYourTurn);
+		
+		if(response.nowIsYourTurn) newMessages(['Expulsaron a alguien', 'Tu turno']);
+		else newMessages(['Expulsaron a alguien']);
+
+		if(response.defend) changeDefendTextState(true);
 	}
 }
 

@@ -112,18 +112,36 @@ module.exports = function(dataObject, ws)
 	{
 		if(playersList[i] !== whoToKick) remainingPlayers.push(playersList[i]);
 	}
+
+
+
+	//Determinar de quién es el turno ahora
+	if(room.order.length > 1)
+	{
+		const currentTurn = room.whoIsPlaying;
+		const kickedTurn = room.order.indexOf(whoToKick);
+
+		if(kickedTurn === -1) console.log(colors.yellow('kick: jugador a eliminar no existe en room.order?'));
+		else if(currentTurn > kickedTurn) room.whoIsPlaying--;
+		else if(currentTurn >= room.order.length - 1) room.whoIsPlaying = 0;
+		//Si el turno del jugador expulsado, no hace falta hacer nada ya que al sacarlo de la lista el valor apunta automáticamente al siguiente jugador.
+		//Si el turno es de un jugador que viene antes del jugador expulsado, no hace falta hacer nada ya que todo sigue en orden.
+	}
 	room.order = remainingPlayers;
 
 
 
-	//Si no queda nadie en la sala simplemente borrarla
-	if(remainingPlayers.length === 0)
+	//Si no queda nadie en la sala o solo queda uno pero ya no puede entrar nadie, simplemente borrarla
+	if(remainingPlayers.length === 0
+	|| !room.letMorePlayersIn && remainingPlayers.length <= 1)
 	{
 		ws.send(JSON.stringify(
 		{
 			operation: 'playerKicked',
 			remainingPlayers: [],
-			nowYoureMaster: false
+			nowYoureMaster: false,
+			nowIsYourTurn: false,
+			defend: false
 		}));
 		delete game.activeGames[roomID];
 		console.log('Sala borrada porque todos fueron expulsados');
@@ -138,13 +156,16 @@ module.exports = function(dataObject, ws)
 
 
 	//Responder a todos
+	const whoIsPlayingName = remainingPlayers[room.whoIsPlaying];
 	for(let i = 0; i < playersList.length; i++)
 	{
 		room.players[playersList[i]].ws.send(JSON.stringify(
 		{
 			operation: 'playerKicked',
 			remainingPlayers,
-			nowYoureMaster: playersList[i] === room.master
+			nowYoureMaster: playersList[i] === room.master,
+			nowIsYourTurn: whoIsPlayingName === playersList[i],
+			defend: whoIsPlayingName === playersList[i] && room.cardsToVictim > 0
 		}));
 	}
 
