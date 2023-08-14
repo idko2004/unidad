@@ -17,7 +17,8 @@ module.exports = function(dataObject, ws)
 	Requisitos:
 	{
 		operation: 'debug',
-		debug: '' some debug thing
+		debug: '' some debug thing,
+		data: '' some extra thing
 	}
 	*/
 	switch(dataObject.debug)
@@ -26,8 +27,8 @@ module.exports = function(dataObject, ws)
 			console.log('invalid debug type');
 			ws.send(JSON.stringify(
 			{
-				operation: 'debug',
-				debug: 'invalid debug type'
+				operation: 'errorPlaying',
+				error: 'invalid debug type'
 			}))
 			break;
 
@@ -48,5 +49,57 @@ module.exports = function(dataObject, ws)
 				debug: clients.wsClients
 			}));
 			break;
+
+		case 'player':
+			console.log('sending information about a specific player');
+			if(dataObject.data === undefined || !Array.isArray(dataObject.data))
+			{
+				ws.send(JSON.stringify(
+				{
+					operation: 'errorPlaying',
+					error: 'No data was sent'
+				}));
+				return;
+			}
+			let player_roomID = dataObject.data[0];
+			let player_playerName = dataObject.data[1];
+			let player_room = game.activeGames[player_roomID];
+			if(player_room === undefined)
+			{
+				ws.send(JSON.stringify(
+				{
+					operation: 'errorPlaying',
+					error: 'invalidRoom'
+				}));
+				return;
+			}
+
+			let player_player = player_room.players[player_playerName];
+			if(player_player === undefined)
+			{
+				ws.send(JSON.stringify(
+				{
+					operation: 'errorPlaying',
+					error: 'invalidRoom'
+				}));
+				return;
+			}
+
+			let player_copy =
+			{
+				luck: player_player.luck,
+				inactive: player_player.inactive,
+				deck: player_player.deck,
+				connected: player_player.ws !== null
+			}
+			if(player_player.ws !== null) player_copy.wsGameInfo = player_player.ws.gameInfo
+
+			ws.send(JSON.stringify(
+			{
+				operation: 'debug',
+				debug: player_copy
+			}));
+			break;
+
 	}
 }

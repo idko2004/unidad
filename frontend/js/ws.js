@@ -161,3 +161,23 @@ function parseOperations(response)
 			break;
 	}
 }
+
+function debug(type, extra)
+{
+	let debugObj =
+	{
+		operation: 'debug',
+		debug: type
+	}
+
+	switch(type)
+	{
+		case 'player':
+			if(Array.isArray(extra)) debugObj.data = extra;
+			else if(typeof extra === 'string') debugObj.data = [roomID, extra];
+			else debugObj.data = [roomID, username];
+			break;
+	}
+
+	ws.send(JSON.stringify(debugObj));
+}

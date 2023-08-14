@@ -18,11 +18,11 @@ module.exports = async function(data, ws)
 	}
 	catch(err)
 	{
-		console.log('HA OCURRIDO UN ERROR', err);
+		console.log(colors.red('HA OCURRIDO UN ERROR'), err);
 		ws.send(JSON.stringify(
 		{
-			operation: 'parsingData',
-			error: 'cantParseData',
+			operation: 'errorPlaying',
+			error: 'catastrophicError_EverythingCrashed',
 			errorMsg: err.message,
 			errorCode: err.code
 		}));
@@ -46,6 +46,7 @@ function parseOperation(dataObject, ws)
 		default:
 			ws.send(JSON.stringify(
 			{
+				operation: 'errorPlaying',
 				error: 'invalidOperation'
 			}));
 			console.log(colors.red(`${dataObject.operation} no es una operación válida`));
