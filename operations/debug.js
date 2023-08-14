@@ -101,5 +101,50 @@ module.exports = function(dataObject, ws)
 			}));
 			break;
 
+		case 'room':
+			console.log('sending information about a room');
+			if(typeof dataObject.data !== 'string')
+			{
+				ws.send(JSON.stringify(
+				{
+					operation: 'errorPlaying',
+					error: 'No data was sent'
+				}));
+				return;
+			}
+
+			let room_room = game.activeGames[dataObject.data];
+			if(room_room === undefined)
+			{
+				ws.send(JSON.stringify(
+				{
+					operation: 'errorPlaying',
+					error: 'invalidRoom'
+				}));
+				return;
+			}
+
+			let room_copy =
+			{
+				id: dataObject.data,
+				master: room_room.master,
+				maxPlayers: room_room.maxPlayers,
+				currentCard: room_room.currentCard,
+				letMorePlayersIn: room_room.letMorePlayersIn,
+				whoIsPlaying: room_room.whoIsPlaying,
+				direction: room_room.direction,
+				cardGrabbed: room_room.cardGrabbed,
+				cardsToVictim: room_room.cardsToVictim,
+				order: room_room.order,
+				table: room_room.table,
+				players: Object.keys(room_room.players)
+			}
+
+			ws.send(JSON.stringify(
+			{
+				operation: 'debug',
+				debug: room_copy
+			}));
+			break;
 	}
 }

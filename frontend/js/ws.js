@@ -172,10 +172,19 @@ function debug(type, extra)
 
 	switch(type)
 	{
+		default:
+			if(extra !== undefined) debugObj.data = extra;
+			break;
+
 		case 'player':
 			if(Array.isArray(extra)) debugObj.data = extra;
 			else if(typeof extra === 'string') debugObj.data = [roomID, extra];
 			else debugObj.data = [roomID, username];
+			break;
+
+		case 'room':
+			if(typeof extra === 'string') debugObj.data = extra;
+			else debugObj.data = roomID;
 			break;
 	}
 
