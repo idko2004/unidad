@@ -127,7 +127,7 @@ module.exports = function(dataObject, ws)
 
 
 	// Elegir la carta que enviar
-	const card = cards.getCard(roomID, username);
+	const card = cards.getCard(roomID);
 	room.players[username].deck.push(card);
 
 

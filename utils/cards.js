@@ -154,16 +154,9 @@ function newTable()
 	return table;
 }
 
-function getCard(roomID, playerName)
-{
-	let card = getLuckyCard(roomID, playerName);
-	if(card === null) card = getTableCard(roomID);
-	return card;
-}
 
 
-
-function getTableCard(roomID)
+function getCard(roomID)
 {
 	if(roomID === undefined)
 	{
@@ -208,95 +201,6 @@ function getTableCard(roomID)
 
 
 
-function getLuckyCard(roomID, playerName) //Si no se va a obtener lucky card, devolver falso para obtener carta a través de getCard()
-{
-	if([roomID, playerName].includes(undefined))
-	{
-		console.log(colors.yellow('cards.getLuckyCard: roomID o playerName es undefined'));
-		return null;
-	}
-
-	const room = game.activeGames[roomID];
-	if(room === undefined)
-	{
-		console.log(colors.red(`cards.getLuckyCard: ${roomID} is not a valid room`));
-		return null;
-	}
-
-	const player = room.players[playerName];
-	if(player === undefined)
-	{
-		console.log(colors.red(`cards.getLuckyCard: ${playerName} is not a valid player`));
-		return null;
-	}
-
-	const r = Math.random();
-	if(player.luck < r) return null; //No hubo suerte
-
-	const table = room.table;
-	if(table === undefined || !Array.isArray(table))
-	{
-		console.log(colors.red(`cards.getLuckyCard: ${roomID} doesn't have a valid table`));
-		return null;
-	}
-
-	const luckyThing = random.range(0, 3);
-	let card;
-	switch(luckyThing)
-	{
-		case 0: //Mismo color
-			const currentColor = properties[room.currentCard].color;
-			for(let i = 0; i < table.length; i++)
-			{
-				if(currentColor === properties[table[i]].value)
-				{
-					card = table[i];
-					break;
-				}
-			}
-			break;
-
-		case 1: //Mismo valor
-			const currentValue = properties[room.currentCard].value;
-			for(let i = 0; i < table.length; i++)
-			{
-				if(currentValue === properties[table[i]].value)
-				{
-					card = table[i];
-					break;
-				}
-			}
-			break;
-
-		case 2: //Carta especial o más especial
-			for(let i = 9; i < table.length; i++)
-			{
-				if([cardTypes.special, cardTypes.moreSpecial].includes(properties[table[i]].type))
-				{
-					card = table[i];
-					break;
-				}
-			}
-			break;
-	}
-
-	if(card === undefined) return null;
-	console.log('lucky');
-	
-	let tableUpdate = deleteFromDeck(card, table);
-	if(tableUpdate.length < 3)
-	{
-		tableUpdate = newTable();
-		console.log('Mesa recargada');
-	}
-	room.table = tableUpdate;
-
-	//game.utils.luck(roomID, playerName, false);
-	return card;
-}
-
-
-
 function getNormalCard()
 {
 	let cardIndex = random.range(0, normalCards.length - 1);
@@ -309,60 +213,20 @@ function getNormalCard()
 	}
 }
 
-/*
-function getCard(type)
-{
-	if(type === 'all')
-	{
-		let cardIndex = random.range(0, allCards.length);
-		let card = allCards[cardIndex];
-		if(card !== undefined) return card;
-		else
-		{
-			console.log(colors.red(`cards.getCard: allCards[${cardIndex}] is undefined`));
-			return allCards[0];
-		}
-	}
-	else if(type === 'normal')
-	{
-		let cardIndex = random.range(0, normalCards.length);
-		let card = normalCards[cardIndex];
-		if(card !== undefined) return card;
-		else
-		{
-			console.log(colors.red(`cards.getCard: normalCards[${cardIndex}] is undefined`));
-			return normalCards[0];
-		}
-	}
-	else if(type === 'special')
-	{
-		let cardIndex = random.range(0, specialCards.length);
-		let card = specialCards[cardIndex];
-		if(card !== undefined) return card;
-		else
-		{
-			console.log(colors.red(`cards:getCard: specialCards[${cardIndex}] is undefined`));
-			return specialCards[0];
-		}
-	}
-	else
-	{
-		console.log(colors.red(`cards.getCard: ${type} no es un tipo de carta`));
-		return undefined;
-	}
-}
-*/
 
-function generateDeck(roomID, playerName)
+
+function generateDeck(roomID)
 {
 	let deck = [];
 	for(let i = 0; i < 7; i++)
 	{
-		deck.push(getCard(roomID, playerName));
+		deck.push(getCard(roomID));
 	}
 	console.log('cards.generateDeck: deck generado', deck);
 	return deck;
 }
+
+
 
 function deleteFromDeck(card, deck)
 {
@@ -400,6 +264,8 @@ function deleteFromDeck(card, deck)
 	return newDeck;
 }
 
+
+
 function cardIsValid(card, currentCard)
 {
 	const cardProps = properties[card];
@@ -432,6 +298,8 @@ function cardIsValid(card, currentCard)
 	return sameColor || sameValue;
 }
 
+
+
 function deckContainsSpecificsCards(cards, deck)
 {
 	if([cards, deck].includes(undefined) || !Array.isArray(cards), !Array.isArray(deck))
@@ -451,13 +319,14 @@ function deckContainsSpecificsCards(cards, deck)
 }
 
 
+
 function giveCardsToVictim(roomID, victim)
 {
 	const newCards = [];
 	const cardsToVictim = game.activeGames[roomID].cardsToVictim;
 	for(let i = 0; i < cardsToVictim; i++)
 	{
-		newCards.push(getCard(roomID, victim));
+		newCards.push(getCard(roomID));
 	}
 	console.log('Cartas para la víctima', newCards);
 
@@ -465,6 +334,7 @@ function giveCardsToVictim(roomID, victim)
 	console.log('Mazo de la víctima', game.activeGames[roomID].players[victim].deck);
 	game.activeGames[roomID].cardsToVictim = 0; //Reiniciar el número de cartas para la siguiente víctima
 }
+
 
 
 function giveCardsToSomeone(roomID, someone, howMany)
@@ -484,11 +354,13 @@ function giveCardsToSomeone(roomID, someone, howMany)
 	const newCards = [];
 	for(let i = 0; i < howMany; i++)
 	{
-		newCards.push(getCard(roomID, someone));
+		newCards.push(getCard(roomID));
 	}
 
 	game.activeGames[roomID].players[someone].deck.push(...newCards);
 }
+
+
 
 module.exports =
 {

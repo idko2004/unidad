@@ -157,7 +157,6 @@ module.exports = function(dataObject, ws)
 	// Añadir usuario a la sala
 	room.players[username] =
 	{
-		luck: 0.15,
 		ws
 	}
 	room.players[username].deck = cards.generateDeck(roomID, username);

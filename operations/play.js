@@ -296,7 +296,7 @@ function playNormalCard(dataObject, ws, room, messages)
 			victim: username,
 			cardsnumber: room.cardsToVictim
 		}));
-		game.utils.luck(roomID, username, true); //Darle suerte
+
 		cards.giveCardsToVictim(roomID, username); //Dar las cartas al jugador
 		game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
 		game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
@@ -336,8 +336,6 @@ function playPlusCard(howManyCards, dataObject, ws, room, messages)
 	room.cardGrabbed = false; //Para que el jugador del turno siguiente pueda agarrar una carta del mazo
 	room.players[username].deck = cards.deleteFromDeck(play.card, room.players[username].deck); //Quitar la carta jugada del mazo
 	room.cardsToVictim += howManyCards; //Sumar las cartas que le van a caer a la víctima
-
-	game.utils.luck(roomID, username, false); //Quitarle suerte a quien juegue un +
 
 	messages.push(msg.getMessage(msg.msgValues.accumuledCards, //Mensaje de la jugada
 	{
@@ -419,7 +417,6 @@ function playBlockCard(dataObject, ws, room, messages)
 		}));
 
 		room.cardsToVictim = 0;
-		game.utils.luck(roomID, username, true); //Darle suerte
 		game.utils.nextTurn(roomID);
 		game.utils.updatePlayers(roomID, messages);
 	}
@@ -430,7 +427,6 @@ function playBlockCard(dataObject, ws, room, messages)
 			victim: room.order[game.utils.whosNext(roomID)]
 		}));
 	
-		game.utils.luck(roomID, username, false); //Quitarle suerte
 		game.utils.nextTurn(roomID);
 		game.utils.nextTurn(roomID);
 		game.utils.updatePlayers(roomID, messages);
@@ -473,7 +469,6 @@ function playReverseCard(dataObject, ws, room, messages)
 			cardsnumber: room.cardsToVictim
 		}));
 
-		game.utils.luck(roomID, username, true); //Darle suerte
 		cards.giveCardsToVictim(roomID, victim);
 
 		game.utils.nextTurn(roomID);
@@ -491,7 +486,6 @@ function playReverseCard(dataObject, ws, room, messages)
 
 	else //Si solo son dos personas jugando, la persona que tiró la carta vuelve a tener el turno
 	{
-		game.utils.luck(roomID, username, false); //Quitarle suerte
 		const victim = room.order[game.utils.whosNext(roomID)];
 
 		messages.push(msg.getMessage(msg.msgValues.blocked,
@@ -525,7 +519,6 @@ function playColorCard(dataObject, ws, room, messages)
 			victim: username,
 			cardsnumber: room.cardsToVictim
 		}));
-		game.utils.luck(roomID, username, true); //Darle suerte
 		cards.giveCardsToVictim(roomID, username); //Dar las cartas al jugador
 		game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
 		game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
@@ -536,8 +529,6 @@ function playColorCard(dataObject, ws, room, messages)
 	//room.currentCard = play.card; //Actualizar la carta actual
 	room.cardGrabbed = false; //Para que el jugador del turno siguiente pueda agarrar una carta del mazo
 	room.players[username].deck = cards.deleteFromDeck(play.card, room.players[username].deck); //Quitar la carta jugada del mazo
-
-	game.utils.luck(roomID, username, false); //Quitarle suerte
 
 
 	const cardProperties = cards.properties[play.card];
@@ -637,9 +628,6 @@ function playZeroCard(dataObject, ws, room, messages)
 		let aux = room.players[username].deck;
 		room.players[username].deck = room.players[victim].deck;
 		room.players[victim].deck = aux;
-
-		game.utils.luck(roomID, username, false); //Quitarle suerte
-		game.utils.luck(roomID, victim, true); //Darle suerte a la víctima
 	
 		messages.push(msg.getMessage(msg.msgValues.interchangeDecks,
 		{
@@ -680,7 +668,6 @@ function playPlusOneCard(dataObject, ws, room, messages)
 			victim: username,
 			cardsnumber: room.cardsToVictim
 		}));
-		game.utils.luck(roomID, username, true); //Darle suerte
 		cards.giveCardsToVictim(roomID, username); //Dar las cartas al jugador
 		game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
 		game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
@@ -691,8 +678,6 @@ function playPlusOneCard(dataObject, ws, room, messages)
 	room.currentCard = play.card; //Actualizar la carta actual
 	room.cardGrabbed = false; //Para que el jugador del turno siguiente pueda agarrar una carta del mazo
 	room.players[username].deck = cards.deleteFromDeck(play.card, room.players[username].deck); //Quitar la carta jugada del mazo
-
-	game.utils.luck(roomID, username, false); //Quitarle suerte
 
 	for(let i = 0; i < room.order.length; i++)
 	{
