@@ -1,6 +1,6 @@
 let confeti = [];
 
-let numberOfConfeti = 150;
+let numberOfConfeti = (innerWidth * 2) / remSize;
 
 let confetiDeltaTime = 1000/30;
 let v = 0;
@@ -35,7 +35,7 @@ function randomizeConfeti()
 	for(let i = 0; i < confeti.length; i++)
 	{
 		confeti[i].x = randomRange(0, innerWidth);
-		confeti[i].y = -20;
+		confeti[i].y = -50;
 		confeti[i].e = Math.random();
 		if(confeti[i].e < 0.1) confeti[i].e += 1 * Math.random();
 		confeti[i].rx = randomRange(0, 360);

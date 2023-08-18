@@ -19,4 +19,5 @@ let canGrabACard = true;
 let defendTextActive = false;
 
 const remSize = parseFloat(getComputedStyle(document.body).fontSize);
+const vhSize = innerHeight / 100;
 
