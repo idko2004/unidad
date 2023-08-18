@@ -64,18 +64,18 @@ function startServer()
 		const filePath = getFilePath(req.url);
 		if([undefined, null].includes(filePath))
 		{
-			console.log('Invalid Path');
-			res.writeHead(500);
-			res.end('Invalid Path');
+			console.log('Not Found');
+			res.writeHead(404);
+			res.end('Not Found');
 			return;
 		}
 
 		const file = await loadFile(filePath);
 		if([undefined, null].includes(filePath))
 		{
-			console.log('Invalid Path');
-			res.writeHead(400);
-			res.end('Invalid Path');
+			console.log('Not Found');
+			res.writeHead(404);
+			res.end('Not Found');
 			return;
 		}
 

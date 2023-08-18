@@ -43,10 +43,9 @@ wss.on('connection', function(ws)
 });
 
 //Ping
-const pingRate = vars.env.PING_RATE || "15_000";
+const pingRate = vars.env.PING_RATE || "15000";
 setInterval(function()
 {
-	return;
 	//console.log('### Llegó la hora de pinguear ###');
 	for(let i = 0; i < clients.wsClients.length; i++)
 	{
