@@ -144,6 +144,10 @@ function parseOperations(response)
 			gameUpdate(response);
 			break;
 
+		case 'blowResponse':
+			blowResponse(response);
+			break;
+
 		case 'grabCard':
 			grabCard(response);
 			break;

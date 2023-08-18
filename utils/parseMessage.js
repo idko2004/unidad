@@ -34,6 +34,7 @@ const joinGame = require('../operations/joinGame');
 const startGame = require('../operations/startGame');
 const kick = require('../operations/kick');
 const play = require('../operations/play');
+const blow = require('../operations/blow');
 const grabCard = require('../operations/grabCard');
 const skip = require('../operations/skip');
 const getCardProperties = require('../operations/getCardProperties');
@@ -70,6 +71,10 @@ function parseOperation(dataObject, ws)
 
 		case 'play':
 			play(dataObject, ws);
+			break;
+
+		case 'blow':
+			blow(dataObject, ws);
 			break;
 
 		case 'grabCard':

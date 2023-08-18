@@ -15,6 +15,11 @@ function gameUpdate(response)
 	changeDefendTextState(response.defend || false);
 }
 
+//Cuando soplas
+function blowResponse(response)
+{
+	updateDeck(response.deck);
+}
 
 
 //Cada que el servidor envía la operación grabCard, lo cuál ocurre cada que el jugador agarra una carta del mazo (la carta con el + de abajo).

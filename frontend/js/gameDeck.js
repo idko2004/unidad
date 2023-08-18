@@ -94,6 +94,16 @@ function clickACardInDeck(e)
 				break;
 		}
 	}
+	else
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'blow',
+			roomID,
+			key,
+			card
+		}));
+	}
 }
 
 
