@@ -65,10 +65,11 @@ setInterval(function()
 	let newClientsArray = [];
 	for(let i = 0; i < clients.wsClients.length; i++)
 	{
-		if(clients.wsClients[i] === undefined) continue;
-		newClientsArray.push(clients.wsClients[i]);
+		if(clients.wsClients[i] !== undefined) newClientsArray.push(clients.wsClients[i]);
 	}
-	clients.wsClients = newClientsArray;
+
+	if(newClientsArray.length !== clients.wsClients.length) clients.wsClients = newClientsArray;
+
 }, parseInt(pingRate));
 
 function conectionClosed(ws, j)
@@ -98,7 +99,7 @@ function conectionClosed(ws, j)
 		}
 	}
 
-	clients.wsClients[j] = undefined;
+	delete clients.wsClients[j];
 	ws.terminate();
 }
 

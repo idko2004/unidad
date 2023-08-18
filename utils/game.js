@@ -340,6 +340,12 @@ function updateTimeout(roomID)
 
 	room.timeout = setTimeout(function()
 	{
+		if(activeGames[roomID] === undefined)
+		{
+			console.log('La sala del timeout ya no existe', roomID);
+			return;
+		}
+
 		const username = room.order[room.whoIsPlaying];
 		console.log(`### Timeout para ${username} en ${roomID}`);
 		nextTurn(roomID);
