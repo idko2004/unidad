@@ -151,6 +151,7 @@ function updateDeck(deck)
 
 		for(let i = 0; i < elementsInDeck.length; i++)
 		{
+			if(elementsInDeck[i].classList.contains('card-delete')) continue;
 			cardsNames.push(elementsInDeck[i].attributes.card.value);
 		}
 		return cardsNames;
