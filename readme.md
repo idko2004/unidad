@@ -1,15 +1,18 @@
 # Unidad
 Unidad es un juego parecido al UNO, pero con otras reglas, de hecho, es posible que algunas ya te las conozcas, porque nadie juega al UNO con las reglas oficiales.
 
-Puedes jugar a Unidad directamente en el sitio web [idko.infinityfreeapp.com/unidad](http://idko.infinityfreeapp.com/unidad/index.html) o puedes correr tu propia instancia.
+Puedes jugar a Unidad directamente* en el sitio web [idko.infinityfreeapp.com/unidad](http://idko.infinityfreeapp.com/unidad/index.html) o puedes correr tu propia instancia.
+
+> _*De momento, igual es necesario tener tu propia instancia del servidor, aún no hay un servidor online disponible._
 
 ## Instalación
-Es necesario tener instaladas las siguientes dependencias:
+Es necesario tener instalados los siguientes programas:
 - node.js
 - npm
 - [git (opcional)](https://git-scm.com/)
 
 Para instalar node.js y npm, es recomendable utilizar [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) en Linux, o [nvs](https://github.com/jasongin/nvs#setup) en Windows.
+
 ### 1. Clonar el repositorio
 Puedes clonar el repositorio usando git
 ```
@@ -36,6 +39,9 @@ o
 ```
 node main.js
 ```
+
+Si no salen errores, ya estás listo para jugar.
+
 **En la terminal deberán salir instrucciones sobre como conectarse con el navegador.**
 
 **Es necesario que todos estén en la misma red wifi para jugar.**
@@ -56,6 +62,27 @@ Los clientes pueden preguntar por información debug al servidor WebSocket si la
 
 Para poder acceder a información debug introduzca en el navegador, desde la consola de las herramientas de desarrollador:
 ```javascript
-ws.send(JSON.stringify({ operation: "debug", debug: <debug_type> }))
+debug("<type>")
 ```
-Reemplace `<debug_type>` con `"activeGames"` o `"wsClients"`.
+Los distintos tipos de debug son:
+- `activeGames`: Devuelve los datos de todas las salas.
+
+- `wsclients`: Devuelve todos los clientes de WebSocket.
+
+- `player`: Devuelve la información de un jugador en una sala.
+
+- `room`: Devuelve la información de una sala.
+
+En los casos de `player` y `room` se puede introducir información adicional:
+```javascript
+debug("player") //Para obtener su propia información.
+
+debug("player", "<username>") //Para obtener la información de un usuario en específico en la misma sala en la sala en la que se encuentra el cliente.
+
+debug("player", ["<roomID>", "<username>"]) //Para obtener la información de un usuario en específico en una sala en específica.
+
+
+debug("room") //Para obtener información de la sala en la que se encuentra el cliente.
+
+debug("room", "<roomID>") //Para obtener información de una sala en específica.
+```
