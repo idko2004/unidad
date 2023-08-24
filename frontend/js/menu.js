@@ -140,7 +140,7 @@ document.getElementById('searchGameButton').addEventListener('click', function()
 	roomID = document.getElementById('searchGameRoom').value;
 	if(roomID === undefined) return;
 
-	roomID = roomID.trim();
+	roomID = roomID.trim().toLowerCase();
 	if(roomID === '') return;
 
 	let obj =

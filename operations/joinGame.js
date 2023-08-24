@@ -51,7 +51,7 @@ module.exports = function(dataObject, ws)
 
 
 	//Encontrar la sala
-	roomID = roomID.trim();
+	roomID = roomID.trim().toLowerCase();
 	const room = game.activeGames[roomID];
 	if(room === undefined)
 	{
