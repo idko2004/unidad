@@ -55,12 +55,14 @@
 					Elegir tipo de servidor
 				</div>
 				<div class="menuContent">
-					<p>
-						<button id="onlineServerButton" title="Conectarse al servidor online">Servidor online (de momento localhost)</button>
-					</p>
-					<p>
-						<button id="localServerButton" title="Conectarse a un servidor en tu red local">Servidor local</button>
-					</p>
+					<div class="remPadding">
+						<div>
+							<button id="onlineServerButton" title="Conectarse al servidor online">Servidor online (de momento localhost)</button>
+						</div>
+						<div>
+							<button id="localServerButton" title="Conectarse a un servidor en tu red local">Servidor local</button>
+						</div>
+					</div>
 					<hr>
 					<p>
 						<small>
@@ -85,12 +87,16 @@
 					<p>
 						Escribe la dirección ip del servidor:
 					</p>
-					<p>
 						<input type="text" id="customUrlField">
-					</p>
-					<p>
-						<button id="connectCustomServerButton">Conectarse</button>
+					<div class="remPadding">
 						<button id="customServerBackButton">Volver</button>
+						<button id="connectCustomServerButton">Conectarse</button>
+					</div>
+					<hr>
+					<p>
+						<small>
+							Para usar un servidor local es necesario descargar el programa del servidor (backend) y que alguien lo ejecute en tu red local.
+						</small>
 					</p>
 				</div>
 			</section>
@@ -107,12 +113,14 @@
 					Para nada una copia barata del UNO
 				</div>
 				<div class="menuContent">
-					<p>
-						<button id="mainMenuToCreateGame">Crear partida</button>
-					</p>
-					<p>
-						<button id="mainMenuToFindGame">Unirse a una partida</button>
-					</p>
+					<div class="remPadding">
+						<div>
+							<button id="mainMenuToCreateGame">Crear partida</button>
+						</div>
+						<div>
+							<button id="mainMenuToFindGame">Unirse a una partida</button>
+						</div>
+					</div>
 					<div id="serverLabelContainer" hidden>
 						<hr>
 						<p id="serverLabel"></p>
@@ -141,10 +149,10 @@
 						Cantidad de jugadores:
 					</p>
 					<input type="number" id="createGamePlayers" value="2">
-					<p>
-						<button id="createGameButton">Crear partida</button>
+					<div class="remPadding">
 						<button id="createGameBack">Volver</button>
-					</p>
+						<button id="createGameButton">Crear partida</button>
+					</div>
 				</div>
 			</section>
 		</div>
@@ -169,10 +177,10 @@
 						ID de la sala:
 					</p>
 					<input type="text" id="searchGameRoom">
-					<p>
-						<button id="searchGameButton">Buscar partida</button>
+					<div class="remPadding">
 						<button id="searchGameBack">Volver</button>
-					</p>
+						<button id="searchGameButton">Buscar partida</button>
+					</div>
 				</div>
 			</section>
 		</div>
@@ -199,9 +207,9 @@
 						Esperando a los demás jugadores...
 					</p>
 				</div>
-				<div>
-					<button id="waitStartButton" hidden>Empezar</button>
+				<div class="remPadding">
 					<button id="waitExitButton">Salir</button>
+					<button id="waitStartButton" hidden>Empezar</button>
 				</div>
 			</div>
 		</div>
@@ -282,10 +290,6 @@
 					<div class="cardsize-smaller" id="colorCardGreen"><div class="cardsprite card-COLORg"></div></div>
 					<div class="cardsize-smaller" id="colorCardBlue"><div class="cardsprite card-COLORb"></div></div>
 					<div class="cardsize-smaller" id="colorCardYellow"><div class="cardsprite card-COLORy"></div></div>
-					<!--img src="img/COLORr.png" id="colorCardRed">
-					<img src="img/COLORg.png" id="colorCardGreen">
-					<img src="img/COLORb.png" id="colorCardBlue">
-					<img src="img/COLORy.png" id="colorCardYellow"-->
 				</div>
 			</div>
 		</div>

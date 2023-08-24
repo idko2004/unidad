@@ -121,6 +121,7 @@ button
 	color: white;
 	background-color: var(--red);
 	padding: 0.4rem;
+	margin: 0.5rem;
 	border: 0.2rem solid var(--red);
 	border-radius: 0.4rem;
 }
@@ -161,6 +162,8 @@ button:disabled
 	font-family: 'Tilt Warp', cursive;
 	font-size: 0.8rem;
 	border: 0;
+	margin: 0;
+	padding: 0;
 	background-color: transparent;
 	color: var(--white);
 }
@@ -181,4 +184,9 @@ button:disabled
 .centerAlign
 {
 	text-align: center;
+}
+
+.remPadding
+{
+	padding: 1rem;
 }
