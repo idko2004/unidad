@@ -238,6 +238,14 @@ module.exports = function(dataObject, ws)
 	{
 		if(room.cardsToVictim > 0) //Si te están tirando tremendo +4
 		{
+			ws.send(JSON.stringify(
+			{
+				operation: 'errorPlaying',
+				error: 'cantDefendWithThat'
+			}));
+			return;
+		
+			/*
 			messages.push(msg.getMessage(msg.msgValues.cardsEaten, //Mensaje de que la víctima se comió cartas
 			{
 				victim: username,
@@ -247,6 +255,7 @@ module.exports = function(dataObject, ws)
 			game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
 			game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
 			return;
+			*/
 		}
 
 		switch(cardProperties.value)
@@ -291,6 +300,14 @@ function playNormalCard(dataObject, ws, room, messages)
 
 	if(room.cardsToVictim > 0) //Si te están tirando tremendo +4
 	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'errorPlaying',
+			error: 'cantDefendWithThat'
+		}));
+		return;
+
+		/*
 		messages.push(msg.getMessage(msg.msgValues.cardsEaten, //Mensaje de que la víctima se comió cartas
 		{
 			victim: username,
@@ -301,6 +318,7 @@ function playNormalCard(dataObject, ws, room, messages)
 		game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
 		game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
 		return;
+		*/
 	} //Si no te están tirando tremendo +4
 
 	room.currentCard = play.card; //Actualizar la carta actual
@@ -514,6 +532,14 @@ function playColorCard(dataObject, ws, room, messages)
 
 	if(room.cardsToVictim > 0) //No creo que llegue a ocurrir, pero en caso de que sí, si te estan tirando cartas + y por algún motivo respondes con una carta de color, que funcione igual a que si respondes con una carta normal
 	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'errorPlaying',
+			error: 'cantDefendWithThat'
+		}));
+		return;
+
+		/*
 		messages.push(msg.getMessage(msg.msgValues.cardsEaten, //Mensaje de que la víctima se comió cartas
 		{
 			victim: username,
@@ -523,6 +549,7 @@ function playColorCard(dataObject, ws, room, messages)
 		game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
 		game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
 		return;
+		*/
 	}
 
 
@@ -663,6 +690,13 @@ function playPlusOneCard(dataObject, ws, room, messages)
 
 	if(room.cardsToVictim > 0) //No creo que llegue a ocurrir, pero en caso de que sí, si te estan tirando cartas + y por algún motivo respondes con una carta de color, que funcione igual a que si respondes con una carta normal
 	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'errorPlaying',
+			error: 'cantDefendWithThat'
+		}));
+		return;
+		/*
 		messages.push(msg.getMessage(msg.msgValues.cardsEaten, //Mensaje de que la víctima se comió cartas
 		{
 			victim: username,
@@ -672,6 +706,7 @@ function playPlusOneCard(dataObject, ws, room, messages)
 		game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
 		game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
 		return;
+		*/
 	}
 
 

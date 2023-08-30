@@ -136,6 +136,19 @@ function errorPlaying(response)
 				}
 			});
 			break;
+
+		case 'cantDefendWithThat':
+			floatingWindow(
+			{
+				title: 'Esa carta no',
+				text: 'Esa carta no podrá salvarte de tu destino.',
+				button:
+				{
+					text: ":´(",
+					callback: closeWindow
+				}
+			});
+			break;
 	}
 }
 

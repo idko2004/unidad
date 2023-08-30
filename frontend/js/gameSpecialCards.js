@@ -10,6 +10,21 @@ const colorWindow = document.getElementById('colorWindow');
 
 function openColorWindow()
 {
+	if(!canPlay || canSkipDirectly)
+	{
+		if(canSkipDirectly) floatingWindow(
+		{
+			title: 'Esa carta no',
+			text: 'Por más que lo intentes, cambiar el color de las cartas no te salvará.',
+			button:
+			{
+				text: ':(',
+				callback: closeWindow
+			}
+		});
+		return;
+	}
+
 	colorWindowBg.hidden = false;
 	colorWindow.classList.remove('closeWin');
 	colorWindow.classList.add('openWin');
@@ -48,7 +63,7 @@ async function playColorCard(color)
 {
 	await closeColorWindow();
 
-	if(!canPlay) return;
+	if(!canPlay || canSkipDirectly) return;
 	
 	const cardColors =
 	{
@@ -92,7 +107,21 @@ async function playColorCard(color)
 //Cartas 0, de cambiar mazos con otros jugadores
 function openZeroCardMenu(card)
 {
-	if(!canPlay) return;
+	if(!canPlay || canSkipDirectly) //Que no se abra si no es tu turno o tenés que defenderte.
+	{
+		if(canSkipDirectly) floatingWindow(
+		{
+			title: 'Esa carta no',
+			text: 'Por más que lo intentes, un 0 no podrá defenderte.',
+			button:
+			{
+				text: ':(',
+				callback: closeWindow
+			}
+		});
+		//si canPlay es falso, esta función no debería de poder ejecutarse, ya que estarías soplando.
+		return;
+	}
 
 	const list = [];
 	for(let i = 0; i < players.length; i++)

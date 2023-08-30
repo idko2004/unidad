@@ -7,8 +7,8 @@
 - [ ] Hacer shuffle con la mesa. (no sé si haga falta pero haría que todo sea doblemente random).
 - [ ] Actualizar idko.infityfreeapp.com/unidad.
 - [ ] Manual de como jugar.
-- [ ] Cuando te tiran una carta + y jugás una carta que no puede defenderte, en vez de darte las cartas que te diga que no podés usar esa carta.
-- [ ] Si te tiran una carta + y jugás una carta 0 o cambiacolor, que no salga ningún menú y te diga que no podés usar esa carta.
+- [x] Cuando te tiran una carta + y jugás una carta que no puede defenderte, en vez de darte las cartas que te diga que no podés usar esa carta.
+- [x] Si te tiran una carta + y jugás una carta 0 o cambiacolor, que no salga ningún menú y te diga que no podés usar esa carta.
 - [x] No poder soplar una carta especial.
 - [ ] Quitar límite de cantidad de jugadores, que este se defina en cuanto se inicia la partida, mientras se está esperando, que puedan entrar los que quieran.
 - [ ] Sección de opciones avanzadas en el menú de crear partida.
