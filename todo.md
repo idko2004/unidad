@@ -1,4 +1,4 @@
-- [ ] Hacer un menú funcional
+- [x] Hacer un menú funcional
 - [x] Poder hechar a los jugadores de la sala
 - [x] Si dos jugadores con el mismo nombre entran a una sala se buguea
 - [x] Sistema de suerte
@@ -7,6 +7,7 @@
 - [ ] Hacer shuffle con la mesa. (no sé si haga falta pero haría que todo sea doblemente random).
 - [ ] Actualizar idko.infityfreeapp.com/unidad.
 - [ ] Manual de como jugar.
+- [ ] Página acerca de.
 - [x] Cuando te tiran una carta + y jugás una carta que no puede defenderte, en vez de darte las cartas que te diga que no podés usar esa carta.
 - [x] Si te tiran una carta + y jugás una carta 0 o cambiacolor, que no salga ningún menú y te diga que no podés usar esa carta.
 - [x] No poder soplar una carta especial.

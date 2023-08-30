@@ -12,6 +12,8 @@ function startGame(response)
 	createCardsInDeck(response.deck);
 	newMessages(response.message);
 	updateBackgroundColor(response.yourTurn);
+
+	playerDeck = response.deck;
 }
 
 

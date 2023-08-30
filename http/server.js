@@ -28,6 +28,7 @@ const allowedPaths =
 [
 	'/',
 	'/index.html',
+	'/about.html',
 
 	'/css/confeti.css',
 	'/css/floatingWindow.css',

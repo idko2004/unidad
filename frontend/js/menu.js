@@ -583,6 +583,8 @@ document.getElementById('gameMenu').addEventListener('click', function()
 			callback: async function()
 			{
 				await closeWindow();
+				document.getElementById('deck').innerHTML = '';
+				createCardsInDeck(playerDeck);
 			}
 	});
 
@@ -592,6 +594,13 @@ document.getElementById('gameMenu').addEventListener('click', function()
 		callback: async function()
 		{
 			await closeWindow();
+			let a = document.createElement('a');
+			a.setAttribute('href', 'about.html');
+			a.setAttribute('target', '_blank');
+			a.hidden = true;
+			document.body.appendChild(a);
+			a.click();
+			a.remove();
 		}
 	});
 

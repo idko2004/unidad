@@ -117,6 +117,8 @@ function updateDeck(deck)
 		return;
 	}
 
+	playerDeck = deck;
+
 	const currentDeck = getCurrentDeck();
 	const newDeck = deck;
 	console.log('current deck:', currentDeck);

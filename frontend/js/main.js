@@ -11,7 +11,7 @@ let username;
 let roomID;
 let key;
 let currentCard;
-//let playerDeck = [];
+let playerDeck = [];
 let canPlay = false;
 let canSkip = false;
 let canSkipDirectly = false;
