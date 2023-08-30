@@ -335,6 +335,7 @@ function joinedToGame(response)
 	}
 
 	askForCardProperties();
+	updateStartGameButton();
 	changeMenus('waitPlayers');
 }
 
@@ -343,17 +344,7 @@ function playerJoined(response)
 	players.push(response.username);
 	addPlayerToWaitingList(response.username);
 
-	//Hacer aparecer el botón de empezar
-	if(gameMaster && (players.length === maxPlayers))
-	{
-		document.getElementById('waitingPlayersText').hidden = true;
-		document.getElementById('waitStartButton').hidden = false;
-	}
-	else
-	{
-		document.getElementById('waitingPlayersText').hidden = false;
-		document.getElementById('waitStartButton').hidden = true;
-	}
+	updateStartGameButton();
 }
 
 function addPlayerToWaitingList(playerName)
@@ -482,6 +473,30 @@ function playerKicked(response)
 		else newMessages(['Expulsaron a alguien']);
 
 		if(response.defend) changeDefendTextState(true);
+	}
+	else updateStartGameButton();
+}
+
+function updateStartGameButton()
+{
+	if(!gameMaster)
+	{
+		document.getElementById('waitStartButton').hidden = true;
+	}
+	else
+	{
+		document.getElementById('waitStartButton').hidden = false;
+
+		if(players.length === maxPlayers)
+		{
+			document.getElementById('waitingPlayersText').hidden = true;
+			document.getElementById('waitStartButton').disabled = false;
+		}
+		else
+		{
+			document.getElementById('waitingPlayersText').hidden = false;
+			document.getElementById('waitStartButton').disabled = true;
+		}
 	}
 }
 
