@@ -91,6 +91,20 @@ module.exports = function(dataObject, ws)
 
 
 
+	//Comprobamos si la carta no es una carta especial
+	if([cards.cardTypes.moreSpecial, cards.cardTypes.special].includes(cards.properties[card].type))
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'errorPlaying',
+			error: 'cantBlowSpecial'
+		}));
+		console.log('errorPlaying: invalidCard: no se pueden soplar cartas especiales');
+		return;
+	}
+
+
+
 	// Comprobamos si la carta está en el mazo del jugador
 	if(!player.deck.includes(card))
 	{

@@ -123,6 +123,19 @@ function errorPlaying(response)
 				}
 			});
 			break;
+
+		case 'cantBlowSpecial':
+			floatingWindow(
+			{
+				title: 'Esa carta no',
+				text: 'Las cartas especiales o muy especiales no se pueden soplar.',
+				button:
+				{
+					text: 'Aceptar',
+					callback: closeWindow
+				}
+			});
+			break;
 	}
 }
 
