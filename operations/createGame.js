@@ -160,7 +160,6 @@ module.exports = function(dataObject, ws)
 
 
 	// Crear una partida
-	const table = cards.newTable();
 	const key = rand.generateKey(7);
 
 	game.activeGames[roomID] =
@@ -174,7 +173,6 @@ module.exports = function(dataObject, ws)
 		cardsToVictim: 0,
 		rules,
 		order: [],
-		table,
 		keys:
 		{
 			[key]: username
@@ -189,6 +187,9 @@ module.exports = function(dataObject, ws)
 		},
 		timeout: undefined
 	}
+
+	//Generar el maso en la mesa
+	game.activeGames[roomID].table = cards.newTable(roomID);
 
 	//Crear el deck del jugador, se crea a parte porque es necesario que el juego esté creado para poder obtener cartas
 	game.activeGames[roomID].players[username].deck = cards.generateDeck(roomID);

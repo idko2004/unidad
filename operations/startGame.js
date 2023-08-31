@@ -84,11 +84,6 @@ module.exports = function(dataObject, ws)
 
 
 
-	//Shufflear la mesa
-	room.table = random.shuffle(room.table);
-
-
-
 	// Poner el orden de los jugadores y quien juega
 	const players = Object.keys(room.players);
 	

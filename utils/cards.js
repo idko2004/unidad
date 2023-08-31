@@ -123,9 +123,16 @@ const random = require('./random');
 
 const colors = require('colors');
 
-function newTable()
+function newTable(roomID)
 {
-	const table =
+	const room = game.activeGames[roomID];
+	if(room === undefined)
+	{
+		console.log(colors.red(`cards.newTable: la sala ${roomID} no existe`));
+		return [];
+	}
+
+	let table =
 	[
 		'1r', '2r', '3r', '4r', '5r', '6r', '7r', '8r', '9r', '+2r', 'REVERSEr', 'BLOCKr', '0r', '+4',
 		'1r', '2r', '3r', '4r', '5r', '6r', '7r', '8r', '9r', '+2r', 'REVERSEr', 'BLOCKr', 'COLOR',
@@ -137,19 +144,29 @@ function newTable()
 		'1b', '2b', '3b', '4b', '5b', '6b', '7b', '8b', '9b', '+2b', 'REVERSEb', 'BLOCKb', 'COLOR',
 		
 		'1y', '2y', '3y', '4y', '5y', '6y', '7y', '8y', '9y', '+2y', 'REVERSEy', 'BLOCKy', '0y', '+4',
-		'1y', '2y', '3y', '4y', '5y', '6y', '7y', '8y', '9y', '+2y', 'REVERSEy', 'BLOCKy', 'COLOR',
+		'1y', '2y', '3y', '4y', '5y', '6y', '7y', '8y', '9y', '+2y', 'REVERSEy', 'BLOCKy', 'COLOR'
 
+		/*
 		'+1r', '+1g', '+1b', '+1y',
 		'+6r', '+6g', '+6b', '+6y',
 		'BLANKr', 'BLANKg', 'BLANKb', 'BLANKy',
 		'COLORr', 'COLORg', 'COLORb', 'COLORy',
+		*/
 	];
 
-	//Añadir cartas normales aleatorias para compensar por las cartas más especiales
-	for(let i = 0; i < 20; i++)
+	if(room.rules.moreSpecialCards)
 	{
-		table.push(getNormalCard());
+		//Añadir las cartas muy especiales a la mesa si es que están habilitadas en las reglas
+		//También añadir cartas normales aleatorias para compensar por las cartas más especiales
+		for(let i = 0; i < moreSpecialCards.length; i++)
+		{
+			table.push(moreSpecialCards[i]);
+			table.push(getNormalCard());
+		}
 	}
+
+	//Shufflear la mesa
+	table = random.shuffle(table);
 
 	return table;
 }
@@ -190,7 +207,7 @@ function getCard(roomID)
 	let tableUpdate = deleteFromDeck(card, table);
 	if(tableUpdate.length < 3)
 	{
-		tableUpdate = newTable();
+		tableUpdate = newTable(roomID);
 		console.log('Mesa recargada');
 	}
 	
