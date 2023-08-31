@@ -1,5 +1,6 @@
 const game = require('../utils/game');
 const msg = require('../utils/messages');
+const random = require('../utils/random');
 
 module.exports = function(dataObject, ws)
 {
@@ -80,6 +81,11 @@ module.exports = function(dataObject, ws)
 
 	//Ya no dejar que nadie más entre en la sala
 	room.letMorePlayersIn = false;
+
+
+
+	//Shufflear la mesa
+	room.table = random.shuffle(room.table);
 
 
 

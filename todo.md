@@ -4,7 +4,7 @@
 - [x] Sistema de suerte
 - [x] Que las acciones se realicen con claves en vez de nombres de usuario, cuando un jugador se une a la partida, se le entrega un código, y cada acción que quiera realizar debe estar acompañada de ese código en vez de su nombre de usuario.
 - [x] Soplar.
-- [ ] Hacer shuffle con la mesa. (no sé si haga falta pero haría que todo sea doblemente random).
+- [x] Hacer shuffle con la mesa. (no sé si haga falta pero haría que todo sea doblemente random).
 - [ ] Actualizar idko.infityfreeapp.com/unidad.
 - [ ] Manual de como jugar.
 - [ ] Página acerca de.
@@ -17,3 +17,4 @@
 - [ ] Poder activar o desactivar las cartas más especiales en las opciones avanzadas.
 - [ ] Poder modificar la cantidad de cartas con la que se empieza en las opciones avanzadas.
 - [ ] Poder desactivar bloqueo o reversa a las cartas + en las opciones avanzadas.
+- [ ] Dejar de usar google fonts.
