@@ -128,7 +128,6 @@ module.exports = function(dataObject, ws)
 			{
 				id: dataObject.data,
 				master: room_room.master,
-				maxPlayers: room_room.maxPlayers,
 				currentCard: room_room.currentCard,
 				letMorePlayersIn: room_room.letMorePlayersIn,
 				whoIsPlaying: room_room.whoIsPlaying,

@@ -5,7 +5,6 @@ const gamesExample =
 	'a1b2c3': //roomID
 	{
 		master: 'alguien', //Persona que creó la sala y controla el juego,
-		maxPlayers: 4, //Cantidad de jugadores necesarios para iniciar una partida,
 		currentCard: '6b',
 		letMorePlayersIn: false,
 		whoIsPlaying: 0, //A quien le toca,
@@ -331,8 +330,6 @@ function updateTimeout(roomID)
 
 			//Eliminar el perfil del jugador de esta sala
 			delete room.players[username];
-
-			room.maxPlayers--;
 		}
 
 		if(room.order.length <= 1)

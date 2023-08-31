@@ -5,7 +5,6 @@ let connected = false;
 
 let gameMaster = false;
 let players = [];
-let maxPlayers;
 
 let username;
 let roomID;

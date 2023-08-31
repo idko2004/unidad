@@ -183,31 +183,10 @@ document.getElementById('createGameButton').addEventListener('click', function()
 	if(username === '') return;
 
 
-	let numberOfPlayers = parseInt(document.getElementById('createGamePlayers').value);
-	if(isNaN(numberOfPlayers)
-	|| numberOfPlayers < 2
-	|| numberOfPlayers > 10)
-	{
-		floatingWindow(
-		{
-			title: 'El número de jugadores está mal',
-			text: 'La cantidad de jugadores debe estar entre 2 y 10',
-			button:
-			{
-				text: 'Aceptar',
-				callback: closeWindow
-			}
-		});
-		return;
-	}
-
-	maxPlayers = numberOfPlayers;
-
 	let obj =
 	{
 		operation: 'createGame',
-		username,
-		maxPlayers
+		username
 	};
 
 	ws.send(JSON.stringify(obj));
@@ -217,11 +196,6 @@ document.getElementById('createGameButton').addEventListener('click', function()
 });
 
 document.getElementById('createGameUsername').addEventListener('keyup', function(e)
-{
-	if(e.key === 'Enter') document.getElementById('createGamePlayers').focus();
-});
-
-document.getElementById('createGamePlayers').addEventListener('keyup', function(e)
 {
 	if(e.key === 'Enter') document.getElementById('createGameButton').click();
 });
@@ -487,7 +461,7 @@ function updateStartGameButton()
 	{
 		document.getElementById('waitStartButton').hidden = false;
 
-		if(players.length === maxPlayers)
+		if(players.length > 1)
 		{
 			document.getElementById('waitingPlayersText').hidden = true;
 			document.getElementById('waitStartButton').disabled = false;
@@ -504,7 +478,7 @@ document.getElementById('waitStartButton').addEventListener('click', function(e)
 {
 	if(!gameMaster) return;
 
-	if(players.length < maxPlayers) return;
+	if(players.length < 2) return;
 
 	changeMenus('loading');
 

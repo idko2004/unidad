@@ -11,7 +11,6 @@ module.exports = function(dataObject, ws)
 	{
 		operation: 'createGame',
 		username: nombre del usuario master,
-		maxPlayers: número de jugadores necesarios
 	}
 
 	Respuesta:
@@ -28,17 +27,11 @@ module.exports = function(dataObject, ws)
 	console.log('---------------\ncreateGame\n');
 
 	let username = dataObject.username;
-	let maxPlayers = dataObject.maxPlayers;
 
 	if(username === undefined
-	|| maxPlayers === undefined
 	|| typeof username !== 'string'
-	|| typeof maxPlayers !== 'number'
-	|| isNaN(maxPlayers)
 	|| username.trim() === ''
-	|| username.length > 20
-	|| maxPlayers < 2
-	|| maxPlayers > 20)
+	|| username.length > 20)
 	{
 		console.log('Los requisitos no se cumplen');
 		ws.send(JSON.stringify(
@@ -67,7 +60,6 @@ module.exports = function(dataObject, ws)
 	game.activeGames[roomID] =
 	{
 		master: username,
-		maxPlayers,
 		currentCard: cards.getNormalCard(),
 		letMorePlayersIn: true,
 		whoIsPlaying: 0,

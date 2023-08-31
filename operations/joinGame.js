@@ -141,6 +141,7 @@ module.exports = function(dataObject, ws)
 
 
 
+	/*
 	// Ver si la sala está llena
 	if(players.length >= room.maxPlayers)
 	{
@@ -151,6 +152,7 @@ module.exports = function(dataObject, ws)
 		}));
 		return;
 	}
+	*/
 
 
 
