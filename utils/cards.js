@@ -217,8 +217,17 @@ function getNormalCard()
 
 function generateDeck(roomID)
 {
+	const room = game.activeGames[roomID];
+	if(roomID === undefined)
+	{
+		console.log(`cards.generateDeck: la sala ${roomID} no existe`);
+		return [];
+	}
+
+	const deckSize = room.rules.cardsAtStart;
+
 	let deck = [];
-	for(let i = 0; i < 7; i++)
+	for(let i = 0; i < deckSize; i++)
 	{
 		deck.push(getCard(roomID));
 	}

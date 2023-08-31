@@ -161,7 +161,7 @@ module.exports = function(dataObject, ws)
 	{
 		ws
 	}
-	room.players[username].deck = cards.generateDeck(roomID, username);
+	room.players[username].deck = cards.generateDeck(roomID);
 
 	players.push(username);
 
