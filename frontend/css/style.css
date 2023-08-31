@@ -23,6 +23,7 @@ body
 	border: 0;
 	background-color: var(--black);
 	color: var(--white);
+	font-family: 'Tilt Warp', cursive;
 
 	animation: background-color 300ms ease-out;
 }

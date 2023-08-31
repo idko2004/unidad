@@ -141,10 +141,52 @@
 					Crear una partida
 				</div>
 				<div class="menuContent">
-					<p>
-						Tu nombre:
-					</p>
-					<input type="text" id="createGameUsername">
+					<div class="remPadding">
+						<p>
+							Tu nombre:
+						</p>
+						<input type="text" id="createGameUsername">
+					</div>
+					<div>
+						<button id="createGameOptionsButton">Modificar algunas reglas</button>
+						<div id="createGameOptionsMenu" hidden>
+							<hr>
+							<div class="remPadding">
+								<p>
+									Cartas iniciales
+								</p>
+								<input type="number" value="7" id="createGameCardsNumber">
+							</div>
+							<div class="remPadding">
+								<p>
+									Cartas muy especiales
+								</p>
+								<div id="createGameSpecialCardsState">
+									Activado
+								</div>
+								<button id="createGameSpecialCards">Desactivar</button>
+							</div>
+							<div class="remPadding">
+								<p>
+									Defenderse con cartas de bloqueo y reversa
+								</p>
+								<div id="createGameDefendState">
+									Activado
+								</div>
+								<button id="createGameDefend">Desactivar</button>
+							</div>
+							<div class="remPadding">
+								<p>
+									Intercambiar mazos con una carta 0
+								</p>
+								<div id="createGameInterchangeZeroState">
+									Activado
+								</div>
+								<button id="createGameInterchangeZero">Desactivar</button>
+							</div>
+							<hr>
+						</div>
+					</div>
 					<div class="remPadding">
 						<button id="createGameBack">Volver</button>
 						<button id="createGameButton">Crear partida</button>

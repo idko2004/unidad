@@ -201,6 +201,97 @@ document.getElementById('createGameUsername').addEventListener('keyup', function
 });
 
 //
+//	Opciones en create game
+//
+
+function updateCreateGameOptions()
+{
+	//Si se van a modificar las reglas, el menú de modificar reglas debe mostrarse
+	document.getElementById('createGameOptionsMenu').hidden = !roomRules.modifyRules;
+
+	//El texto del botón de mostrar o ocultar el menú
+	if(roomRules.modifyRules) document.getElementById('createGameOptionsButton').innerText = 'Dejar las reglas por defecto';
+	else document.getElementById('createGameOptionsButton').innerText = 'Modificar algunas reglas';
+
+	//Número de cartas al comienzo
+	document.getElementById('createGameCardsNumber').value = roomRules.cardsAtStart;
+
+	//Cartas muy especiales
+	if(roomRules.verySpecialCards)
+	{
+		document.getElementById('createGameSpecialCardsState').innerText = "Activado";
+		document.getElementById('createGameSpecialCards').innerText = "Desactivar";
+	}
+	else
+	{
+		document.getElementById('createGameSpecialCardsState').innerText = "Desactivado";
+		document.getElementById('createGameSpecialCards').innerText = "Activar";
+	}
+
+	//Gimmick de defensa
+	if(roomRules.defendGimmick)
+	{
+		document.getElementById('createGameDefendState').innerText = "Activado";
+		document.getElementById('createGameDefend').innerText = "Desactivar";
+	}
+	else
+	{
+		document.getElementById('createGameDefendState').innerText = "Desactivado";
+		document.getElementById('createGameDefend').innerText = "Activar";
+	}
+
+	//Intercambiar mazos con 0
+	if(roomRules.zeroInterchange)
+	{
+		document.getElementById('createGameInterchangeZeroState').innerText = "Activado";
+		document.getElementById('createGameInterchangeZero').innerText = "Desactivar";
+	}
+	else
+	{
+		document.getElementById('createGameInterchangeZeroState').innerText = "Desactivado";
+		document.getElementById('createGameInterchangeZero').innerText = "Activar";
+	}
+}
+
+document.getElementById('createGameOptionsButton').addEventListener('click', function()
+{
+	roomRules.modifyRules = !roomRules.modifyRules;
+	updateCreateGameOptions();
+});
+
+document.getElementById('createGameCardsNumber').addEventListener('change', function(e)
+{
+	let number = parseInt(e.target.value);
+
+	if(isNaN(number) || number < 2)
+	{
+		e.target.value = 7;
+		roomRules.cardsAtStart = 7;
+		return;
+	}
+
+	roomRules.cardsAtStart = number;
+});
+
+document.getElementById('createGameSpecialCards').addEventListener('click', function()
+{
+	roomRules.verySpecialCards = !roomRules.verySpecialCards;
+	updateCreateGameOptions();
+});
+
+document.getElementById('createGameDefend').addEventListener('click', function()
+{
+	roomRules.defendGimmick = !roomRules.defendGimmick;
+	updateCreateGameOptions();
+});
+
+document.getElementById('createGameInterchangeZero').addEventListener('click', function()
+{
+	roomRules.zeroInterchange = !roomRules.zeroInterchange;
+	updateCreateGameOptions();
+});
+
+//
 //	WAIT FOR PLAYERS MENU
 //
 

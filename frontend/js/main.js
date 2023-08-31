@@ -17,6 +17,15 @@ let canSkipDirectly = false;
 let canGrabACard = true;
 let defendTextActive = false;
 
+const roomRules = //Esto solo se usa al momento de crear partida
+{
+	modifyRules: false,
+	cardsAtStart: 7,
+	verySpecialCards: true,
+	defendGimmick: true,
+	zeroInterchange: true
+}
+
 const remSize = parseFloat(getComputedStyle(document.body).fontSize);
 const vhSize = innerHeight / 100;
 
