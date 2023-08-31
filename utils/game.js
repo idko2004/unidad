@@ -10,7 +10,14 @@ const gamesExample =
 		whoIsPlaying: 0, //A quien le toca,
 		direction: -1, //Determina en que dirección va el orden de juego, debe ser 1 o -1, este número se suma a whoIsPlaying al final de cada turno.
 		cardGrabbed: true, //Determina si el jugador ya ha "tomado una carta del mazo", si es verdadero, ya no debería ser capaz de tomar más cartas, debido a que ya tomó una, debe restablecerse a falso cada que termine el turno de un jugador,
-		cardsToVictim: 0, //Número de cartas que un jugador recibirá cuando no pueda defenderse de un +2 o +4
+		cardsToVictim: 0, //Número de cartas que un jugador recibirá cuando no pueda defenderse de un +2 o +4,
+		rules: //Reglas que se aplican a esta sala, para poder personalizar el juego
+		{
+			cardsAtStart: 7, //La cantidad de cartas con las que empieza el juego
+			moreSpecialCards: true, //Decide si habrán cartas muy especiales en la mesa
+			defendGimmick: true, //Decide si un jugador puede defenderse utilizando una carta reversa o bloqueo.
+			zeroInterchange: true //Decide si se pueden intercambiar mazos con una carta 0.
+		},
 		order: [ 'alguien', 'fulanito' ], //El orden en el que van a ir los turnos,
 		table: [ '7y' ], //Todas las cartas que hay en la mesa
 		keys: //Claves que los usuarios utilizan para autenticarse, se entrega una clave a cada uno al unirse a una partida o crear una

@@ -189,6 +189,14 @@ document.getElementById('createGameButton').addEventListener('click', function()
 		username
 	};
 
+	if(roomRules.modifyRules) obj.rules =
+	{
+		cardsAtStart: roomRules.cardsAtStart,
+		moreSpecialCards: roomRules.verySpecialCards,
+		defendGimmick: roomRules.defendGimmick,
+		zeroInterchange: roomRules.zeroInterchange
+	}
+
 	ws.send(JSON.stringify(obj));
 
 	gameMaster = true;
@@ -364,6 +372,23 @@ function joinedToGame(response)
 						{
 							await closeWindow();
 							changeMenus('findGame');
+						}
+					}
+				});
+				break;
+
+			case 'invalidRules':
+				floatingWindow(
+				{
+					title: 'Hay un problema',
+					text: 'Una de las reglas de la sala parece que no es válida',
+					button:
+					{
+						text: 'Aceptar',
+						callback: async function()
+						{
+							await closeWindow();
+							changeMenus('createGame');
 						}
 					}
 				});
