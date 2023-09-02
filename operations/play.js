@@ -1,7 +1,6 @@
 const game = require('../utils/game');
 const cards = require('../utils/cards');
 const msg = require('../utils/messages');
-const random = require('../utils/random');
 
 const colors = require('colors');
 
@@ -244,18 +243,6 @@ module.exports = function(dataObject, ws)
 				error: 'cantDefendWithThat'
 			}));
 			return;
-		
-			/*
-			messages.push(msg.getMessage(msg.msgValues.cardsEaten, //Mensaje de que la víctima se comió cartas
-			{
-				victim: username,
-				cardsnumber: room.cardsToVictim
-			}));
-			cards.giveCardsToVictim(roomID, username); //Dar las cartas al jugador
-			game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
-			game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
-			return;
-			*/
 		}
 
 		switch(cardProperties.value)
@@ -273,7 +260,6 @@ module.exports = function(dataObject, ws)
 				playZeroCard(dataObject, ws, room, messages);
 				break;
 		}
-
 	}
 
 
@@ -306,19 +292,6 @@ function playNormalCard(dataObject, ws, room, messages)
 			error: 'cantDefendWithThat'
 		}));
 		return;
-
-		/*
-		messages.push(msg.getMessage(msg.msgValues.cardsEaten, //Mensaje de que la víctima se comió cartas
-		{
-			victim: username,
-			cardsnumber: room.cardsToVictim
-		}));
-
-		cards.giveCardsToVictim(roomID, username); //Dar las cartas al jugador
-		game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
-		game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
-		return;
-		*/
 	} //Si no te están tirando tremendo +4
 
 	room.currentCard = play.card; //Actualizar la carta actual
@@ -362,38 +335,6 @@ function playPlusCard(howManyCards, dataObject, ws, room, messages)
 		cardsnumber: room.cardsToVictim
 	}));
 
-	/*
-	const victim = room.order[game.utils.whosNext(roomID)]; //Determinar quien va a ser la víctima que se lleve las cartas
-
-	
-	if(!cards.deckContainsSpecificsCards(
-	[
-		'+4',
-		'+2r', '+2g', '+2y', '+2y',
-		'+6r', '+6g', '+6b', '+6y',
-		'BLOCKr', 'BLOCKg', 'BLOCKb', 'BLOCKy',
-		'REVERSEr', 'REVERSEg', 'REVERSEb', 'REVERSEy'
-	],room.players[victim].deck)) //Si la víctima no tiene cartas para defenderse
-	{
-		console.log('La victima no puede defenderse');
-
-		messages.push(msg.getMessage(msg.msgValues.cardsEaten, //Mensaje de que la víctima se comió cartas
-		{
-			victim,
-			cardsnumber: room.cardsToVictim
-		}));
-
-		cards.giveCardsToVictim(roomID, victim);
-
-		//Cambiar de turno dos veces para saltar el turno de la víctima
-		game.utils.nextTurn(roomID);
-
-	}
-	else console.log('Existen cartas defensivas en su mazo');
-	//Si la víctima no tiene cartas para defenderse, debe recibir las cartas inmediatamente y su turno debe saltarse.
-	//Pero, si la víctima es capaz de defenderse, debe hacerlo, de lo contrario, deberá de recibir las cartas
-	*/
-
 	game.utils.nextTurn(roomID); //Cambiar de turno dos veces para saltar el turno de la víctima
 	game.utils.updatePlayers(roomID, messages);
 }
@@ -407,6 +348,19 @@ function playBlockCard(dataObject, ws, room, messages)
 		console.log(colors.red('play.playBlockCard: alguno de los parámetros es undefined'));
 		return;
 	}
+
+	//Si defenderse con bloqueo no está permitido en esta sala y hay cartas de las que defenderse, enviar un mensaje al jugador y no hacer nada.
+	if(!room.rules.defendGimmick && room.cardsToVictim > 0)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'errorPlaying',
+			error: 'defendGimmickDisabled'
+		}));
+		console.log('errorPlaying: defendGimmickDisabled: en esta sala está desactivada la defensa con cartas especiales');
+		return;
+	}
+
 
 	const play = dataObject.play;
 	const username = dataObject.username;
@@ -460,6 +414,19 @@ function playReverseCard(dataObject, ws, room, messages)
 		console.log(colors.red('play.playReverseCard: alguno de los parámetros es undefined'));
 		return;
 	}
+
+	//Si defenderse con bloqueo no está permitido en esta sala y hay cartas de las que defenderse, enviar un mensaje al jugador y no hacer nada.
+	if(!room.rules.defendGimmick && room.cardsToVictim > 0)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'errorPlaying',
+			error: 'defendGimmickDisabled'
+		}));
+		console.log('errorPlaying: defendGimmickDisabled: en esta sala está desactivada la defensa con cartas especiales');
+		return;
+	}
+
 
 	const play = dataObject.play;
 	const username = dataObject.username;
@@ -538,18 +505,6 @@ function playColorCard(dataObject, ws, room, messages)
 			error: 'cantDefendWithThat'
 		}));
 		return;
-
-		/*
-		messages.push(msg.getMessage(msg.msgValues.cardsEaten, //Mensaje de que la víctima se comió cartas
-		{
-			victim: username,
-			cardsnumber: room.cardsToVictim
-		}));
-		cards.giveCardsToVictim(roomID, username); //Dar las cartas al jugador
-		game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
-		game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
-		return;
-		*/
 	}
 
 
@@ -696,17 +651,6 @@ function playPlusOneCard(dataObject, ws, room, messages)
 			error: 'cantDefendWithThat'
 		}));
 		return;
-		/*
-		messages.push(msg.getMessage(msg.msgValues.cardsEaten, //Mensaje de que la víctima se comió cartas
-		{
-			victim: username,
-			cardsnumber: room.cardsToVictim
-		}));
-		cards.giveCardsToVictim(roomID, username); //Dar las cartas al jugador
-		game.utils.nextTurn(roomID); //Pasar el turno al siguiente jugador
-		game.utils.updatePlayers(roomID, messages); //Enviar el estado de la partida a todos los jugadores
-		return;
-		*/
 	}
 
 

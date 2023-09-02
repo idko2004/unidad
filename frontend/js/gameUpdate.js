@@ -149,6 +149,19 @@ function errorPlaying(response)
 				}
 			});
 			break;
+
+		case 'defendGimmickDisabled':
+			floatingWindow(
+			{
+				title: 'Reglas modificadas',
+				text: 'En esta sala se ha deshabilitado la opción de defenderse usando cartas bloqueo o reversa.',
+				button:
+				{
+					text: 'Aceptar',
+					callback: closeWindow
+				}
+			});
+			break;
 	}
 }
 

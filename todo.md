@@ -11,10 +11,10 @@
 - [x] Si te tiran una carta + y jugás una carta 0 o cambiacolor, que no salga ningún menú y te diga que no podés usar esa carta.
 - [x] No poder soplar una carta especial.
 - [x] Quitar límite de cantidad de jugadores, que este se defina en cuanto se inicia la partida, mientras se está esperando, que puedan entrar los que quieran.
-- [ ] En el menú de esperar, que no desaparezca el botón de empezar, en vez de eso que solo se ponga gris.
-- [ ] Sección de opciones avanzadas en el menú de crear partida.
-- [ ] Poder activar o desactivar las cartas más especiales en las opciones avanzadas.
-- [ ] Poder modificar la cantidad de cartas con la que se empieza en las opciones avanzadas.
+- [x] En el menú de esperar, que no desaparezca el botón de empezar, en vez de eso que solo se ponga gris.
+- [x] Sección de opciones avanzadas en el menú de crear partida.
+- [x] Poder activar o desactivar las cartas más especiales en las opciones avanzadas.
+- [x] Poder modificar la cantidad de cartas con la que se empieza en las opciones avanzadas.
 - [ ] Poder desactivar bloqueo o reversa a las cartas + en las opciones avanzadas.
 - [ ] Dejar de usar google fonts.
 - [ ] Decidir de forma random quien tiene el primer turno.
