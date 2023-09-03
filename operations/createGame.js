@@ -198,6 +198,7 @@ module.exports = function(dataObject, ws)
 			[username]:
 			{
 				deck: [],
+				inactive: 0,
 				ws
 			}
 		},

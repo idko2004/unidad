@@ -175,6 +175,40 @@ function errorPlaying(response)
 				}
 			});
 			break;
+
+		case 'kickedForInactivity':
+			floatingWindow(
+			{
+				title: 'Expulsado por inactividad',
+				text: 'Han pasado unos cuantos turnos sin que juegues, así que el servidor te ha expulsado.',
+				button:
+				{
+					text: 'Aceptar',
+					callback: async function()
+					{
+						await closeWindow();
+						location.reload();
+					}
+				}
+			});
+			break;
+
+		case 'roomDeleted':
+			floatingWindow(
+			{
+				title: 'Sala borrada',
+				text: 'La sala se ha borrado.',
+				button:
+				{
+					text: 'Aceptar',
+					callback: async function()
+					{
+						await closeWindow();
+						location.reload();
+					}
+				}
+			});
+			break;
 	}
 }
 

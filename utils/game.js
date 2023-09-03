@@ -304,7 +304,7 @@ function updateTimeout(roomID)
 
 	if(room.timeout !== undefined) clearTimeout(room.timeout);
 
-	room.timeout = setTimeout(function()
+	room.timeout = setTimeout(async function()
 	{
 		if(activeGames[roomID] === undefined)
 		{
@@ -317,19 +317,25 @@ function updateTimeout(roomID)
 		nextTurn(roomID);
 		updatePlayers(roomID, [msg.getMessage(msg.msgValues.inactive, {username})]);
 
-
 		room.players[username].inactive++;
+		console.log(`Veces que ${username} estuvo inactivo: ${room.players[username].inactive}`);
 
 		if(room.players[username].inactive >= 3)
 		{
 			console.log(`### Jugador ${username} eliminado de la sala ${roomID}`);
 
+			//Avisar al jugador que le expulsaron
+			await room.players[username].ws.send(JSON.stringify(
+			{
+				operation: 'errorPlaying',
+				error: 'kickedForInactivity'
+			}));
+
 			//Eliminar el jugador del orden de turnos
-			room.order[whoIsPlaying] = undefined;
 			let newOrder = [];
 			for(let i = 0; i < room.order.length; i++)
 			{
-				if(room.order[i] !== undefined) newOrder.push(room.order[i]);
+				if(room.order[i] !== username) newOrder.push(room.order[i]);
 			}
 			room.order = newOrder;
 
@@ -342,6 +348,15 @@ function updateTimeout(roomID)
 
 		if(room.order.length <= 1)
 		{
+			for(let i = 0; i < room.order.length; i++)
+			{
+				await room.players[room.order[i]].ws.send(JSON.stringify(
+				{
+					operation: 'errorPlaying',
+					error: 'roomDeleted'
+				}));
+			}
+
 			delete activeGames[roomID];
 			console.log('### Sala borrada por inactividad', Object.keys(activeGames));
 		}
