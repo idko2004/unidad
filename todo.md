@@ -15,6 +15,8 @@
 - [x] Sección de opciones avanzadas en el menú de crear partida.
 - [x] Poder activar o desactivar las cartas más especiales en las opciones avanzadas.
 - [x] Poder modificar la cantidad de cartas con la que se empieza en las opciones avanzadas.
-- [ ] Poder desactivar bloqueo o reversa a las cartas + en las opciones avanzadas.
+- [x] Poder desactivar bloqueo o reversa a las cartas + en las opciones avanzadas.
+- [x] Poder desactivar soplar en las opciones avanzadas.
+- [ ] Que existan cartas de +8 si las cartas iniciales son >= 15
 - [ ] Dejar de usar google fonts.
 - [ ] Decidir de forma random quien tiene el primer turno.

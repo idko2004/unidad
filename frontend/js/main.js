@@ -23,7 +23,8 @@ const roomRules = //Esto solo se usa al momento de crear partida
 	cardsAtStart: 7,
 	verySpecialCards: true,
 	defendGimmick: true,
-	zeroInterchange: true
+	zeroInterchange: true,
+	blow: true
 }
 
 const remSize = parseFloat(getComputedStyle(document.body).fontSize);

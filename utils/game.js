@@ -16,7 +16,8 @@ const gamesExample =
 			cardsAtStart: 7, //La cantidad de cartas con las que empieza el juego
 			moreSpecialCards: true, //Decide si habrán cartas muy especiales en la mesa
 			defendGimmick: true, //Decide si un jugador puede defenderse utilizando una carta reversa o bloqueo.
-			zeroInterchange: true //Decide si se pueden intercambiar mazos con una carta 0.
+			zeroInterchange: true, //Decide si se pueden intercambiar mazos con una carta 0.,
+			blow: true //Decide si se puede soplar
 		},
 		order: [ 'alguien', 'fulanito' ], //El orden en el que van a ir los turnos,
 		table: [ '7y' ], //Todas las cartas que hay en la mesa

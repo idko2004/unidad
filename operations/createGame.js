@@ -58,7 +58,8 @@ module.exports = function(dataObject, ws)
 		cardsAtStart: 7,
 		moreSpecialCards: true,
 		defendGimmick: true,
-		zeroInterchange: true
+		zeroInterchange: true,
+		blow: true
 	}
 
 	if(rules === undefined) rules = defaultRules; //Aplicar las reglas por defecto si no se envía ninguna
@@ -66,10 +67,9 @@ module.exports = function(dataObject, ws)
 	{
 		//Comprobar si las reglas son válidas
 		let rulesKeys = Object.keys(rules);
-		rulesKeys.forEach((i) => 
+		for(let i = 0; i < rulesKeys.length; i++)
 		{
-			//Si alguna regla no está en esta lista, no es una regla válida
-			if(!['cardsAtStart', 'moreSpecialCards', 'defendGimmick', 'zeroInterchange'].includes(i))
+			if(!['cardsAtStart', 'moreSpecialCards', 'defendGimmick', 'zeroInterchange', 'blow'].includes(rulesKeys[i])) //Si alguna regla no está en esta lista, no es una regla válida
 			{
 				ws.send(JSON.stringify(
 				{
@@ -79,7 +79,7 @@ module.exports = function(dataObject, ws)
 				console.log(`obtainRoomID: invalidRules: la regla ${i} no es válida`);
 				return;
 			}
-		});
+		}
 
 		//Comprobar que cardsAtStart sea un número válido
 		if(rules.cardsAtStart !== undefined)
@@ -146,6 +146,22 @@ module.exports = function(dataObject, ws)
 			}
 		}
 		else rules.zeroInterchange = defaultRules.zeroInterchange;
+
+		//Comprobar que blow tenga un valor válido
+		if(rules.blow !== undefined)
+		{
+			if(typeof rules.blow !== 'boolean')
+			{
+				ws.send(JSON.stringify(
+				{
+					operation: 'obtainRoomID',
+					error: 'invalidRules'
+				}));
+				console.log('obtainRoomID: invalidRules: blow no es un boolean');
+				return;
+			}
+		}
+		else rules.blow = defaultRules.blow;
 	}
 
 

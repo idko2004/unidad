@@ -162,6 +162,19 @@ function errorPlaying(response)
 				}
 			});
 			break;
+
+		case 'blowDisabled':
+			floatingWindow(
+			{
+				title: 'Reglas modificadas',
+				text: 'En esta sala se ha deshabilitado la opción de soplar.',
+				button:
+				{
+					text: 'Aceptar',
+					callback: closeWindow
+				}
+			});
+			break;
 	}
 }
 

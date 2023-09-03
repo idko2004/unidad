@@ -49,6 +49,20 @@ module.exports = function(dataObject, ws)
 
 
 
+	//Comprobar si en esta sala se puede soplar
+	if(!room.rules.blow)
+	{
+		ws.send(JSON.stringify(
+		{
+			operation: 'errorPlaying',
+			error: 'blowDisabled'
+		}));
+		console.log('errorPlaying: blowDisabled: soplar está desactivado en esta sala');
+		return;
+	}
+
+
+
 	const username = room.keys[key];
 	if(username === undefined)
 	{

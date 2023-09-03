@@ -194,7 +194,8 @@ document.getElementById('createGameButton').addEventListener('click', function()
 		cardsAtStart: roomRules.cardsAtStart,
 		moreSpecialCards: roomRules.verySpecialCards,
 		defendGimmick: roomRules.defendGimmick,
-		zeroInterchange: roomRules.zeroInterchange
+		zeroInterchange: roomRules.zeroInterchange,
+		blow: roomRules.blow
 	}
 
 	ws.send(JSON.stringify(obj));
@@ -259,6 +260,18 @@ function updateCreateGameOptions()
 		document.getElementById('createGameInterchangeZeroState').innerText = "Desactivado";
 		document.getElementById('createGameInterchangeZero').innerText = "Activar";
 	}
+
+	//Soplar
+	if(roomRules.blow)
+	{
+		document.getElementById('createGameBlowState').innerText = "Activado";
+		document.getElementById('createGameBlow').innerText = "Desactivar";
+	}
+	else
+	{
+		document.getElementById('createGameBlowState').innerText = "Desactivado";
+		document.getElementById('createGameBlow').innerText = "Activar";
+	}
 }
 
 document.getElementById('createGameOptionsButton').addEventListener('click', function()
@@ -296,6 +309,12 @@ document.getElementById('createGameDefend').addEventListener('click', function()
 document.getElementById('createGameInterchangeZero').addEventListener('click', function()
 {
 	roomRules.zeroInterchange = !roomRules.zeroInterchange;
+	updateCreateGameOptions();
+});
+
+document.getElementById('createGameBlow').addEventListener('click', function()
+{
+	roomRules.blow = !roomRules.blow;
 	updateCreateGameOptions();
 });
 
