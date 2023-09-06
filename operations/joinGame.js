@@ -108,7 +108,8 @@ module.exports = function(dataObject, ws)
 			deck: room.players[username].deck,
 			currentCard: room.currentCard,
 			yourTurn: room.order[room.whoIsPlaying] === username,
-			message: ['Has vuelto a la partida']
+			message: ['Has vuelto a la partida'],
+			rules: room.rules
 		}));
 		return;
 	}
@@ -188,7 +189,8 @@ module.exports = function(dataObject, ws)
 		operation: 'joinedToGame',
 		roomID,
 		key,
-		players
+		players,
+		rules: room.rules
 	}));
 
 

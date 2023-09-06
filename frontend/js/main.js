@@ -17,7 +17,10 @@ let canSkipDirectly = false;
 let canGrabACard = true;
 let defendTextActive = false;
 
-const roomRules = //Esto solo se usa al momento de crear partida
+
+//Esto se usa al momento de crear partida para saber que reglas enviar al servidor para crear la sala
+//También se usa para guardar las reglas que el servidor envía al ya crear la sala o al unirse a una sala.
+let roomRules =
 {
 	modifyRules: false,
 	cardsAtStart: 7,

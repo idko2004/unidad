@@ -436,6 +436,7 @@ function joinedToGame(response)
 	roomID = response.roomID;
 	key = response.key;
 	players = response.players;
+	roomRules = response.rules;
 	document.getElementById('waitRoomID').innerText = response.roomID;
 
 	for(let i = 0; i < response.players.length; i++)

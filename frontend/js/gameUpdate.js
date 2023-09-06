@@ -222,6 +222,7 @@ function rejoined(response)
 	roomID = response.roomID;
 	players = response.players;
 	key = response.key;
+	roomRules = response.rules;
 
 	startGame(response);
 }

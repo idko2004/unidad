@@ -232,6 +232,7 @@ module.exports = function(dataObject, ws)
 		players:
 		[
 			username
-		]
+		],
+		rules
 	}));
 }
