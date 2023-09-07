@@ -123,6 +123,13 @@ function openZeroCardMenu(card)
 		return;
 	}
 
+	//Cuando intercambiar mazos está desactivado en las reglas
+	if(!roomRules.zeroInterchange)
+	{
+		playZeroCard(null, card);
+		return;
+	}
+
 	const list = [];
 	for(let i = 0; i < players.length; i++)
 	{

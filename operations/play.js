@@ -581,6 +581,7 @@ function playZeroCard(dataObject, ws, room, messages)
 	const roomID = dataObject.roomID;
 
 	const victim = play.change;
+
 	if(victim === undefined)
 	{
 		ws.send(JSON.stringify(
@@ -588,16 +589,31 @@ function playZeroCard(dataObject, ws, room, messages)
 			operation: 'errorPlaying',
 			error: 'invalidVictim'
 		}));
+		console.log('errorPlaying: invalidVictim: victim is undefined');
 		return;
 	}
-	if(!room.order.includes(victim) && victim !== null)
+	if(victim !== null)
 	{
-		ws.send(JSON.stringify(
+		if(!room.rules.zeroInterchange)
 		{
-			operation: 'errorPlaying',
-			error: 'invalidVictim'
-		}));
-		return;
+			ws.send(JSON.stringify(
+			{
+				operation: 'errorPlaying',
+				error:'zeroInterchangeDisabled'
+			}));
+			console.log('errorPlaying: zeroInterchangeDisabled: en esta sala no se puede intercambiar mazos');
+			return;
+		}
+		if(!room.order.includes(victim))
+		{
+			ws.send(JSON.stringify(
+			{
+				operation: 'errorPlaying',
+				error: 'invalidVictim'
+			}));
+			console.log('errorPlaying: invalidVictim: victim is not in the room');
+			return;
+		}
 	}
 
 	room.currentCard = play.card; //Actualizar la carta actual

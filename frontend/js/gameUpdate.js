@@ -163,6 +163,19 @@ function errorPlaying(response)
 			});
 			break;
 
+		case 'zeroInterchangeDisabled':
+			floatingWindow(
+			{
+				title: 'Reglas modificadas',
+				text: 'En esta sala se ha deshabilitado la opción de intercambiar mazos usando una carta 0.',
+				button:
+				{
+					text: 'Aceptar',
+					callback: closeWindow
+				}
+			});
+			break;
+
 		case 'blowDisabled':
 			floatingWindow(
 			{
