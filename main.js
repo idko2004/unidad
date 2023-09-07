@@ -29,7 +29,9 @@ wss.on('connection', function(ws)
 	console.log('### ¡Cliente conectado!');
 
 	ws.isAlive = true;
-	ws.gameInfo = [];
+	if(ws.gameInfo === undefined) ws.gameInfo = [];
+	else console.log(colors.yellow(`### El cliente ya tiene gameInfo: ${ws.gameInfo}`));
+
 	clients.wsClients.push(ws);
 	
 	ws.on('message', function(data)
@@ -43,7 +45,7 @@ wss.on('connection', function(ws)
 });
 
 //Ping
-const pingRate = vars.env.PING_RATE || "15000";
+const pingRate = vars.env.PING_RATE || "20000";
 setInterval(function()
 {
 	//console.log('### Llegó la hora de pinguear ###');
