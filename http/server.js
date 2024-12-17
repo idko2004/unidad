@@ -20,6 +20,7 @@ const MIME_TYPES =
 	gif: "image/gif",
 	ico: "image/x-icon",
 	svg: "image/svg+xml",
+	ttf: "font/ttf"
 };
 
 const STATIC_PATH = path.join(process.cwd(), "./frontend");
@@ -35,6 +36,9 @@ const allowedPaths =
 	'/css/game.css',
 	'/css/spritesheet.css',
 	'/css/style.css',
+
+	'/commonassets/fonts.css',
+	'/commonassets/fonts/TiltWarp-Regular-VariableFont.ttf',
 
 	'/img/favicon.png',
 	'/img/cardsheet.png',
