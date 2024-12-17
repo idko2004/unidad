@@ -55,10 +55,10 @@ function changeMenus(menu)
 
 document.getElementById('onlineServerButton').addEventListener('click', function()
 {
-	url = onlineUrl;
 	changeMenus('loading');
+	url = `ws://${gameserver}`;
 	connectToServer();
-	updateServerLabel(null);
+	updateServerLabel(gameserver);
 });
 
 document.getElementById('localServerButton').addEventListener('click', function()

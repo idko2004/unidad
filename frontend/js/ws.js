@@ -1,17 +1,31 @@
 let ws;
 
-autoconnect();
+seeIfWeHaveAnIpAlredyAtStartup();
 
-function autoconnect()
+//Cuando es el propio backend en el que está haciendo de servidor http, este modifica la etiqueta body para ponerle un atributo "gameserver", y en este pone su propia ip de forma en la que se pueda conectar, esto estaba pensado para que ocurra automáticamente, sin embargo, habían situaciones en las que esto no era posible y debías esperar a que la conexión hiciese timeout para poder introducir la ip manualmente. Por otro lado, había un botón que lo único que hacía era conectarse a localhost, así que vamos a usar ese botón para realizar esta acción a partir de ahora.
+function seeIfWeHaveAnIpAlredyAtStartup()
 {
-	const gameserver = document.body.getAttribute('gameserver');
+	const _gameserver = document.body.getAttribute('gameserver');
+	if(_gameserver === null)
+	{
+		document.getElementById('customServerBackButton').hidden = true; //Ocultar esto porque si no tiene el la ip puesta para conectarse automáticamente, no debería de poder ver el menú anterior.
+		document.getElementById('onlineServerButton').hidden = true; //Por si acaso.
+		changeMenus('localServer');
+	}
+	else
+	{
+		gameserver = _gameserver;
+		document.getElementById('onlineServerButton').innerText = `Conectarse a ${_gameserver}`;
+		changeMenus('server');
+	}
+	/*
 	if(gameserver === null) changeMenus('server');
 	else
 	{
 		url = `ws://${gameserver}`;
 		connectToServer();
 		updateServerLabel(gameserver);
-	}
+	}*/
 }
 
 

@@ -1,5 +1,5 @@
-const onlineUrl = 'ws://localhost:8765';
 let url;
+let gameserver;
 
 let connected = false;
 

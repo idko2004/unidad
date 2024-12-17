@@ -1,9 +1,7 @@
 # Unidad
 Unidad es un juego parecido al UNO, pero con otras reglas, de hecho, es posible que algunas ya te las conozcas, porque nadie juega al UNO con las reglas oficiales.
 
-Puedes jugar a Unidad directamente* en el sitio web [idko.infinityfreeapp.com/unidad](http://idko.infinityfreeapp.com/unidad/index.html) o puedes correr tu propia instancia.
-
-> _*De momento, igual es necesario tener tu propia instancia del servidor, aún no hay un servidor online disponible._
+Para jugar a Unidad es necesario que alguien instale el servidor, y el resto en la red local podrá jugar.
 
 ## Instalación
 Es necesario tener instalados los siguientes programas:

@@ -94,7 +94,7 @@ function startServer()
 		+ '\nMÉTODO 1:\n=========\n'
 		+ `- En la barra de direcciones de tu navegador escribe: ${vars.global.filesServer}\n`
 		+ '\nMÉTODO 2:\n=========\n'
-		+ '- Ve al sitio web "idko.infinityfreeapp.com/unidad"\n'
+		+ '- Ve al sitio web "idko2004.github.io/unidad/play/"\n'
 		+ '- En el menú "Elegir tipo de servidor" elige "Servidor local"\n'
 		+ `- Escribe en el campo de texto: ${vars.global.gameServer}\n`
 		+ colors.green('================');
